@@ -1,0 +1,482 @@
+
+
+
+
+This report was automatically generated with the R package **knitr**
+(version 1.12.3).
+
+
+```r
+# knitr::stitch_rmd(script="./analysis/select.R", output="./analysis/stitched-output/select.md")
+rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
+```
+
+
+```r
+# Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+library(magrittr, quietly=TRUE)
+
+# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+requireNamespace("matchingMarkets")
+requireNamespace("readr")
+requireNamespace("tidyr")
+requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+```
+
+```r
+path_in_billet  <- "./data-phi-free/derived/billet.csv"
+path_in_officer <- "./data-phi-free/derived/officer.csv"
+```
+
+```r
+# Read the CSVs
+ds_billet_long   <- readr::read_csv(path_in_billet)
+ds_officer_long  <- readr::read_csv(path_in_officer)
+
+ds_billet_roster   <- readr::read_csv("./data-phi-free/raw/billet-roster.csv")
+ds_officer_roster  <- readr::read_csv("./data-phi-free/raw/officer-roster.csv")
+```
+
+```r
+ds_billet <- ds_billet_long %>%
+  dplyr::mutate(
+    billet_id  = sprintf("b_%03d", billet_id),
+    officer_id = sprintf("o_%03d", officer_id)
+  ) %>%
+  tidyr::spread(key=officer_id, value=preference) %>%
+  dplyr::mutate(billet_index = seq_len(n()))
+
+billet <- ds_billet %>%
+  dplyr::select(-billet_id, -billet_index) %>%
+  as.matrix()
+row.names(billet) <- ds_billet$billet_id
+
+ds_officer <- ds_officer_long %>%
+  dplyr::mutate(
+    billet_id = sprintf("b_%03d", billet_id),
+    officer_id = sprintf("o_%03d", officer_id)
+  ) %>%
+  tidyr::spread(key=billet_id, value=preference) %>%
+  dplyr::mutate(officer_index = seq_len(n()))
+
+officer <- ds_officer %>%
+  dplyr::select(-officer_id, -officer_index) %>%
+  as.matrix()
+row.names(officer) <- ds_officer$officer_id
+```
+
+```r
+m <- matchingMarkets::daa(c.prefs=billet, s.prefs=officer)
+print(m)
+```
+
+```
+## $s.prefs
+##       b_001 b_002 b_003 b_004 b_005 b_006 b_007 b_008 b_009 b_010 b_011
+## o_001    16     7    20    21    17    19     5     8     3    13    15
+## o_002     4    21     3    16     7    11     1     9     8     5    15
+## o_003    22    15    19    16    10     6     8    20    13     4     5
+## o_004     9     2     3    14    10     6    22    12     5    13    15
+## o_005     2    20     5     9     1     8    21     7    19    13    22
+## o_006    15     2    12    22     8    17    18    13    16     7     6
+## o_007     8     3     9    10    12     5    17    14    22    13     2
+## o_008     9     2     6     7    17    14    12     8     5    22    13
+## o_009     9    13     2    16     4    19    12     5    14     8     7
+## o_010    10    22    14     1    13    18     8     4    16     5     7
+## o_011    11    15     9     5    12    14     8     7     3     4    20
+## o_012    20    18     5    17     1     4    14    16    22     7     3
+## o_013    10     2     8    19    13    16    17     3     6     1    21
+## o_014    21     9    18     8     5    14     4     3    15    19     1
+## o_015     8     3    22    11    15    12    20    17     6    21    18
+## o_016     4    17     1     6     8    18    19    10    12     3    20
+## o_017    22     4    14    20     8     5    19    11    12    13    15
+## o_018     5    10    17    11    19    18    13    14     1     3     6
+## o_019     1    11     3    17     2    10     4     9    12     5    22
+## o_020    19     4     1     7    10     8    20    16    22    14     3
+## o_021     9     7     3     2    20    11     4    21    12    14     8
+## o_022     8     5    13    11    12    22    17    18    19     4    14
+## o_023     7    17    19     5     3    20     2    18     6    21    14
+## o_024    21    22    11    15     8    16     1     6    20    13     9
+## o_025     5    17    15     6    18     1     3    11    22    10    21
+## o_026    18     4    14    16    20     8     7     1    12     6    19
+##       b_012 b_013 b_014 b_015 b_016 b_017 b_018 b_019 b_020 b_021 b_022
+## o_001    12     2    18    22    11     4    10     1    14     6     9
+## o_002    12    10    18    19    20    17     2    13    14    22     6
+## o_003    12    18    17     1     9    21     2     3     7    11    14
+## o_004     8    18     7     4    16     1    11    17    19    20    21
+## o_005    10     3    12     4    16    17    14    11    15    18     6
+## o_006     5    19    21    20     9    10     4    11     3     1    14
+## o_007    16    20     1    18    19    11    15     6     7     4    21
+## o_008    11     4    20    21    10     3     1    16    19    18    15
+## o_009     6    18     1    22    20    11     3    10    15    21    17
+## o_010     6     3    12    17     9    21    20    11    15     2    19
+## o_011    16    21    17    22    10    18     6    19    13     1     2
+## o_012    11     8     6    13    10    21     2     9    12    15    19
+## o_013    22     9    18    14     5     7    12    20    15    11     4
+## o_014    16     6    10    22    12     7    11    20    13    17     2
+## o_015    13     7     5     1    14     4     9    16     2    10    19
+## o_016     5    11    14    16     7    15    13     2     9    21    22
+## o_017     6     1    18     3    17    21     2     9    16    10     7
+## o_018     4     7    22     2    20     9    15    21    12     8    16
+## o_019    16     7    13    18    19    20    14    21    15     6     8
+## o_020     2    15    12     5    13    17     9    18    21     6    11
+## o_021    10     1    18    13    16     6    15    22     5    17    19
+## o_022    15    21     6     1    20     9     3     2    16    10     7
+## o_023     8     1    13    15     4    22     9    10    12    16    11
+## o_024     2    19    10    17     4     3    18     5     7    14    12
+## o_025     8     9     2     4     7    19    12    14    13    20    16
+## o_026    22    21    10     9    13    15    17     5     2    11     3
+## 
+## $c.prefs
+##       o_001 o_002 o_003 o_004 o_005 o_006 o_007 o_008 o_009 o_010 o_011
+## b_001    25    13     6    16     1     7    19    14     2     5     8
+## b_002     2     9    23    12     1     5    20    16    11    10    25
+## b_003     3    12    13     5     6    14    20    17    21    25     2
+## b_004    20    10    16     2    24    21     8    22    26    25    18
+## b_005     2    17    10    13    14     5    19     6     9    11    24
+## b_006     2    10    23     6     8    16     4    18    17     1    22
+## b_007    16    22    14     6    21     1    13    19    20    26     9
+## b_008    16    15    26     8    12    18     9    14     3     5     2
+## b_009     8    12    10     5     1     9     4    20     3    16    21
+## b_010    23     1     3    15    20    22    25     9    18     8    13
+## b_011    10     6    20    16     5     3    15     4    14     7     1
+## b_012     3    13    17    19     2    15    20     5    22     8    12
+## b_013    26     4    20    13    21    15     5    11     6    22     7
+## b_014    10    14    21    16    23    25     2     3    19    18    17
+## b_015    25    21     6     8     3     4    18    13    12    14     5
+## b_016     4    11     6     3    15    18    12    24    20    26     7
+## b_017     1     3     7     9    12     4    16    14    24    20    10
+## b_018     8    15    23    16    11    19    13    20    18     7     5
+## b_019     4    20    26    19    11    16    18    24     9     5     7
+## b_020     9     8    13    20    18     6    24     3    19     1    23
+## b_021    24    17     5    16     6     3    22    26     7    12    23
+## b_022    17    14     9    22     4    19     3     5     8    12    15
+##       o_012 o_013 o_014 o_015 o_016 o_017 o_018 o_019 o_020 o_021 o_022
+## b_001    20    18    22    12    23     4    26    10    17     9    11
+## b_002     8    17    21    14    15    24     6     4    19    18    22
+## b_003    18    19     4    16    24    11    15    10    26     7    23
+## b_004     4    15    13     5     1    17    12     6    23    11     7
+## b_005    21    12    26    16     1     4    22    25    18    15    20
+## b_006     3    13    24    19    26     9    21     7    15    14    20
+## b_007    25    10    12    17     8    24     2    15    11     5     4
+## b_008    13     6     4    22    21     7    11    23    10    20    25
+## b_009    26    19    13    14    23     7     6    17     2    15    22
+## b_010    12    11    16     2     5    21    10     6     7    19     4
+## b_011     8    17    18    22     2    19    12    26    24    21    11
+## b_012    10    21    16     1    14    25    11     7    24    18    23
+## b_013     9    19    14    16    23    18    24    17     2     3    10
+## b_014     7     6     9     1     4    11    20    13    22     8     5
+## b_015    16    10    17    20     1     7    15     2    26    23    19
+## b_016     9     1    22     8     5    19    23    14    16    25     2
+## b_017     8    26    21    18     5    17    22    11    15     6    25
+## b_018    17     3     6     1    22     4    25    24    14    12    26
+## b_019     2     6    22     8    10    25     3    23    14    12    13
+## b_020    11    26    14     5    17    25    22    12    10    21     4
+## b_021    21     9    11     8     2    19     4    25    20    18    10
+## b_022     2    25    11     7     6    23    21    16    24     1    20
+##       o_023 o_024 o_025 o_026
+## b_001     3    15    24    21
+## b_002    13     7     3    26
+## b_003     9     1    22     8
+## b_004    19     3    14     9
+## b_005     8    23     7     3
+## b_006    12    25     5    11
+## b_007     7     3    18    23
+## b_008    24    17     1    19
+## b_009    25    11    18    24
+## b_010    17    24    14    26
+## b_011    23    25     9    13
+## b_012     6     9     4    26
+## b_013    12     1    25     8
+## b_014    12    24    15    26
+## b_015     9    22    24    11
+## b_016    13    10    21    17
+## b_017    19    23     2    13
+## b_018    21     9    10     2
+## b_019    15     1    17    21
+## b_020     7     2    16    15
+## b_021     1    13    15    14
+## b_022    26    10    13    18
+## 
+## $iterations
+## [1] 1
+## 
+## $matches
+## $matches[[1]]
+## [1] 19
+## 
+## $matches[[2]]
+## [1] 13
+## 
+## $matches[[3]]
+## [1] 9
+## 
+## $matches[[4]]
+## [1] 17
+## 
+## $matches[[5]]
+## [1] 7
+## 
+## $matches[[6]]
+## [1] 21
+## 
+## $matches[[7]]
+## [1] 2
+## 
+## $matches[[8]]
+## [1] 8
+## 
+## $matches[[9]]
+## [1] 22
+## 
+## $matches[[10]]
+## [1] 18
+## 
+## $matches[[11]]
+## [1] 16
+## 
+## $matches[[12]]
+## [1] 12
+## 
+## $matches[[13]]
+## [1] 10
+## 
+## $matches[[14]]
+## [1] 20
+## 
+## $matches[[15]]
+## [1] 11
+## 
+## $matches[[16]]
+## [1] 1
+## 
+## $matches[[17]]
+## [1] 5
+## 
+## $matches[[18]]
+## [1] 14
+## 
+## $matches[[19]]
+## [1] 6
+## 
+## $matches[[20]]
+## [1] 3
+## 
+## $matches[[21]]
+## [1] 4
+## 
+## $matches[[22]]
+## [1] 15
+## 
+## $matches[[23]]
+## [1] 0
+## 
+## $matches[[24]]
+## [1] 0
+## 
+## $matches[[25]]
+## [1] 0
+## 
+## $matches[[26]]
+## [1] 0
+## 
+## 
+## $match.mat
+##        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11]
+##  [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [2,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [4,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [5,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [6,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [7,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [8,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+##  [9,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [10,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [11,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13,] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [14,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [15,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [16,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+## [17,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [18,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+## [19,]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [20,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [21,] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+## [22,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##       [,12] [,13] [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22]
+##  [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [2,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [4,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
+##  [5,] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+##  [6,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
+##  [7,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [8,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [9,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [10,] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [11,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12,]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [14,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+## [15,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+## [16,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [17,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [18,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [19,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [20,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [21,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [22,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##       [,23] [,24] [,25] [,26]
+##  [1,] FALSE FALSE FALSE FALSE
+##  [2,] FALSE FALSE FALSE FALSE
+##  [3,] FALSE FALSE FALSE FALSE
+##  [4,] FALSE FALSE FALSE FALSE
+##  [5,] FALSE FALSE FALSE FALSE
+##  [6,] FALSE FALSE FALSE FALSE
+##  [7,] FALSE FALSE FALSE FALSE
+##  [8,] FALSE FALSE FALSE FALSE
+##  [9,] FALSE FALSE FALSE FALSE
+## [10,] FALSE FALSE FALSE FALSE
+## [11,] FALSE FALSE FALSE FALSE
+## [12,] FALSE FALSE FALSE FALSE
+## [13,] FALSE FALSE FALSE FALSE
+## [14,] FALSE FALSE FALSE FALSE
+## [15,] FALSE FALSE FALSE FALSE
+## [16,] FALSE FALSE FALSE FALSE
+## [17,] FALSE FALSE FALSE FALSE
+## [18,] FALSE FALSE FALSE FALSE
+## [19,] FALSE FALSE FALSE FALSE
+## [20,] FALSE FALSE FALSE FALSE
+## [21,] FALSE FALSE FALSE FALSE
+## [22,] FALSE FALSE FALSE FALSE
+## 
+## $singles
+## integer(0)
+## 
+## $edgelist
+##    colleges students
+## 1         1       19
+## 2         2       13
+## 3         3        9
+## 4         4       17
+## 5         5        7
+## 6         6       21
+## 7         7        2
+## 8         8        8
+## 9         9       22
+## 10       10       18
+## 11       11       16
+## 12       12       12
+## 13       13       10
+## 14       14       20
+## 15       15       11
+## 16       16        1
+## 17       17        5
+## 18       18       14
+## 19       19        6
+## 20       20        3
+## 21       21        4
+## 22       22       15
+## 23       23        0
+## 24       24        0
+## 25       25        0
+## 26       26        0
+```
+
+```r
+ds_edge <-m$edgelist %>%
+  dplyr::rename(
+    billet_index  = colleges,
+    officer_index = students
+  ) %>%
+  dplyr::left_join(ds_billet[, c("billet_id", "billet_index")], by="billet_index") %>%
+  dplyr::left_join(ds_officer[, c("officer_id", "officer_index")], by="officer_index") %>%
+  dplyr::mutate(
+    billet_id   = as.integer(gsub("^b_(\\d+)$", "\\1", billet_id, perl=T)),
+    officer_id  = as.integer(gsub("^o_(\\d+)$", "\\1", officer_id, perl=T))
+  ) %>%
+  dplyr::left_join(ds_billet_roster, by="billet_id") %>%
+  dplyr::left_join(ds_officer_roster, by="officer_id")
+
+knitr::kable(ds_edge)
+```
+
+
+
+| billet_index| officer_index| billet_id| officer_id|billet_name |office_name_last |
+|------------:|-------------:|---------:|----------:|:-----------|:----------------|
+|            1|            19|         1|         19|NH Guam     |Sutherland       |
+|            2|            13|         2|         13|WRNMMC      |Murray           |
+|            3|             9|         3|          9|Lejeune MEU |Ince             |
+|            4|            17|         4|         17|Lejeune MLG |Quinn            |
+|            5|             7|         5|          7|NHCL        |Glover           |
+|            6|            21|         6|         21|NH Oki      |Underwood        |
+|            7|             2|         7|          2|Oki MLG     |Bailey           |
+|            8|             8|         8|          8|Oki MEU     |Harris           |
+|            9|            22|         9|         22|NHCP        |Vaughan          |
+|           10|            18|        10|         18|Ft Belv     |Rampling         |
+|           11|            16|        11|         16|Guant       |Paige            |
+|           12|            12|        12|         12|CBIRF       |Lambert          |
+|           13|            10|        13|         10|NH Jax      |Jones            |
+|           14|            20|        14|         20|NTTC        |Taylor           |
+|           15|            11|        15|         11|NH Napl     |Knox             |
+|           16|             1|        16|          1|NMCP        |Abraham          |
+|           17|             5|        17|          5|NH Rota     |Ellison          |
+|           18|            14|        18|         14|NMCSD       |Nash             |
+|           19|             6|        19|          6|NH Sig      |Forsyth          |
+|           20|             3|        20|          3|NHTP        |Carr             |
+|           21|             4|        21|          4|WHMP        |Davidson         |
+|           22|            15|        22|         15|NH Yoko     |Oliver           |
+|           23|             0|        NA|         NA|NA          |NA               |
+|           24|             0|        NA|         NA|NA          |NA               |
+|           25|             0|        NA|         NA|NA          |NA               |
+|           26|             0|        NA|         NA|NA          |NA               |
+
+The R session information (including the OS info, R version and all
+packages used):
+
+
+```r
+sessionInfo()
+```
+
+```
+## R version 3.2.3 (2015-12-10)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 14.04.3 LTS
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] magrittr_1.5
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.3           tidyr_0.4.0           dplyr_0.4.3.9000     
+##  [4] gmp_0.5-12            assertthat_0.1        R6_2.1.2             
+##  [7] DBI_0.3.1.9008        formatR_1.2.1         evaluate_0.8         
+## [10] highr_0.5.1           stringi_1.0-1         lazyeval_0.1.10      
+## [13] partitions_1.9-18     polynom_1.3-8         tools_3.2.3          
+## [16] stringr_1.0.0.9000    readr_0.2.2           matchingMarkets_0.2-1
+## [19] markdown_0.7.7        parallel_3.2.3        rsconnect_0.4.1.4    
+## [22] knitr_1.12.3          lpSolve_5.6.13
+```
+
+```r
+Sys.time()
+```
+
+```
+## [1] "2016-02-04 01:40:07 CST"
+```
+
