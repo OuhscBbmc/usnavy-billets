@@ -1,23 +1,23 @@
 hospital_id,hospital_name,billet_count
-201,NH Guam,1
-202,WRNMMC,1
-203,Lejeune MEU,1
-204,Lejeune MLG,1
-205,NHCL,1
-206,NH Oki,1
-207,Oki MLG,1
+201,NH Guam,2
+202,WRNMMC,0
+203,Lejeune MEU,2
+204,Lejeune MLG,2
+205,NHCL,3
+206,NH Oki,0
+207,Oki MLG,2
 208,Oki MEU,1
-209,NHCP,1
+209,NHCP,3
 210,Ft Belv,1
 211,Guant,1
 212,CBIRF,1
-213,NH Jax,1
-214,NTTC,1
-215,NH Napl,1
-216,NMCP,1
-217,NH Rota,1
-218,NMCSD,1
+213,NH Jax,2
+214,NTTC,0
+215,NH Napl,3
+216,NMCP,6
+217,NH Rota,2
+218,NMCSD,2
 219,NH Sig,1
 220,NHTP,1
 221,WHMP,1
-222,NH Yoko,1
+222,NH Yoko,3
