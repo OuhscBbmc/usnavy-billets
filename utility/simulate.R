@@ -44,7 +44,7 @@ ds_officer <- expand.grid(
 ds_billet <- ds_billet %>%
   dplyr::group_by(billet_id) %>%
   dplyr::mutate(
-    preference = base::sample(ds_officer_roster$officer_id)
+    preference = base::sample(length(ds_officer_roster$officer_id))
   ) %>%
   dplyr::ungroup() %>%
   dplyr::arrange(billet_id)
@@ -52,7 +52,7 @@ ds_billet <- ds_billet %>%
 ds_officer <- ds_officer %>%
   dplyr::group_by(officer_id) %>%
   dplyr::mutate(
-    preference = base::sample(ds_billet_roster$billet_id)
+    preference = base::sample(length(ds_billet_roster$billet_id))
   ) %>%
   dplyr::ungroup() %>%
   dplyr::arrange(officer_id)
