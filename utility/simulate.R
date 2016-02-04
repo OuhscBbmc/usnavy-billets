@@ -60,4 +60,3 @@ ds_officer <- ds_officer %>%
 # ---- save-to-disk ------------------------------------------------------------
 readr::write_csv(ds_billet , path_out_billet)
 readr::write_csv(ds_officer, path_out_officer)
-
