@@ -365,8 +365,8 @@ ds_edge <- m$edgelist %>%
     hospital_index  = colleges,
     officer_index   = students
   ) %>%
-  dplyr::left_join(ds_hospital_roster, by="hospital_index") %>%
-  dplyr::left_join(ds_officer_roster , by="officer_index" )
+  dplyr::right_join(ds_hospital_roster, by="hospital_index") %>%
+  dplyr::right_join(ds_officer_roster , by="officer_index" )
 
 knitr::kable(ds_edge)
 ```
@@ -375,28 +375,32 @@ knitr::kable(ds_edge)
 
 | hospital_index| officer_index| hospital_id|hospital_name | billet_count_max| officer_id|office_name_last |
 |--------------:|-------------:|-----------:|:-------------|----------------:|----------:|:----------------|
-|              1|            13|         201|NH Guam       |                2|        413|Murray           |
-|              2|             9|         202|WRNMMC        |                0|        409|Ince             |
-|              3|            12|         203|Lejeune MEU   |                2|        412|Lambert          |
-|              4|            16|         204|Lejeune MLG   |                2|        416|Paige            |
-|              5|             2|         205|NHCL          |                3|        402|Bailey           |
-|              6|             6|         206|NH Oki        |                0|        406|Forsyth          |
-|              7|            22|         207|Oki MLG       |                2|        422|Vaughan          |
-|              8|            15|         208|Oki MEU       |                1|        415|Oliver           |
-|              9|             8|         209|NHCP          |                3|        408|Harris           |
-|             10|             3|         210|Ft Belv       |                1|        403|Carr             |
-|             11|             5|         211|Guant         |                1|        405|Ellison          |
-|             12|            19|         212|CBIRF         |                1|        419|Sutherland       |
-|             13|            26|         213|NH Jax        |                2|        426|Zimmer           |
-|             14|            10|         214|NTTC          |                0|        410|Jones            |
-|             15|            25|         215|NH Napl       |                3|        425|Young            |
-|             16|             4|         216|NMCP          |                6|        404|Davidson         |
 |             17|             1|         217|NH Rota       |                2|        401|Abraham          |
-|             18|            23|         218|NMCSD         |                2|        423|Walker           |
-|             19|            20|         219|NH Sig        |                1|        420|Taylor           |
-|             20|            18|         220|NHTP          |                1|        418|Rampling         |
-|             21|            24|         221|WHMP          |                1|        424|Xiong            |
+|              5|             2|         205|NHCL          |                3|        402|Bailey           |
+|             10|             3|         210|Ft Belv       |                1|        403|Carr             |
+|             16|             4|         216|NMCP          |                6|        404|Davidson         |
+|             11|             5|         211|Guant         |                1|        405|Ellison          |
+|              6|             6|         206|NH Oki        |                0|        406|Forsyth          |
+|             NA|             7|          NA|NA            |               NA|        407|Glover           |
+|              9|             8|         209|NHCP          |                3|        408|Harris           |
+|              2|             9|         202|WRNMMC        |                0|        409|Ince             |
+|             14|            10|         214|NTTC          |                0|        410|Jones            |
+|             NA|            11|          NA|NA            |               NA|        411|Knox             |
+|              3|            12|         203|Lejeune MEU   |                2|        412|Lambert          |
+|              1|            13|         201|NH Guam       |                2|        413|Murray           |
+|             NA|            14|          NA|NA            |               NA|        414|Nash             |
+|              8|            15|         208|Oki MEU       |                1|        415|Oliver           |
+|              4|            16|         204|Lejeune MLG   |                2|        416|Paige            |
 |             22|            17|         222|NH Yoko       |                3|        417|Quinn            |
+|             20|            18|         220|NHTP          |                1|        418|Rampling         |
+|             12|            19|         212|CBIRF         |                1|        419|Sutherland       |
+|             19|            20|         219|NH Sig        |                1|        420|Taylor           |
+|             NA|            21|          NA|NA            |               NA|        421|Underwood        |
+|              7|            22|         207|Oki MLG       |                2|        422|Vaughan          |
+|             18|            23|         218|NMCSD         |                2|        423|Walker           |
+|             21|            24|         221|WHMP          |                1|        424|Xiong            |
+|             15|            25|         215|NH Napl       |                3|        425|Young            |
+|             13|            26|         213|NH Jax        |                2|        426|Zimmer           |
 
 The R session information (including the OS info, R version and all
 packages used):
@@ -441,6 +445,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-02-05 00:34:22 CST"
+## [1] "2016-02-05 00:47:28 CST"
 ```
 

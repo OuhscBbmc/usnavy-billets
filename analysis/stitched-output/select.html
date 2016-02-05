@@ -554,8 +554,8 @@ print(m)
     hospital_index  = colleges,
     officer_index   = students
   ) %&gt;%
-  dplyr::left_join(ds_hospital_roster, by=&quot;hospital_index&quot;) %&gt;%
-  dplyr::left_join(ds_officer_roster , by=&quot;officer_index&quot; )
+  dplyr::right_join(ds_hospital_roster, by=&quot;hospital_index&quot;) %&gt;%
+  dplyr::right_join(ds_officer_roster , by=&quot;officer_index&quot; )
 
 knitr::kable(ds_edge)
 </code></pre>
@@ -572,40 +572,13 @@ knitr::kable(ds_edge)
 </tr>
 </thead><tbody>
 <tr>
+<td align="right">17</td>
 <td align="right">1</td>
-<td align="right">13</td>
-<td align="right">201</td>
-<td align="left">NH Guam</td>
+<td align="right">217</td>
+<td align="left">NH Rota</td>
 <td align="right">2</td>
-<td align="right">413</td>
-<td align="left">Murray</td>
-</tr>
-<tr>
-<td align="right">2</td>
-<td align="right">9</td>
-<td align="right">202</td>
-<td align="left">WRNMMC</td>
-<td align="right">0</td>
-<td align="right">409</td>
-<td align="left">Ince</td>
-</tr>
-<tr>
-<td align="right">3</td>
-<td align="right">12</td>
-<td align="right">203</td>
-<td align="left">Lejeune MEU</td>
-<td align="right">2</td>
-<td align="right">412</td>
-<td align="left">Lambert</td>
-</tr>
-<tr>
-<td align="right">4</td>
-<td align="right">16</td>
-<td align="right">204</td>
-<td align="left">Lejeune MLG</td>
-<td align="right">2</td>
-<td align="right">416</td>
-<td align="left">Paige</td>
+<td align="right">401</td>
+<td align="left">Abraham</td>
 </tr>
 <tr>
 <td align="right">5</td>
@@ -617,42 +590,6 @@ knitr::kable(ds_edge)
 <td align="left">Bailey</td>
 </tr>
 <tr>
-<td align="right">6</td>
-<td align="right">6</td>
-<td align="right">206</td>
-<td align="left">NH Oki</td>
-<td align="right">0</td>
-<td align="right">406</td>
-<td align="left">Forsyth</td>
-</tr>
-<tr>
-<td align="right">7</td>
-<td align="right">22</td>
-<td align="right">207</td>
-<td align="left">Oki MLG</td>
-<td align="right">2</td>
-<td align="right">422</td>
-<td align="left">Vaughan</td>
-</tr>
-<tr>
-<td align="right">8</td>
-<td align="right">15</td>
-<td align="right">208</td>
-<td align="left">Oki MEU</td>
-<td align="right">1</td>
-<td align="right">415</td>
-<td align="left">Oliver</td>
-</tr>
-<tr>
-<td align="right">9</td>
-<td align="right">8</td>
-<td align="right">209</td>
-<td align="left">NHCP</td>
-<td align="right">3</td>
-<td align="right">408</td>
-<td align="left">Harris</td>
-</tr>
-<tr>
 <td align="right">10</td>
 <td align="right">3</td>
 <td align="right">210</td>
@@ -660,51 +597,6 @@ knitr::kable(ds_edge)
 <td align="right">1</td>
 <td align="right">403</td>
 <td align="left">Carr</td>
-</tr>
-<tr>
-<td align="right">11</td>
-<td align="right">5</td>
-<td align="right">211</td>
-<td align="left">Guant</td>
-<td align="right">1</td>
-<td align="right">405</td>
-<td align="left">Ellison</td>
-</tr>
-<tr>
-<td align="right">12</td>
-<td align="right">19</td>
-<td align="right">212</td>
-<td align="left">CBIRF</td>
-<td align="right">1</td>
-<td align="right">419</td>
-<td align="left">Sutherland</td>
-</tr>
-<tr>
-<td align="right">13</td>
-<td align="right">26</td>
-<td align="right">213</td>
-<td align="left">NH Jax</td>
-<td align="right">2</td>
-<td align="right">426</td>
-<td align="left">Zimmer</td>
-</tr>
-<tr>
-<td align="right">14</td>
-<td align="right">10</td>
-<td align="right">214</td>
-<td align="left">NTTC</td>
-<td align="right">0</td>
-<td align="right">410</td>
-<td align="left">Jones</td>
-</tr>
-<tr>
-<td align="right">15</td>
-<td align="right">25</td>
-<td align="right">215</td>
-<td align="left">NH Napl</td>
-<td align="right">3</td>
-<td align="right">425</td>
-<td align="left">Young</td>
 </tr>
 <tr>
 <td align="right">16</td>
@@ -716,31 +608,121 @@ knitr::kable(ds_edge)
 <td align="left">Davidson</td>
 </tr>
 <tr>
+<td align="right">11</td>
+<td align="right">5</td>
+<td align="right">211</td>
+<td align="left">Guant</td>
+<td align="right">1</td>
+<td align="right">405</td>
+<td align="left">Ellison</td>
+</tr>
+<tr>
+<td align="right">6</td>
+<td align="right">6</td>
+<td align="right">206</td>
+<td align="left">NH Oki</td>
+<td align="right">0</td>
+<td align="right">406</td>
+<td align="left">Forsyth</td>
+</tr>
+<tr>
+<td align="right">NA</td>
+<td align="right">7</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">407</td>
+<td align="left">Glover</td>
+</tr>
+<tr>
+<td align="right">9</td>
+<td align="right">8</td>
+<td align="right">209</td>
+<td align="left">NHCP</td>
+<td align="right">3</td>
+<td align="right">408</td>
+<td align="left">Harris</td>
+</tr>
+<tr>
+<td align="right">2</td>
+<td align="right">9</td>
+<td align="right">202</td>
+<td align="left">WRNMMC</td>
+<td align="right">0</td>
+<td align="right">409</td>
+<td align="left">Ince</td>
+</tr>
+<tr>
+<td align="right">14</td>
+<td align="right">10</td>
+<td align="right">214</td>
+<td align="left">NTTC</td>
+<td align="right">0</td>
+<td align="right">410</td>
+<td align="left">Jones</td>
+</tr>
+<tr>
+<td align="right">NA</td>
+<td align="right">11</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">411</td>
+<td align="left">Knox</td>
+</tr>
+<tr>
+<td align="right">3</td>
+<td align="right">12</td>
+<td align="right">203</td>
+<td align="left">Lejeune MEU</td>
+<td align="right">2</td>
+<td align="right">412</td>
+<td align="left">Lambert</td>
+</tr>
+<tr>
+<td align="right">1</td>
+<td align="right">13</td>
+<td align="right">201</td>
+<td align="left">NH Guam</td>
+<td align="right">2</td>
+<td align="right">413</td>
+<td align="left">Murray</td>
+</tr>
+<tr>
+<td align="right">NA</td>
+<td align="right">14</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">414</td>
+<td align="left">Nash</td>
+</tr>
+<tr>
+<td align="right">8</td>
+<td align="right">15</td>
+<td align="right">208</td>
+<td align="left">Oki MEU</td>
+<td align="right">1</td>
+<td align="right">415</td>
+<td align="left">Oliver</td>
+</tr>
+<tr>
+<td align="right">4</td>
+<td align="right">16</td>
+<td align="right">204</td>
+<td align="left">Lejeune MLG</td>
+<td align="right">2</td>
+<td align="right">416</td>
+<td align="left">Paige</td>
+</tr>
+<tr>
+<td align="right">22</td>
 <td align="right">17</td>
-<td align="right">1</td>
-<td align="right">217</td>
-<td align="left">NH Rota</td>
-<td align="right">2</td>
-<td align="right">401</td>
-<td align="left">Abraham</td>
-</tr>
-<tr>
-<td align="right">18</td>
-<td align="right">23</td>
-<td align="right">218</td>
-<td align="left">NMCSD</td>
-<td align="right">2</td>
-<td align="right">423</td>
-<td align="left">Walker</td>
-</tr>
-<tr>
-<td align="right">19</td>
-<td align="right">20</td>
-<td align="right">219</td>
-<td align="left">NH Sig</td>
-<td align="right">1</td>
-<td align="right">420</td>
-<td align="left">Taylor</td>
+<td align="right">222</td>
+<td align="left">NH Yoko</td>
+<td align="right">3</td>
+<td align="right">417</td>
+<td align="left">Quinn</td>
 </tr>
 <tr>
 <td align="right">20</td>
@@ -752,6 +734,51 @@ knitr::kable(ds_edge)
 <td align="left">Rampling</td>
 </tr>
 <tr>
+<td align="right">12</td>
+<td align="right">19</td>
+<td align="right">212</td>
+<td align="left">CBIRF</td>
+<td align="right">1</td>
+<td align="right">419</td>
+<td align="left">Sutherland</td>
+</tr>
+<tr>
+<td align="right">19</td>
+<td align="right">20</td>
+<td align="right">219</td>
+<td align="left">NH Sig</td>
+<td align="right">1</td>
+<td align="right">420</td>
+<td align="left">Taylor</td>
+</tr>
+<tr>
+<td align="right">NA</td>
+<td align="right">21</td>
+<td align="right">NA</td>
+<td align="left">NA</td>
+<td align="right">NA</td>
+<td align="right">421</td>
+<td align="left">Underwood</td>
+</tr>
+<tr>
+<td align="right">7</td>
+<td align="right">22</td>
+<td align="right">207</td>
+<td align="left">Oki MLG</td>
+<td align="right">2</td>
+<td align="right">422</td>
+<td align="left">Vaughan</td>
+</tr>
+<tr>
+<td align="right">18</td>
+<td align="right">23</td>
+<td align="right">218</td>
+<td align="left">NMCSD</td>
+<td align="right">2</td>
+<td align="right">423</td>
+<td align="left">Walker</td>
+</tr>
+<tr>
 <td align="right">21</td>
 <td align="right">24</td>
 <td align="right">221</td>
@@ -761,13 +788,22 @@ knitr::kable(ds_edge)
 <td align="left">Xiong</td>
 </tr>
 <tr>
-<td align="right">22</td>
-<td align="right">17</td>
-<td align="right">222</td>
-<td align="left">NH Yoko</td>
+<td align="right">15</td>
+<td align="right">25</td>
+<td align="right">215</td>
+<td align="left">NH Napl</td>
 <td align="right">3</td>
-<td align="right">417</td>
-<td align="left">Quinn</td>
+<td align="right">425</td>
+<td align="left">Young</td>
+</tr>
+<tr>
+<td align="right">13</td>
+<td align="right">26</td>
+<td align="right">213</td>
+<td align="left">NH Jax</td>
+<td align="right">2</td>
+<td align="right">426</td>
+<td align="left">Zimmer</td>
 </tr>
 </tbody></table>
 
@@ -809,7 +845,7 @@ packages used):</p>
 <pre><code class="r">Sys.time()
 </code></pre>
 
-<pre><code>## [1] &quot;2016-02-05 00:34:22 CST&quot;
+<pre><code>## [1] &quot;2016-02-05 00:47:28 CST&quot;
 </code></pre>
 
 </body>

@@ -68,7 +68,7 @@ ds_edge <- m$edgelist %>%
     hospital_index  = colleges,
     officer_index   = students
   ) %>%
-  dplyr::left_join(ds_hospital_roster, by="hospital_index") %>%
-  dplyr::left_join(ds_officer_roster , by="officer_index" )
+  dplyr::right_join(ds_hospital_roster, by="hospital_index") %>%
+  dplyr::right_join(ds_officer_roster , by="officer_index" )
 
 knitr::kable(ds_edge)
