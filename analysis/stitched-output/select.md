@@ -24,39 +24,39 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 ```
 
 ```r
-path_in_billet  <- "./data-phi-free/derived/billet.csv"
+path_in_hospital  <- "./data-phi-free/derived/hospital.csv"
 path_in_officer <- "./data-phi-free/derived/officer.csv"
 ```
 
 ```r
 # Read the CSVs
-ds_billet_long   <- readr::read_csv(path_in_billet)
+ds_hospital_long   <- readr::read_csv(path_in_hospital)
 ds_officer_long  <- readr::read_csv(path_in_officer)
 
-ds_billet_roster   <- readr::read_csv("./data-phi-free/raw/billet-roster.csv")
+ds_hospital_roster   <- readr::read_csv("./data-phi-free/raw/hospital-roster.csv")
 ds_officer_roster  <- readr::read_csv("./data-phi-free/raw/officer-roster.csv")
 ```
 
 ```r
-ds_billet <- ds_billet_long %>%
+ds_hospital <- ds_hospital_long %>%
   dplyr::mutate(
-    billet_id  = sprintf("b_%03d", billet_id),
+    hospital_id  = sprintf("b_%03d", hospital_id),
     officer_id = sprintf("o_%03d", officer_id)
   ) %>%
   tidyr::spread(key=officer_id, value=preference) %>%
-  dplyr::mutate(billet_index = seq_len(n()))
+  dplyr::mutate(hospital_index = seq_len(n()))
 
-billet <- ds_billet %>%
-  dplyr::select(-billet_id, -billet_index) %>%
+hospital <- ds_hospital %>%
+  dplyr::select(-hospital_id, -hospital_index) %>%
   as.matrix()
-row.names(billet) <- ds_billet$billet_id
+row.names(hospital) <- ds_hospital$hospital_id
 
 ds_officer <- ds_officer_long %>%
   dplyr::mutate(
-    billet_id = sprintf("b_%03d", billet_id),
+    hospital_id = sprintf("b_%03d", hospital_id),
     officer_id = sprintf("o_%03d", officer_id)
   ) %>%
-  tidyr::spread(key=billet_id, value=preference) %>%
+  tidyr::spread(key=hospital_id, value=preference) %>%
   dplyr::mutate(officer_index = seq_len(n()))
 
 officer <- ds_officer %>%
@@ -66,7 +66,7 @@ row.names(officer) <- ds_officer$officer_id
 ```
 
 ```r
-m <- matchingMarkets::daa(c.prefs=billet, s.prefs=officer)
+m <- matchingMarkets::daa(c.prefs=hospital, s.prefs=officer)
 print(m)
 ```
 
@@ -388,16 +388,16 @@ print(m)
 ```r
 ds_edge <-m$edgelist %>%
   dplyr::rename(
-    billet_index  = colleges,
+    hospital_index  = colleges,
     officer_index = students
   ) %>%
-  dplyr::left_join(ds_billet[, c("billet_id", "billet_index")], by="billet_index") %>%
+  dplyr::left_join(ds_hospital[, c("hospital_id", "hospital_index")], by="hospital_index") %>%
   dplyr::left_join(ds_officer[, c("officer_id", "officer_index")], by="officer_index") %>%
   dplyr::mutate(
-    billet_id   = as.integer(gsub("^b_(\\d+)$", "\\1", billet_id, perl=T)),
+    hospital_id   = as.integer(gsub("^b_(\\d+)$", "\\1", hospital_id, perl=T)),
     officer_id  = as.integer(gsub("^o_(\\d+)$", "\\1", officer_id, perl=T))
   ) %>%
-  dplyr::left_join(ds_billet_roster, by="billet_id") %>%
+  dplyr::left_join(ds_hospital_roster, by="hospital_id") %>%
   dplyr::left_join(ds_officer_roster, by="officer_id")
 
 knitr::kable(ds_edge)
@@ -405,34 +405,34 @@ knitr::kable(ds_edge)
 
 
 
-| billet_index| officer_index| billet_id| officer_id|billet_name |office_name_last |
-|------------:|-------------:|---------:|----------:|:-----------|:----------------|
-|            1|            19|       201|        419|NH Guam     |Sutherland       |
-|            2|            13|       202|        413|WRNMMC      |Murray           |
-|            3|             9|       203|        409|Lejeune MEU |Ince             |
-|            4|            17|       204|        417|Lejeune MLG |Quinn            |
-|            5|             7|       205|        407|NHCL        |Glover           |
-|            6|            21|       206|        421|NH Oki      |Underwood        |
-|            7|             2|       207|        402|Oki MLG     |Bailey           |
-|            8|             8|       208|        408|Oki MEU     |Harris           |
-|            9|            22|       209|        422|NHCP        |Vaughan          |
-|           10|            18|       210|        418|Ft Belv     |Rampling         |
-|           11|            16|       211|        416|Guant       |Paige            |
-|           12|            12|       212|        412|CBIRF       |Lambert          |
-|           13|            10|       213|        410|NH Jax      |Jones            |
-|           14|            20|       214|        420|NTTC        |Taylor           |
-|           15|            11|       215|        411|NH Napl     |Knox             |
-|           16|             1|       216|        401|NMCP        |Abraham          |
-|           17|             5|       217|        405|NH Rota     |Ellison          |
-|           18|            14|       218|        414|NMCSD       |Nash             |
-|           19|             6|       219|        406|NH Sig      |Forsyth          |
-|           20|             3|       220|        403|NHTP        |Carr             |
-|           21|             4|       221|        404|WHMP        |Davidson         |
-|           22|            15|       222|        415|NH Yoko     |Oliver           |
-|           23|             0|        NA|         NA|NA          |NA               |
-|           24|             0|        NA|         NA|NA          |NA               |
-|           25|             0|        NA|         NA|NA          |NA               |
-|           26|             0|        NA|         NA|NA          |NA               |
+| hospital_index| officer_index| hospital_id| officer_id|hospital_name | billet_count|office_name_last |
+|--------------:|-------------:|-----------:|----------:|:-------------|------------:|:----------------|
+|              1|            19|         201|        419|NH Guam       |            2|Sutherland       |
+|              2|            13|         202|        413|WRNMMC        |            0|Murray           |
+|              3|             9|         203|        409|Lejeune MEU   |            2|Ince             |
+|              4|            17|         204|        417|Lejeune MLG   |            2|Quinn            |
+|              5|             7|         205|        407|NHCL          |            3|Glover           |
+|              6|            21|         206|        421|NH Oki        |            0|Underwood        |
+|              7|             2|         207|        402|Oki MLG       |            2|Bailey           |
+|              8|             8|         208|        408|Oki MEU       |            1|Harris           |
+|              9|            22|         209|        422|NHCP          |            3|Vaughan          |
+|             10|            18|         210|        418|Ft Belv       |            1|Rampling         |
+|             11|            16|         211|        416|Guant         |            1|Paige            |
+|             12|            12|         212|        412|CBIRF         |            1|Lambert          |
+|             13|            10|         213|        410|NH Jax        |            2|Jones            |
+|             14|            20|         214|        420|NTTC          |            0|Taylor           |
+|             15|            11|         215|        411|NH Napl       |            3|Knox             |
+|             16|             1|         216|        401|NMCP          |            6|Abraham          |
+|             17|             5|         217|        405|NH Rota       |            2|Ellison          |
+|             18|            14|         218|        414|NMCSD         |            2|Nash             |
+|             19|             6|         219|        406|NH Sig        |            1|Forsyth          |
+|             20|             3|         220|        403|NHTP          |            1|Carr             |
+|             21|             4|         221|        404|WHMP          |            1|Davidson         |
+|             22|            15|         222|        415|NH Yoko       |            3|Oliver           |
+|             23|             0|          NA|         NA|NA            |           NA|NA               |
+|             24|             0|          NA|         NA|NA            |           NA|NA               |
+|             25|             0|          NA|         NA|NA            |           NA|NA               |
+|             26|             0|          NA|         NA|NA            |           NA|NA               |
 
 The R session information (including the OS info, R version and all
 packages used):
@@ -477,6 +477,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-02-04 01:52:11 CST"
+## [1] "2016-02-04 23:35:01 CST"
 ```
 

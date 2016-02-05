@@ -218,37 +218,37 @@ requireNamespace(&quot;tidyr&quot;)
 requireNamespace(&quot;dplyr&quot;) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 </code></pre>
 
-<pre><code class="r">path_in_billet  &lt;- &quot;./data-phi-free/derived/billet.csv&quot;
+<pre><code class="r">path_in_hospital  &lt;- &quot;./data-phi-free/derived/hospital.csv&quot;
 path_in_officer &lt;- &quot;./data-phi-free/derived/officer.csv&quot;
 </code></pre>
 
 <pre><code class="r"># Read the CSVs
-ds_billet_long   &lt;- readr::read_csv(path_in_billet)
+ds_hospital_long   &lt;- readr::read_csv(path_in_hospital)
 ds_officer_long  &lt;- readr::read_csv(path_in_officer)
 
-ds_billet_roster   &lt;- readr::read_csv(&quot;./data-phi-free/raw/billet-roster.csv&quot;)
+ds_hospital_roster   &lt;- readr::read_csv(&quot;./data-phi-free/raw/hospital-roster.csv&quot;)
 ds_officer_roster  &lt;- readr::read_csv(&quot;./data-phi-free/raw/officer-roster.csv&quot;)
 </code></pre>
 
-<pre><code class="r">ds_billet &lt;- ds_billet_long %&gt;%
+<pre><code class="r">ds_hospital &lt;- ds_hospital_long %&gt;%
   dplyr::mutate(
-    billet_id  = sprintf(&quot;b_%03d&quot;, billet_id),
+    hospital_id  = sprintf(&quot;b_%03d&quot;, hospital_id),
     officer_id = sprintf(&quot;o_%03d&quot;, officer_id)
   ) %&gt;%
   tidyr::spread(key=officer_id, value=preference) %&gt;%
-  dplyr::mutate(billet_index = seq_len(n()))
+  dplyr::mutate(hospital_index = seq_len(n()))
 
-billet &lt;- ds_billet %&gt;%
-  dplyr::select(-billet_id, -billet_index) %&gt;%
+hospital &lt;- ds_hospital %&gt;%
+  dplyr::select(-hospital_id, -hospital_index) %&gt;%
   as.matrix()
-row.names(billet) &lt;- ds_billet$billet_id
+row.names(hospital) &lt;- ds_hospital$hospital_id
 
 ds_officer &lt;- ds_officer_long %&gt;%
   dplyr::mutate(
-    billet_id = sprintf(&quot;b_%03d&quot;, billet_id),
+    hospital_id = sprintf(&quot;b_%03d&quot;, hospital_id),
     officer_id = sprintf(&quot;o_%03d&quot;, officer_id)
   ) %&gt;%
-  tidyr::spread(key=billet_id, value=preference) %&gt;%
+  tidyr::spread(key=hospital_id, value=preference) %&gt;%
   dplyr::mutate(officer_index = seq_len(n()))
 
 officer &lt;- ds_officer %&gt;%
@@ -257,7 +257,7 @@ officer &lt;- ds_officer %&gt;%
 row.names(officer) &lt;- ds_officer$officer_id
 </code></pre>
 
-<pre><code class="r">m &lt;- matchingMarkets::daa(c.prefs=billet, s.prefs=officer)
+<pre><code class="r">m &lt;- matchingMarkets::daa(c.prefs=hospital, s.prefs=officer)
 print(m)
 </code></pre>
 
@@ -577,16 +577,16 @@ print(m)
 
 <pre><code class="r">ds_edge &lt;-m$edgelist %&gt;%
   dplyr::rename(
-    billet_index  = colleges,
+    hospital_index  = colleges,
     officer_index = students
   ) %&gt;%
-  dplyr::left_join(ds_billet[, c(&quot;billet_id&quot;, &quot;billet_index&quot;)], by=&quot;billet_index&quot;) %&gt;%
+  dplyr::left_join(ds_hospital[, c(&quot;hospital_id&quot;, &quot;hospital_index&quot;)], by=&quot;hospital_index&quot;) %&gt;%
   dplyr::left_join(ds_officer[, c(&quot;officer_id&quot;, &quot;officer_index&quot;)], by=&quot;officer_index&quot;) %&gt;%
   dplyr::mutate(
-    billet_id   = as.integer(gsub(&quot;^b_(\\d+)$&quot;, &quot;\\1&quot;, billet_id, perl=T)),
+    hospital_id   = as.integer(gsub(&quot;^b_(\\d+)$&quot;, &quot;\\1&quot;, hospital_id, perl=T)),
     officer_id  = as.integer(gsub(&quot;^o_(\\d+)$&quot;, &quot;\\1&quot;, officer_id, perl=T))
   ) %&gt;%
-  dplyr::left_join(ds_billet_roster, by=&quot;billet_id&quot;) %&gt;%
+  dplyr::left_join(ds_hospital_roster, by=&quot;hospital_id&quot;) %&gt;%
   dplyr::left_join(ds_officer_roster, by=&quot;officer_id&quot;)
 
 knitr::kable(ds_edge)
@@ -594,11 +594,12 @@ knitr::kable(ds_edge)
 
 <table><thead>
 <tr>
-<th align="right">billet_index</th>
+<th align="right">hospital_index</th>
 <th align="right">officer_index</th>
-<th align="right">billet_id</th>
+<th align="right">hospital_id</th>
 <th align="right">officer_id</th>
-<th align="left">billet_name</th>
+<th align="left">hospital_name</th>
+<th align="right">billet_count</th>
 <th align="left">office_name_last</th>
 </tr>
 </thead><tbody>
@@ -608,6 +609,7 @@ knitr::kable(ds_edge)
 <td align="right">201</td>
 <td align="right">419</td>
 <td align="left">NH Guam</td>
+<td align="right">2</td>
 <td align="left">Sutherland</td>
 </tr>
 <tr>
@@ -616,6 +618,7 @@ knitr::kable(ds_edge)
 <td align="right">202</td>
 <td align="right">413</td>
 <td align="left">WRNMMC</td>
+<td align="right">0</td>
 <td align="left">Murray</td>
 </tr>
 <tr>
@@ -624,6 +627,7 @@ knitr::kable(ds_edge)
 <td align="right">203</td>
 <td align="right">409</td>
 <td align="left">Lejeune MEU</td>
+<td align="right">2</td>
 <td align="left">Ince</td>
 </tr>
 <tr>
@@ -632,6 +636,7 @@ knitr::kable(ds_edge)
 <td align="right">204</td>
 <td align="right">417</td>
 <td align="left">Lejeune MLG</td>
+<td align="right">2</td>
 <td align="left">Quinn</td>
 </tr>
 <tr>
@@ -640,6 +645,7 @@ knitr::kable(ds_edge)
 <td align="right">205</td>
 <td align="right">407</td>
 <td align="left">NHCL</td>
+<td align="right">3</td>
 <td align="left">Glover</td>
 </tr>
 <tr>
@@ -648,6 +654,7 @@ knitr::kable(ds_edge)
 <td align="right">206</td>
 <td align="right">421</td>
 <td align="left">NH Oki</td>
+<td align="right">0</td>
 <td align="left">Underwood</td>
 </tr>
 <tr>
@@ -656,6 +663,7 @@ knitr::kable(ds_edge)
 <td align="right">207</td>
 <td align="right">402</td>
 <td align="left">Oki MLG</td>
+<td align="right">2</td>
 <td align="left">Bailey</td>
 </tr>
 <tr>
@@ -664,6 +672,7 @@ knitr::kable(ds_edge)
 <td align="right">208</td>
 <td align="right">408</td>
 <td align="left">Oki MEU</td>
+<td align="right">1</td>
 <td align="left">Harris</td>
 </tr>
 <tr>
@@ -672,6 +681,7 @@ knitr::kable(ds_edge)
 <td align="right">209</td>
 <td align="right">422</td>
 <td align="left">NHCP</td>
+<td align="right">3</td>
 <td align="left">Vaughan</td>
 </tr>
 <tr>
@@ -680,6 +690,7 @@ knitr::kable(ds_edge)
 <td align="right">210</td>
 <td align="right">418</td>
 <td align="left">Ft Belv</td>
+<td align="right">1</td>
 <td align="left">Rampling</td>
 </tr>
 <tr>
@@ -688,6 +699,7 @@ knitr::kable(ds_edge)
 <td align="right">211</td>
 <td align="right">416</td>
 <td align="left">Guant</td>
+<td align="right">1</td>
 <td align="left">Paige</td>
 </tr>
 <tr>
@@ -696,6 +708,7 @@ knitr::kable(ds_edge)
 <td align="right">212</td>
 <td align="right">412</td>
 <td align="left">CBIRF</td>
+<td align="right">1</td>
 <td align="left">Lambert</td>
 </tr>
 <tr>
@@ -704,6 +717,7 @@ knitr::kable(ds_edge)
 <td align="right">213</td>
 <td align="right">410</td>
 <td align="left">NH Jax</td>
+<td align="right">2</td>
 <td align="left">Jones</td>
 </tr>
 <tr>
@@ -712,6 +726,7 @@ knitr::kable(ds_edge)
 <td align="right">214</td>
 <td align="right">420</td>
 <td align="left">NTTC</td>
+<td align="right">0</td>
 <td align="left">Taylor</td>
 </tr>
 <tr>
@@ -720,6 +735,7 @@ knitr::kable(ds_edge)
 <td align="right">215</td>
 <td align="right">411</td>
 <td align="left">NH Napl</td>
+<td align="right">3</td>
 <td align="left">Knox</td>
 </tr>
 <tr>
@@ -728,6 +744,7 @@ knitr::kable(ds_edge)
 <td align="right">216</td>
 <td align="right">401</td>
 <td align="left">NMCP</td>
+<td align="right">6</td>
 <td align="left">Abraham</td>
 </tr>
 <tr>
@@ -736,6 +753,7 @@ knitr::kable(ds_edge)
 <td align="right">217</td>
 <td align="right">405</td>
 <td align="left">NH Rota</td>
+<td align="right">2</td>
 <td align="left">Ellison</td>
 </tr>
 <tr>
@@ -744,6 +762,7 @@ knitr::kable(ds_edge)
 <td align="right">218</td>
 <td align="right">414</td>
 <td align="left">NMCSD</td>
+<td align="right">2</td>
 <td align="left">Nash</td>
 </tr>
 <tr>
@@ -752,6 +771,7 @@ knitr::kable(ds_edge)
 <td align="right">219</td>
 <td align="right">406</td>
 <td align="left">NH Sig</td>
+<td align="right">1</td>
 <td align="left">Forsyth</td>
 </tr>
 <tr>
@@ -760,6 +780,7 @@ knitr::kable(ds_edge)
 <td align="right">220</td>
 <td align="right">403</td>
 <td align="left">NHTP</td>
+<td align="right">1</td>
 <td align="left">Carr</td>
 </tr>
 <tr>
@@ -768,6 +789,7 @@ knitr::kable(ds_edge)
 <td align="right">221</td>
 <td align="right">404</td>
 <td align="left">WHMP</td>
+<td align="right">1</td>
 <td align="left">Davidson</td>
 </tr>
 <tr>
@@ -776,6 +798,7 @@ knitr::kable(ds_edge)
 <td align="right">222</td>
 <td align="right">415</td>
 <td align="left">NH Yoko</td>
+<td align="right">3</td>
 <td align="left">Oliver</td>
 </tr>
 <tr>
@@ -784,6 +807,7 @@ knitr::kable(ds_edge)
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr>
@@ -792,6 +816,7 @@ knitr::kable(ds_edge)
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr>
@@ -800,6 +825,7 @@ knitr::kable(ds_edge)
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 <tr>
@@ -808,6 +834,7 @@ knitr::kable(ds_edge)
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="left">NA</td>
+<td align="right">NA</td>
 <td align="left">NA</td>
 </tr>
 </tbody></table>
@@ -850,7 +877,7 @@ packages used):</p>
 <pre><code class="r">Sys.time()
 </code></pre>
 
-<pre><code>## [1] &quot;2016-02-04 01:52:11 CST&quot;
+<pre><code>## [1] &quot;2016-02-04 23:35:01 CST&quot;
 </code></pre>
 
 </body>
