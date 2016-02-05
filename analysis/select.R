@@ -53,6 +53,9 @@ officer <- ds_officer %>%
   as.matrix()
 row.names(officer) <- ds_officer$hospital_id
 
+ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_of_hospital"="preference")
+ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_of_officer"="preference")
+
 
 # ---- select ------------------------------------------------------------------
 m <- matchingMarkets::daa(
@@ -69,6 +72,9 @@ ds_edge <- m$edgelist %>%
     officer_index   = students
   ) %>%
   dplyr::right_join(ds_hospital_roster, by="hospital_index") %>%
-  dplyr::right_join(ds_officer_roster , by="officer_index" )
+  dplyr::left_join(ds_hospital_long, by=c("hospital_id", "officer_id")) %>%
+  dplyr::right_join(ds_officer_roster , by="officer_index" ) %>%
+  dplyr::left_join(ds_officer_long , by=c("hospital_id", "officer_id")) %>%
+  dplyr::arrange(desc(billet_count_max), hospital_id)
 
-knitr::kable(ds_edge)
+knitr::kable(ds_edge, col.names=gsub("_", "<br/>", colnames(ds_edge)))

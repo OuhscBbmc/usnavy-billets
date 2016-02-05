@@ -64,6 +64,9 @@ officer <- ds_officer %>%
   dplyr::select(-hospital_id) %>%
   as.matrix()
 row.names(officer) <- ds_officer$hospital_id
+
+ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_of_hospital"="preference")
+ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_of_officer"="preference")
 ```
 
 ```r
@@ -383,41 +386,50 @@ ds_edge <- m$edgelist %>%
     officer_index   = students
   ) %>%
   dplyr::right_join(ds_hospital_roster, by="hospital_index") %>%
-  dplyr::right_join(ds_officer_roster , by="officer_index" )
+  dplyr::left_join(ds_hospital_long, by=c("hospital_id", "officer_id")) %>%
+  dplyr::right_join(ds_officer_roster , by="officer_index" ) %>%
+  dplyr::left_join(ds_officer_long , by=c("hospital_id", "officer_id")) %>%
+  dplyr::arrange(desc(billet_count_max), hospital_id)
+```
 
-knitr::kable(ds_edge)
+```
+## Error: cannot join on columns 'officer_id' x 'officer_id': index out of bounds
+```
+
+```r
+knitr::kable(ds_edge, col.names=gsub("_", "<br/>", colnames(ds_edge)))
 ```
 
 
 
-| hospital_index| officer_index| hospital_id|hospital_name | billet_count_max| officer_id|office_name_last |
-|--------------:|-------------:|-----------:|:-------------|----------------:|----------:|:----------------|
-|             16|             1|         216|NMCP          |                6|        401|Abraham          |
-|              4|             2|         204|Lejeune MLG   |                2|        402|Bailey           |
-|             22|             3|         222|NH Yoko       |                3|        403|Carr             |
-|              9|             4|         209|NHCP          |                3|        404|Davidson         |
-|             20|             5|         220|NHTP          |                1|        405|Ellison          |
-|             15|             6|         215|NH Napl       |                3|        406|Forsyth          |
-|              3|             7|         203|Lejeune MEU   |                2|        407|Glover           |
-|              9|             8|         209|NHCP          |                3|        408|Harris           |
-|              9|             9|         209|NHCP          |                3|        409|Ince             |
-|             22|            10|         222|NH Yoko       |                3|        410|Jones            |
-|             11|            11|         211|Guant         |                1|        411|Knox             |
-|             18|            12|         218|NMCSD         |                2|        412|Lambert          |
-|             10|            13|         210|Ft Belv       |                1|        413|Murray           |
-|             18|            14|         218|NMCSD         |                2|        414|Nash             |
-|              8|            15|         208|Oki MEU       |                1|        415|Oliver           |
-|              4|            16|         204|Lejeune MLG   |                2|        416|Paige            |
-|             22|            17|         222|NH Yoko       |                3|        417|Quinn            |
-|              5|            18|         205|NHCL          |                3|        418|Rampling         |
-|              1|            19|         201|NH Guam       |                2|        419|Sutherland       |
-|             19|            20|         219|NH Sig        |                1|        420|Taylor           |
-|              7|            21|         207|Oki MLG       |                2|        421|Underwood        |
-|              5|            22|         205|NHCL          |                3|        422|Vaughan          |
-|              7|            23|         207|Oki MLG       |                2|        423|Walker           |
-|             21|            24|         221|WHMP          |                1|        424|Xiong            |
-|              5|            25|         205|NHCL          |                3|        425|Young            |
-|             16|            26|         216|NMCP          |                6|        426|Zimmer           |
+| hospital<br/>index| officer<br/>index| hospital<br/>id|hospital<br/>name | billet<br/>count<br/>max| officer<br/>id|office<br/>name<br/>last | preference<br/>of<br/>hospital| preference<br/>of<br/>officer|
+|------------------:|-----------------:|---------------:|:-----------------|------------------------:|--------------:|:------------------------|------------------------------:|-----------------------------:|
+|                 16|                 1|             216|NMCP              |                        6|            401|Abraham                  |                              4|                            11|
+|                 16|                26|             216|NMCP              |                        6|            426|Zimmer                   |                             17|                            13|
+|                  5|                18|             205|NHCL              |                        3|            418|Rampling                 |                             22|                            19|
+|                  5|                22|             205|NHCL              |                        3|            422|Vaughan                  |                             20|                            12|
+|                  5|                25|             205|NHCL              |                        3|            425|Young                    |                              7|                            18|
+|                  9|                 4|             209|NHCP              |                        3|            404|Davidson                 |                              5|                             5|
+|                  9|                 8|             209|NHCP              |                        3|            408|Harris                   |                             20|                             5|
+|                  9|                 9|             209|NHCP              |                        3|            409|Ince                     |                              3|                            14|
+|                 15|                 6|             215|NH Napl           |                        3|            406|Forsyth                  |                              4|                            20|
+|                 22|                 3|             222|NH Yoko           |                        3|            403|Carr                     |                              9|                            14|
+|                 22|                10|             222|NH Yoko           |                        3|            410|Jones                    |                             12|                            19|
+|                 22|                17|             222|NH Yoko           |                        3|            417|Quinn                    |                             23|                             7|
+|                  1|                19|             201|NH Guam           |                        2|            419|Sutherland               |                             10|                             1|
+|                  3|                 7|             203|Lejeune MEU       |                        2|            407|Glover                   |                             20|                             9|
+|                  4|                 2|             204|Lejeune MLG       |                        2|            402|Bailey                   |                             10|                            16|
+|                  4|                16|             204|Lejeune MLG       |                        2|            416|Paige                    |                              1|                             6|
+|                  7|                21|             207|Oki MLG           |                        2|            421|Underwood                |                              5|                             4|
+|                  7|                23|             207|Oki MLG           |                        2|            423|Walker                   |                              7|                             2|
+|                 18|                12|             218|NMCSD             |                        2|            412|Lambert                  |                             17|                             2|
+|                 18|                14|             218|NMCSD             |                        2|            414|Nash                     |                              6|                            11|
+|                  8|                15|             208|Oki MEU           |                        1|            415|Oliver                   |                             22|                            17|
+|                 10|                13|             210|Ft Belv           |                        1|            413|Murray                   |                             11|                             1|
+|                 11|                11|             211|Guant             |                        1|            411|Knox                     |                              1|                            20|
+|                 19|                20|             219|NH Sig            |                        1|            420|Taylor                   |                             14|                            18|
+|                 20|                 5|             220|NHTP              |                        1|            405|Ellison                  |                             18|                            15|
+|                 21|                24|             221|WHMP              |                        1|            424|Xiong                    |                             13|                            14|
 
 The R session information (including the OS info, R version and all
 packages used):
@@ -462,6 +474,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-02-05 00:57:39 CST"
+## [1] "2016-02-05 01:04:46 CST"
 ```
 
