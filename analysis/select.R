@@ -57,8 +57,8 @@ row.names(officer) <- ds_officer$hospital_id
 # ---- select ------------------------------------------------------------------
 m <- matchingMarkets::daa(
   c.prefs = hospital, #College/hospital preferences (each student  is a row)
-  s.prefs = officer#, #Student/officer  preferences (each hospital is a row)
-  # nSlots  = ds_hospital_roster$billet_count
+  s.prefs = officer, #Student/officer  preferences (each hospital is a row)
+  nSlots  = ds_hospital_roster$billet_count_max
 )
 print(m)
 

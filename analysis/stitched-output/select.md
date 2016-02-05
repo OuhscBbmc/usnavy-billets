@@ -69,8 +69,8 @@ row.names(officer) <- ds_officer$hospital_id
 ```r
 m <- matchingMarkets::daa(
   c.prefs = hospital, #College/hospital preferences (each student  is a row)
-  s.prefs = officer#, #Student/officer  preferences (each hospital is a row)
-  # nSlots  = ds_hospital_roster$billet_count
+  s.prefs = officer, #Student/officer  preferences (each hospital is a row)
+  nSlots  = ds_hospital_roster$billet_count_max
 )
 print(m)
 ```
@@ -204,159 +204,176 @@ print(m)
 ## o_426    26     8    26    11    17    13     2    21    15    14    18
 ## 
 ## $iterations
-## [1] 67
+## [1] 6
 ## 
 ## $matches
 ## $matches[[1]]
-## [1] 13
+## [1] 19  0
 ## 
 ## $matches[[2]]
-## [1] 9
+## numeric(0)
 ## 
 ## $matches[[3]]
-## [1] 12
+## [1] 7 0
 ## 
 ## $matches[[4]]
-## [1] 16
+## [1]  2 16
 ## 
 ## $matches[[5]]
-## [1] 2
+## [1] 18 25 22
 ## 
 ## $matches[[6]]
-## [1] 6
+## numeric(0)
 ## 
 ## $matches[[7]]
-## [1] 22
+## [1] 23 21
 ## 
 ## $matches[[8]]
 ## [1] 15
 ## 
 ## $matches[[9]]
-## [1] 8
+## [1] 4 8 9
 ## 
 ## $matches[[10]]
-## [1] 3
+## [1] 13
 ## 
 ## $matches[[11]]
-## [1] 5
+## [1] 11
 ## 
 ## $matches[[12]]
-## [1] 19
+## [1] 0
 ## 
 ## $matches[[13]]
-## [1] 26
+## [1] 0 0
 ## 
 ## $matches[[14]]
-## [1] 10
+## numeric(0)
 ## 
 ## $matches[[15]]
-## [1] 25
+## [1] 6 0 0
 ## 
 ## $matches[[16]]
-## [1] 4
+## [1]  1 26  0  0  0  0
 ## 
 ## $matches[[17]]
-## [1] 1
+## [1] 0 0
 ## 
 ## $matches[[18]]
-## [1] 23
+## [1] 14 12
 ## 
 ## $matches[[19]]
 ## [1] 20
 ## 
 ## $matches[[20]]
-## [1] 18
+## [1] 5
 ## 
 ## $matches[[21]]
 ## [1] 24
 ## 
 ## $matches[[22]]
-## [1] 17
+## [1]  3 17 10
 ## 
 ## 
 ## $match.mat
 ##        [,1]  [,2]  [,3]  [,4]  [,5]  [,6]  [,7]  [,8]  [,9] [,10] [,11]
 ##  [1,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [2,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
-##  [4,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [5,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-##  [6,] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
-##  [7,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [2,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [4,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [5,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [6,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [7,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [8,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-##  [9,] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [9,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
 ## [10,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [11,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [13,]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [11,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+## [12,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [13,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
 ## [14,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [15,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
 ## [16,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [17,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [18,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [19,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [18,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+## [19,]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [20,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [21,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [22,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
-## [23,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [21,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+## [22,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
+## [23,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
 ## [24,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [25,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [26,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##       [,12] [,13] [,14] [,15] [,16] [,17] [,18] [,19] [,20] [,21] [,22]
-##  [1,] FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+##  [1,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [2,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [4,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [5,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-##  [6,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [3,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
+##  [4,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+##  [5,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
+##  [6,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [7,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [8,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ##  [9,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [10,] FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [10,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
 ## [11,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [12,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [12,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
 ## [13,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [14,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [14,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
 ## [15,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [16,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [17,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE
-## [18,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE
-## [19,]  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [18,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [19,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [20,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE
 ## [21,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [22,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [23,] FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE
+## [23,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
 ## [24,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE  TRUE FALSE
-## [25,] FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
-## [26,] FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [25,] FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE
+## [26,] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE FALSE
 ## 
 ## $singles
-## [1]  7 11 14 21
+## integer(0)
 ## 
 ## $edgelist
 ##    colleges students
-## 1         1       13
-## 2         2        9
-## 3         3       12
-## 4         4       16
-## 5         5        2
-## 6         6        6
-## 7         7       22
-## 8         8       15
-## 9         9        8
-## 10       10        3
-## 11       11        5
-## 12       12       19
-## 13       13       26
-## 14       14       10
-## 15       15       25
-## 16       16        4
-## 17       17        1
-## 18       18       23
-## 19       19       20
-## 20       20       18
-## 21       21       24
-## 22       22       17
+## 1         1       19
+## 2         1        0
+## 3         3        7
+## 4         3        0
+## 5         4        2
+## 6         4       16
+## 7         5       18
+## 8         5       25
+## 9         5       22
+## 10        7       23
+## 11        7       21
+## 12        8       15
+## 13        9        4
+## 14        9        8
+## 15        9        9
+## 16       10       13
+## 17       11       11
+## 18       12        0
+## 19       13        0
+## 20       13        0
+## 21       15        6
+## 22       15        0
+## 23       15        0
+## 24       16        1
+## 25       16       26
+## 26       16        0
+## 27       16        0
+## 28       16        0
+## 29       16        0
+## 30       17        0
+## 31       17        0
+## 32       18       14
+## 33       18       12
+## 34       19       20
+## 35       20        5
+## 36       21       24
+## 37       22        3
+## 38       22       17
+## 39       22       10
 ```
 
 ```r
@@ -375,32 +392,32 @@ knitr::kable(ds_edge)
 
 | hospital_index| officer_index| hospital_id|hospital_name | billet_count_max| officer_id|office_name_last |
 |--------------:|-------------:|-----------:|:-------------|----------------:|----------:|:----------------|
-|             17|             1|         217|NH Rota       |                2|        401|Abraham          |
-|              5|             2|         205|NHCL          |                3|        402|Bailey           |
-|             10|             3|         210|Ft Belv       |                1|        403|Carr             |
-|             16|             4|         216|NMCP          |                6|        404|Davidson         |
-|             11|             5|         211|Guant         |                1|        405|Ellison          |
-|              6|             6|         206|NH Oki        |                0|        406|Forsyth          |
-|             NA|             7|          NA|NA            |               NA|        407|Glover           |
+|             16|             1|         216|NMCP          |                6|        401|Abraham          |
+|              4|             2|         204|Lejeune MLG   |                2|        402|Bailey           |
+|             22|             3|         222|NH Yoko       |                3|        403|Carr             |
+|              9|             4|         209|NHCP          |                3|        404|Davidson         |
+|             20|             5|         220|NHTP          |                1|        405|Ellison          |
+|             15|             6|         215|NH Napl       |                3|        406|Forsyth          |
+|              3|             7|         203|Lejeune MEU   |                2|        407|Glover           |
 |              9|             8|         209|NHCP          |                3|        408|Harris           |
-|              2|             9|         202|WRNMMC        |                0|        409|Ince             |
-|             14|            10|         214|NTTC          |                0|        410|Jones            |
-|             NA|            11|          NA|NA            |               NA|        411|Knox             |
-|              3|            12|         203|Lejeune MEU   |                2|        412|Lambert          |
-|              1|            13|         201|NH Guam       |                2|        413|Murray           |
-|             NA|            14|          NA|NA            |               NA|        414|Nash             |
+|              9|             9|         209|NHCP          |                3|        409|Ince             |
+|             22|            10|         222|NH Yoko       |                3|        410|Jones            |
+|             11|            11|         211|Guant         |                1|        411|Knox             |
+|             18|            12|         218|NMCSD         |                2|        412|Lambert          |
+|             10|            13|         210|Ft Belv       |                1|        413|Murray           |
+|             18|            14|         218|NMCSD         |                2|        414|Nash             |
 |              8|            15|         208|Oki MEU       |                1|        415|Oliver           |
 |              4|            16|         204|Lejeune MLG   |                2|        416|Paige            |
 |             22|            17|         222|NH Yoko       |                3|        417|Quinn            |
-|             20|            18|         220|NHTP          |                1|        418|Rampling         |
-|             12|            19|         212|CBIRF         |                1|        419|Sutherland       |
+|              5|            18|         205|NHCL          |                3|        418|Rampling         |
+|              1|            19|         201|NH Guam       |                2|        419|Sutherland       |
 |             19|            20|         219|NH Sig        |                1|        420|Taylor           |
-|             NA|            21|          NA|NA            |               NA|        421|Underwood        |
-|              7|            22|         207|Oki MLG       |                2|        422|Vaughan          |
-|             18|            23|         218|NMCSD         |                2|        423|Walker           |
+|              7|            21|         207|Oki MLG       |                2|        421|Underwood        |
+|              5|            22|         205|NHCL          |                3|        422|Vaughan          |
+|              7|            23|         207|Oki MLG       |                2|        423|Walker           |
 |             21|            24|         221|WHMP          |                1|        424|Xiong            |
-|             15|            25|         215|NH Napl       |                3|        425|Young            |
-|             13|            26|         213|NH Jax        |                2|        426|Zimmer           |
+|              5|            25|         205|NHCL          |                3|        425|Young            |
+|             16|            26|         216|NMCP          |                6|        426|Zimmer           |
 
 The R session information (including the OS info, R version and all
 packages used):
@@ -445,6 +462,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-02-05 00:47:28 CST"
+## [1] "2016-02-05 00:57:39 CST"
 ```
 
