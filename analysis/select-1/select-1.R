@@ -60,10 +60,10 @@ ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_of_officer"="pr
 
 # ---- rankings-raw ------------------------------------------------------------------
 
-cat("\n\n### Input from Each Hospital\n\n")
+cat("\n\n### Input Provided from Each Hospital\n\n")
 knitr::kable(ds_hospital, format="markdown")
 
-cat("\n\n### Input from Each Officer\n\n")
+cat("\n\n### Input Provided from Each Officer\n\n")
 knitr::kable(ds_officer, format="markdown")
 
 # ---- select ------------------------------------------------------------------

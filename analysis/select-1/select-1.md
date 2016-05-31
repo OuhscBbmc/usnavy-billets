@@ -30,8 +30,9 @@ This report demonstrates one approach to optimally match officers and ER billets
 # Summary
 
 ### Notes 
-1. The current report covers 26 officers, 22 unique hospitals, 39 total possible billets.
-
+1. The current report covers 26 officers, 22 unique hospitals, and 39 total possible billets.
+1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is accommodated during the matching process.
+1. This demonstration was developed by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).
 
 ### Unanswered Questions
 
@@ -39,9 +40,14 @@ This report demonstrates one approach to optimally match officers and ER billets
 
 
 # Raw Rankings
+These two table represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+
+In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
+
+To walk through an example, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer o_405.  The first four hospitals (i.e., b_201, b_202, b_203, b_204) ranked officer o_405 as 1, 1, 6, and 24.
 
 
-### Input from Each Hospital
+### Input Provided from Each Hospital
 
 
 
@@ -76,7 +82,7 @@ This report demonstrates one approach to optimally match officers and ER billets
 
 
 
-### Input from Each Officer
+### Input Provided from Each Officer
 
 
 
@@ -413,6 +419,7 @@ b_222        9       6      14      21       6      14      21      15      17  
 
 # Join
 
+
  hospital<br/>index   officer<br/>index   hospital<br/>id  hospital<br/>name    billet<br/>count<br/>max   officer<br/>id  office<br/>name<br/>last    preference<br/>of<br/>hospital   preference<br/>of<br/>officer
 -------------------  ------------------  ----------------  ------------------  -------------------------  ---------------  -------------------------  -------------------------------  ------------------------------
                  16                   1               216  NMCP                                        6              401  Abraham                                                  4                              11
@@ -448,7 +455,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-05-31, 17:43 -0500
+Report rendered by Will at 2016-05-31, 18:07 -0500
 ```
 
 ```

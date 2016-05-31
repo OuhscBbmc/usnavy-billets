@@ -127,8 +127,8 @@ $(document).ready(function () {
 <li><a href="#answered-questions">Answered Questions</a></li>
 </ul></li>
 <li><a href="#raw-rankings">Raw Rankings</a><ul>
-<li><a href="#input-from-each-hospital">Input from Each Hospital</a></li>
-<li><a href="#input-from-each-officer">Input from Each Officer</a></li>
+<li><a href="#input-provided-from-each-hospital">Input Provided from Each Hospital</a></li>
+<li><a href="#input-provided-from-each-officer">Input Provided from Each Officer</a></li>
 </ul></li>
 <li><a href="#select">Select</a></li>
 <li><a href="#join">Join</a></li>
@@ -150,7 +150,9 @@ $(document).ready(function () {
 <div id="notes" class="section level3">
 <h3>Notes</h3>
 <ol style="list-style-type: decimal">
-<li>The current report covers 26 officers, 22 unique hospitals, 39 total possible billets.</li>
+<li>The current report covers 26 officers, 22 unique hospitals, and 39 total possible billets.</li>
+<li>Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet. Similarly, the hospital ranks an officer, instead of a billet ranking an officer. The billet capacity of a hospital is accommodated during the matching process.</li>
+<li>This demonstration was developed by <a href="http://ouhsc.edu/bbmc/team/">Will Beasley</a>, Assistant Professor of Research, University of Oklahoma College of Medicine, <a href="http://www.oumedicine.com/pediatrics">Department of Pediatrics</a>.</li>
 </ol>
 </div>
 <div id="unanswered-questions" class="section level3">
@@ -162,8 +164,11 @@ $(document).ready(function () {
 </div>
 <div id="raw-rankings" class="section level1">
 <h1>Raw Rankings</h1>
-<div id="input-from-each-hospital" class="section level3">
-<h3>Input from Each Hospital</h3>
+<p>These two table represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table). No adjustments have been made yet to the rankings.</p>
+<p>In the first table (i.e., “Input from Each <em>Hospital</em>”), each row represents an officer being ranked; each column represents a hospital providing their preferences. In constrast, in the second table (i.e., “Input Provided from Each <em>Officer</em>”), each row represents a hospital being ranked; each column represents an officer providing their preferences.</p>
+<p>To walk through an example, look at the fifth row in the first table. The values represent how the 22 hospitals ranked officer o_405. The first four hospitals (i.e., b_201, b_202, b_203, b_204) ranked officer o_405 as 1, 1, 6, and 24.</p>
+<div id="input-provided-from-each-hospital" class="section level3">
+<h3>Input Provided from Each Hospital</h3>
 <table style="width:231%;">
 <colgroup>
 <col width="16%"></col>
@@ -871,8 +876,8 @@ $(document).ready(function () {
 </tbody>
 </table>
 </div>
-<div id="input-from-each-officer" class="section level3">
-<h3>Input from Each Officer</h3>
+<div id="input-provided-from-each-officer" class="section level3">
+<h3>Input Provided from Each Officer</h3>
 <table style="width:271%;">
 <colgroup>
 <col width="18%"></col>
@@ -2837,7 +2842,7 @@ $edgelist
 <div id="session-information" class="section level1">
 <h1>Session Information</h1>
 <p>For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.</p>
-<pre><code>Report rendered by Will at 2016-05-31, 17:43 -0500</code></pre>
+<pre><code>Report rendered by Will at 2016-05-31, 18:07 -0500</code></pre>
 <pre><code>R version 3.3.0 Patched (2016-05-05 r70588)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows &gt;= 8 x64 (build 9200)

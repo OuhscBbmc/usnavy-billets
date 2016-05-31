@@ -63,8 +63,9 @@ read_chunk("./analysis/select-1/select-1.R") #This allows knitr to call chunks t
 # Summary
 
 ### Notes 
-1. The current report covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_hospital_roster)` unique hospitals, `r sum(ds_hospital_roster$billet_count_max)` total possible billets.
-
+1. The current report covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_hospital_roster)` unique hospitals, and `r sum(ds_hospital_roster$billet_count_max)` total possible billets.
+1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is accommodated during the matching process.
+1. This demonstration was developed by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).
 
 ### Unanswered Questions
 
@@ -72,6 +73,11 @@ read_chunk("./analysis/select-1/select-1.R") #This allows knitr to call chunks t
 
 
 # Raw Rankings
+These two table represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+
+In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
+
+To walk through an example, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer `r ds_hospital$officer_id[5]`.  The first four hospitals (i.e., `r paste(colnames(ds_hospital)[2:5], collapse=", ")`) ranked officer `r ds_hospital$officer_id[5]` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
 
 ```{r rankings-raw, echo=echoChunks, message=TRUE, results='asis'}
 ```
@@ -82,6 +88,7 @@ read_chunk("./analysis/select-1/select-1.R") #This allows knitr to call chunks t
 ```
 
 # Join
+
 ```{r join, echo=echoChunks, message=TRUE, fig.width=7}
 ```
 
