@@ -58,13 +58,23 @@ ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_of_hospital"="p
 ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_of_officer"="preference")
 
 
+# ---- rankings-raw ------------------------------------------------------------------
+
+cat("\n\n### Input from Each Hospital\n\n")
+knitr::kable(ds_hospital, format="markdown")
+
+cat("\n\n### Input from Each Officer\n\n")
+knitr::kable(ds_officer, format="markdown")
+
 # ---- select ------------------------------------------------------------------
 m <- matchingMarkets::daa(
-  c.prefs = hospital, #College/hospital preferences (each student  is a row)
-  s.prefs = officer, #Student/officer  preferences (each hospital is a row)
+  c.prefs = hospital, #College/hospital preferences (each officer  is a row)
+  s.prefs = officer, #Student/officer   preferences (each hospital is a row)
   nSlots  = ds_hospital_roster$billet_count_max
 )
 print(m)
+
+knitr::kable(m$s.prefs)
 
 # ---- join ------------------------------------------------------------------
 ds_edge <- m$edgelist %>%
@@ -73,8 +83,8 @@ ds_edge <- m$edgelist %>%
     officer_index   = students
   ) %>%
   dplyr::right_join(ds_hospital_roster, by="hospital_index") %>%
-  dplyr::left_join(ds_hospital_long, by=c("hospital_id", "officer_id")) %>%
   dplyr::right_join(ds_officer_roster , by="officer_index" ) %>%
+  dplyr::left_join(ds_hospital_long, by=c("hospital_id", "officer_id")) %>%
   dplyr::left_join(ds_officer_long , by=c("hospital_id", "officer_id")) %>%
   dplyr::arrange(desc(billet_count_max), hospital_id)
 
