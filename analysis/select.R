@@ -8,6 +8,7 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 library(magrittr, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+# run this line if necessary: install.packages(c("matchingMarkets", "readr", "tidyr", "dplyr"))
 requireNamespace("matchingMarkets")
 requireNamespace("readr")
 requireNamespace("tidyr")
