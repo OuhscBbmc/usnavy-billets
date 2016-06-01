@@ -1,4 +1,4 @@
-# Selection Demo of US Navy Billets
+# Selection Demo of US Navy Detailing Marketplace Pilot Program
 Date: `r Sys.Date()`  
 
 This report demonstrates one approach to optimally match officers and ER billets.  The project is under the initial direction of [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415, with advisement from [Alvin Roth](http://web.stanford.edu/~alroth/).
@@ -32,6 +32,14 @@ This report demonstrates one approach to optimally match officers and ER billets
 Summary
 ===========================================
 
+### Background
+
+To increase billet assignment transparency, and to give members and commands more control of the process, 2017 Navy Emergency Medicine Billets will be assigned using a detailing marketplace.  This is a pilot project within the Navy's larger effort to modernize the personnel system.  
+  
+A list of available billets will be published in the summer of 2016 for physicians to compete for.  At the same time, a list of officers/physicians up for orders will be made available for commands to recruit.  In January, rank lists from officers and commands will be submitted and run through the deferred acceptance algorithm.  The algorithm, used in the National Resident Matching Program, will optimize a match between officer and command.
+
+What follows is a demonstration of the algorithm using theoretical data.
+
 ### Notes 
 1. The current demonstration covers 26 officers, 22 unique hospitals, and 39 total possible billets.  
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
@@ -53,6 +61,11 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 1. How should the process be adjusted to accommodate issues like (a) recent tours overseas, (b) seniority, and (c) cliques?  Our current plan is to set some a priori points, and approximate it with a transformation.  The transformed rankings are fed into the matching algorithm.
 1. How should spousal placement (and other hard restrictions) be handled?  We are currently investigating what will happen if the other (nonacceptable sites) are left blank for the officer, and fed into the matching algorithm.
 1. How should 'subjective retirement thresholds' be handled?  For instance, suppose an officer will retire if they don't match to San Diego.  If they're matched somewhere else and retire, how should their assigned billet be filled?  Does the algorithm need to be run another time?  If so, several runs might be required (if other people's thresholds fail on subsequent runs), which is undesirable.
+1. How can we adjust the process to match members married to other active duty members (COLOs) or enrolled in the Exceptional Family Member Program (EFMP) who have limited billet-assignment options.  That is, some members will have to be matched to certain billets even if those commands do not rank them highly.
+1. How can we adjust the process to allow members to not match?  Specifically, some members have no obligation to stay in the Navy and can elect to get out if they do not get their preferred pick.  How do we allow this without affecting the integrity of the algorithm?
+1. How do we incentivize less desirable commands?
+1. How do we mitigate the advantage on-board members may have in securing an extension or retour?
+
 
 ### Answered Questions
 
@@ -234,7 +247,7 @@ In this demonstration, notice that not all hospitals filled every billet.
 Desirability
 -------------------------------------------
 
-Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how the each ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all 22 blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
+Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how each entity  ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all 22 blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
 
 ![](figure-png/graph-desirability-1.png)<!-- -->![](figure-png/graph-desirability-2.png)<!-- -->
 
@@ -247,7 +260,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-06-01, 11:06 -0500
+Report rendered by Will at 2016-06-01, 12:48 -0500
 ```
 
 ```
