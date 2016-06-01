@@ -1,5 +1,5 @@
 # usnavy-billets
-This project explores possibilities of optimally assigning naval officers to billets.  The demonstration report is viewable in [this report](https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md).
+This project explores possibilities of optimally assigning naval officers to billets.  The demonstration report is viewable in [this report](https://rawgit.com/OuhscBbmc/usnavy-billets/master/analysis/select-1/select-1.html) (or alternatively, this location hosted directly [within the repository](https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md).
 
 The following survey adequately addresses the current project needs, which involves only a few dozen commands and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
 

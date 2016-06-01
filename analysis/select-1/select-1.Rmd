@@ -5,8 +5,6 @@ output:
   html_document:
     keep_md: yes
     toc: yes
-  md_document:
-    variant: markdown_github
 ---
 
 This report demonstrates one approach to optimally match officers and ER billets.  The project is under the initial direction of [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415, with advisement from [Alvin Roth](http://web.stanford.edu/~alroth/).
@@ -77,7 +75,7 @@ A list of available billets will be published in the summer of 2016 for physicia
 What follows is a demonstration of the algorithm using theoretical data.
 
 ### Notes 
-1. The current demonstration covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_command_roster)` unique commands, and `r sum(ds_command_roster$billet_count_max)` total possible billets.  In the specialty of emergency medicine, the term "command" and "command" can almost be used interchangably.  Almost all commands are located in a single command, and each command/command can have multiple billets.
+1. The current demonstration covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_command_roster)` unique commands, and `r sum(ds_command_roster$billet_count_max)` total possible billets.  In the specialty of emergency medicine, the term "command" and "hospital" can almost be used interchangably.  Almost all commands are located in a single command, and each command/hospital can have multiple billets.
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
     * [roster of the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv).
     * [roster of the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv).
@@ -90,7 +88,7 @@ What follows is a demonstration of the algorithm using theoretical data.
 1. This demonstration was developed primarily by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).  The code developed for the billet marketplace project is open source and [available online](https://github.com/OuhscBbmc/usnavy-billets).  
 1. The project members are appreciative of the open source [`matchingMarkets`](https://cran.r-project.org/package=matchingMarkets) R package, (independently developed by [Thilo Klein](https://github.com/thiloklein) since [2013](https://github.com/thiloklein/matchingMarkets/commits/master)) that implements the Gale-Shapley (1962) Deferred Acceptance Algorithm. For further discussion, see [Roth (2007) Deferred Acceptance Algorithms: History, Theory, Practice, and
 Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferred%20Acceptance.pdf) and the [2012 Nobel Prize material](http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/2012/press.html).
-1. The most recent version of this demonstration report is available at https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md.
+1. The [most recent version](https://rawgit.com/OuhscBbmc/usnavy-billets/master/analysis/select-1/select-1.html) of this demonstration report is available in the [public repository](https://github.com/OuhscBbmc/usnavy-billets).  (An [alternate location](https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md) is also available.)
 
 ### Unanswered Questions
 
@@ -111,7 +109,7 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 
 These two tables represent the raw/initial rankings provided from each command (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
-In the first table (i.e., "Input from Each *command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
+In the first table (i.e., "Input from Each *Command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
 
 To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how command ```r ds_command_transition$command_id[5]``` ranked the `r nrow(ds_officer_roster)` officers.  The command's initial four officers (i.e., ```r paste(colnames(ds_command_transition)[2:5], collapse=", ")```) were ranked `r as.data.frame(ds_command_transition[5, 2:4])`, and `r as.data.frame(ds_command_transition[5, 5])`.
 

@@ -77,7 +77,7 @@ ds_officer_transition  <- transpose_transition_frame(ds_officer, id_name="office
 detach("package:dplyr", character.only = TRUE)
 
 # ---- rankings-raw ------------------------------------------------------------------
-cat("\n\n### Input Provided from Each command\n\n")
+cat("\n\n### Input Provided from Each Command\n\n")
 ds_command_transition %>%
   knitr::kable(format="markdown", align='r')
 
@@ -87,8 +87,8 @@ ds_officer_transition %>%
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::daa(
-  c.prefs = command, #College/command preferences (each officer  is a row)
-  s.prefs = officer, #Student/officer   preferences (each command is a row)
+  c.prefs = command, #College/command preferences (each officer is a row)
+  s.prefs = officer, #Student/officer preferences (each command is a row)
   nSlots  = ds_command_roster$billet_count_max
 )
 # print(m)
@@ -99,8 +99,8 @@ m$edgelist %>%
     colleges         = ifelse(colleges==0, "*not matched*", colleges)
   ) %>%
   dplyr::rename_(
-    "command index"    = "colleges",
-    "officer index"    = "students"
+    "command<br/>index"    = "colleges",
+    "officer<br/>index"    = "students"
   ) %>%
   knitr::kable(
     format       = "markdown"

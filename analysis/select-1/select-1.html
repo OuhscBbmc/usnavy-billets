@@ -129,7 +129,7 @@ $(document).ready(function () {
 <li><a href="#answered-questions">Answered Questions</a></li>
 </ul></li>
 <li><a href="#raw-rankings">Raw Rankings</a><ul>
-<li><a href="#input-provided-from-each-command">Input Provided from Each command</a></li>
+<li><a href="#input-provided-from-each-command">Input Provided from Each Command</a></li>
 <li><a href="#input-provided-from-each-officer">Input Provided from Each Officer</a></li>
 </ul></li>
 <li><a href="#results">Results</a><ul>
@@ -161,7 +161,7 @@ $(document).ready(function () {
 <div id="notes" class="section level3">
 <h3>Notes</h3>
 <ol style="list-style-type: decimal">
-<li>The current demonstration covers 26 officers, 22 unique commands, and 39 total possible billets. In the specialty of emergency medicine, the term “command” and “command” can almost be used interchangably. Almost all commands are located in a single command, and each command/command can have multiple billets.</li>
+<li>The current demonstration covers 26 officers, 22 unique commands, and 39 total possible billets. In the specialty of emergency medicine, the term “command” and “hospital” can almost be used interchangably. Almost all commands are located in a single command, and each command/hospital can have multiple billets.</li>
 <li>The four simulated datasets are viewable and editable <a href="https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free">online</a>.
 <ul>
 <li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv">roster of the commands</a>.</li>
@@ -179,7 +179,7 @@ $(document).ready(function () {
 <li>This demonstration was developed primarily by <a href="http://ouhsc.edu/bbmc/team/">Will Beasley</a>, Assistant Professor of Research, University of Oklahoma College of Medicine, <a href="http://www.oumedicine.com/pediatrics">Department of Pediatrics</a>. The code developed for the billet marketplace project is open source and <a href="https://github.com/OuhscBbmc/usnavy-billets">available online</a>.<br />
 </li>
 <li>The project members are appreciative of the open source <a href="https://cran.r-project.org/package=matchingMarkets"><code>matchingMarkets</code></a> R package, (independently developed by <a href="https://github.com/thiloklein">Thilo Klein</a> since <a href="https://github.com/thiloklein/matchingMarkets/commits/master">2013</a>) that implements the Gale-Shapley (1962) Deferred Acceptance Algorithm. For further discussion, see <a href="https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferred%20Acceptance.pdf">Roth (2007) Deferred Acceptance Algorithms: History, Theory, Practice, and Open Questions</a> and the <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/2012/press.html">2012 Nobel Prize material</a>.</li>
-<li>The most recent version of this demonstration report is available at <a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md" class="uri">https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md</a>.</li>
+<li>The <a href="https://rawgit.com/OuhscBbmc/usnavy-billets/master/analysis/select-1/select-1.html">most recent version</a> of this demonstration report is available in the <a href="https://github.com/OuhscBbmc/usnavy-billets">public repository</a>. (An <a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md">alternate location</a> is also available.)</li>
 </ol>
 </div>
 <div id="unanswered-questions" class="section level3">
@@ -204,14 +204,14 @@ $(document).ready(function () {
 <div id="raw-rankings" class="section level1">
 <h1>Raw Rankings</h1>
 <p>These two tables represent the raw/initial rankings provided from each command (in the first table) and from each officer (in the second table). No adjustments have been made yet to the rankings.</p>
-<p>In the first table (i.e., “Input from Each <em>command</em>”), each row represents a single command’s preferences; each column represents a officer being ranked. In constrast, in the second table (i.e., “Input Provided from Each <em>Officer</em>”), each row represents a single officer’s preferences; each column represents a hopsital being ranked.</p>
+<p>In the first table (i.e., “Input from Each <em>Command</em>”), each row represents a single command’s preferences; each column represents a officer being ranked. In constrast, in the second table (i.e., “Input Provided from Each <em>Officer</em>”), each row represents a single officer’s preferences; each column represents a hopsital being ranked.</p>
 <p>To walk through an example from the command’s perspective, look at the fifth row in the first table. The values represent how command <code>c_205</code> ranked the 26 officers. The command’s initial four officers (i.e., <code>o_401, o_402, o_403, o_404</code>) were ranked 2, 17, 10, and 13.</p>
 <p>To walk through an example from the officer’s perspective, look at the second row in the second table. The values represent how officer <code>o_402</code> ranked the 22 commands. The officer’s initial three commands (i.e., <code>c_201, c_202, c_203</code>) were ranked 4, 21, and 3.</p>
 <!-- To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how the 22 commands ranked officer ``o_405``.  The first four commands (i.e., ``c_201, c_202, c_203, c_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
 
 To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked command ``c_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``c_202`` as 7, 21, 15, and 2.-->
 <div id="input-provided-from-each-command" class="section level3">
-<h3>Input Provided from Each command</h3>
+<h3>Input Provided from Each Command</h3>
 <table style="width:269%;">
 <colgroup>
 <col width="16%"></col>
@@ -1633,8 +1633,8 @@ To walk through an example from the officer's perspective, look at the second ro
 <table>
 <thead>
 <tr class="header">
-<th align="right">command index</th>
-<th align="left">officer index</th>
+<th align="right">command<br />index</th>
+<th align="left">officer<br />index</th>
 </tr>
 </thead>
 <tbody>
@@ -2133,7 +2133,7 @@ To walk through an example from the officer's perspective, look at the second ro
 <h1>Session Information</h1>
 <p>We would like to address any questions or suggestions during any stage of the evaluation. Please contact <a href="mailto:richard.childers@navy.mil">Richard C. Childers</a>, CDR NPC, PERS-4415.</p>
 <p>For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.</p>
-<pre><code>Report rendered by Will at 2016-06-01, 14:11 -0500</code></pre>
+<pre><code>Report rendered by Will at 2016-06-01, 14:23 -0500</code></pre>
 <pre><code>R version 3.3.0 Patched (2016-05-05 r70588)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows &gt;= 8 x64 (build 9200)

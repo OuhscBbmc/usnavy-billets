@@ -41,7 +41,7 @@ A list of available billets will be published in the summer of 2016 for physicia
 What follows is a demonstration of the algorithm using theoretical data.
 
 ### Notes 
-1. The current demonstration covers 26 officers, 22 unique commands, and 39 total possible billets.  In the specialty of emergency medicine, the term "command" and "command" can almost be used interchangably.  Almost all commands are located in a single command, and each command/command can have multiple billets.
+1. The current demonstration covers 26 officers, 22 unique commands, and 39 total possible billets.  In the specialty of emergency medicine, the term "command" and "hospital" can almost be used interchangably.  Almost all commands are located in a single command, and each command/hospital can have multiple billets.
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
     * [roster of the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv).
     * [roster of the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv).
@@ -54,7 +54,7 @@ What follows is a demonstration of the algorithm using theoretical data.
 1. This demonstration was developed primarily by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).  The code developed for the billet marketplace project is open source and [available online](https://github.com/OuhscBbmc/usnavy-billets).  
 1. The project members are appreciative of the open source [`matchingMarkets`](https://cran.r-project.org/package=matchingMarkets) R package, (independently developed by [Thilo Klein](https://github.com/thiloklein) since [2013](https://github.com/thiloklein/matchingMarkets/commits/master)) that implements the Gale-Shapley (1962) Deferred Acceptance Algorithm. For further discussion, see [Roth (2007) Deferred Acceptance Algorithms: History, Theory, Practice, and
 Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferred%20Acceptance.pdf) and the [2012 Nobel Prize material](http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/2012/press.html).
-1. The most recent version of this demonstration report is available at https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md.
+1. The [most recent version](https://rawgit.com/OuhscBbmc/usnavy-billets/master/analysis/select-1/select-1.html) of this demonstration report is available in the [public repository](https://github.com/OuhscBbmc/usnavy-billets).  (An [alternate location](https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md) is also available.)
 
 ### Unanswered Questions
 
@@ -75,7 +75,7 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 
 These two tables represent the raw/initial rankings provided from each command (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
-In the first table (i.e., "Input from Each *command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
+In the first table (i.e., "Input from Each *Command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
 
 To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how command ``c_205`` ranked the 26 officers.  The command's initial four officers (i.e., ``o_401, o_402, o_403, o_404``) were ranked  2, 17, 10, and 13.
 
@@ -86,7 +86,7 @@ To walk through an example from the officer's perspective, look at the second ro
 To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked command ``c_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``c_202`` as 7, 21, 15, and 2.-->
 
 
-### Input Provided from Each command
+### Input Provided from Each Command
 
 
 
@@ -157,47 +157,47 @@ Results
 
 The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were 39 total billets (across 22 unique commands), but 26 officers.  This is only the essential information.  See the following section for a comprehensive table.
 
-| command index|officer index |
-|-------------:|:-------------|
-|             1|19            |
-|             1|*not matched* |
-|             3|7             |
-|             3|*not matched* |
-|             4|2             |
-|             4|16            |
-|             5|18            |
-|             5|25            |
-|             5|22            |
-|             7|23            |
-|             7|21            |
-|             8|15            |
-|             9|4             |
-|             9|8             |
-|             9|9             |
-|            10|13            |
-|            11|11            |
-|            12|*not matched* |
-|            13|*not matched* |
-|            13|*not matched* |
-|            15|6             |
-|            15|*not matched* |
-|            15|*not matched* |
-|            16|1             |
-|            16|26            |
-|            16|*not matched* |
-|            16|*not matched* |
-|            16|*not matched* |
-|            16|*not matched* |
-|            17|*not matched* |
-|            17|*not matched* |
-|            18|14            |
-|            18|12            |
-|            19|20            |
-|            20|5             |
-|            21|24            |
-|            22|3             |
-|            22|17            |
-|            22|10            |
+| command<br/>index|officer<br/>index |
+|-----------------:|:-----------------|
+|                 1|19                |
+|                 1|*not matched*     |
+|                 3|7                 |
+|                 3|*not matched*     |
+|                 4|2                 |
+|                 4|16                |
+|                 5|18                |
+|                 5|25                |
+|                 5|22                |
+|                 7|23                |
+|                 7|21                |
+|                 8|15                |
+|                 9|4                 |
+|                 9|8                 |
+|                 9|9                 |
+|                10|13                |
+|                11|11                |
+|                12|*not matched*     |
+|                13|*not matched*     |
+|                13|*not matched*     |
+|                15|6                 |
+|                15|*not matched*     |
+|                15|*not matched*     |
+|                16|1                 |
+|                16|26                |
+|                16|*not matched*     |
+|                16|*not matched*     |
+|                16|*not matched*     |
+|                16|*not matched*     |
+|                17|*not matched*     |
+|                17|*not matched*     |
+|                18|14                |
+|                18|12                |
+|                19|20                |
+|                20|5                 |
+|                21|24                |
+|                22|3                 |
+|                22|17                |
+|                22|10                |
 
 ### Display
 
@@ -257,7 +257,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-06-01, 14:11 -0500
+Report rendered by Will at 2016-06-01, 14:23 -0500
 ```
 
 ```
