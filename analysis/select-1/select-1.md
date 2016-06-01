@@ -1,4 +1,4 @@
-# US Navy Billets  --Selection Demo
+# Selection Demo of US Navy Billets
 Date: `r Sys.Date()`  
 
 This report demonstrates one approach to optimally match officers and ER billets.  The project is under the initial direction of [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415, with advisement from [Alvin Roth](http://web.stanford.edu/~alroth/).
@@ -31,7 +31,7 @@ Summary
 ===========================================
 
 ### Notes 
-1. The current report covers 26 officers, 22 unique hospitals, and 39 total possible billets.
+1. The current demonstration covers 26 officers, 22 unique hospitals, and 39 total possible billets.
 1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is accommodated during the matching process.
 
 ### Sources
@@ -49,13 +49,13 @@ Summary
 
 # Raw Rankings
 
-These two table represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+These two tables represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
 In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer o_405.  The first four hospitals (i.e., b_201, b_202, b_203, b_204) ranked officer o_405 as 1, 1, 6, and 24.
+To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer ``o_405``.  The first four hospitals (i.e., ``b_201, b_202, b_203, b_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital b_202.  The first four officers (i.e., o_401, o_402, o_403, o_404) ranked officer b_202 as 7, 21, 15, and 2.
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital ``b_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``b_202`` as 7, 21, 15, and 2.
 
 
 ### Input Provided from Each Hospital
@@ -177,9 +177,9 @@ Display
 
 The final table shows the indices of only the successful matches, along with the following information:
 
-* the officer & hopsital names (`hospital name` and `officer name last`), 
-* the officer & hopsital IDs  (`hospital id` and `officer id`), 
-* the maximum number of billets for a hospital (`billet count max`), and
+* the hopsital ID and name (`hospital id` and `hospital name`), 
+* the maximum number of billets for a hospital (`billet count max`),
+* the officer ID and name  (`officer id` and `officer name last`), 
 * the preference expressed from the hospital for the officer (`preference from hospital`)
 * the preference expressed from the officer for the hospital (`preference from officer`)
 
@@ -223,7 +223,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-05-31, 22:13 -0500
+Report rendered by Will at 2016-05-31, 22:34 -0500
 ```
 
 ```

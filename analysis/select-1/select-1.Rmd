@@ -1,10 +1,12 @@
 ---
-title: US Navy Billets  --Selection Demo
+title: Selection Demo of US Navy Billets
 date: "Date: `r Sys.Date()`"
 output:
   html_document:
     keep_md: yes
     toc: yes
+  md_document:
+    variant: markdown_github
 ---
 
 This report demonstrates one approach to optimally match officers and ER billets.  The project is under the initial direction of [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415, with advisement from [Alvin Roth](http://web.stanford.edu/~alroth/).
@@ -64,7 +66,7 @@ Summary
 ===========================================
 
 ### Notes 
-1. The current report covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_hospital_roster)` unique hospitals, and `r sum(ds_hospital_roster$billet_count_max)` total possible billets.
+1. The current demonstration covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_hospital_roster)` unique hospitals, and `r sum(ds_hospital_roster$billet_count_max)` total possible billets.
 1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is accommodated during the matching process.
 
 ### Sources
@@ -82,13 +84,13 @@ Summary
 
 # Raw Rankings
 
-These two table represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+These two tables represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
 In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer `r ds_hospital$officer_id[5]`.  The first four hospitals (i.e., `r paste(colnames(ds_hospital)[2:5], collapse=", ")`) ranked officer `r ds_hospital$officer_id[5]` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
+To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer ```r ds_hospital$officer_id[5]```.  The first four hospitals (i.e., ```r paste(colnames(ds_hospital)[2:5], collapse=", ")```) ranked officer ```r ds_hospital$officer_id[5]``` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked hospital `r ds_officer$hospital_id[2]`.  The first four officers (i.e., `r paste(colnames(ds_officer)[2:5], collapse=", ")`) ranked officer `r ds_officer$hospital_id[2]` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked hospital ```r ds_officer$hospital_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$hospital_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.
 
 ```{r rankings-raw, echo=echoChunks, message=TRUE, results='asis'}
 ```
@@ -108,9 +110,9 @@ Display
 
 The final table shows the indices of only the successful matches, along with the following information:
 
-* the officer & hopsital names (`hospital name` and `officer name last`), 
-* the officer & hopsital IDs  (`hospital id` and `officer id`), 
-* the maximum number of billets for a hospital (`billet count max`), and
+* the hopsital ID and name (`hospital id` and `hospital name`), 
+* the maximum number of billets for a hospital (`billet count max`),
+* the officer ID and name  (`officer id` and `officer name last`), 
 * the preference expressed from the hospital for the officer (`preference from hospital`)
 * the preference expressed from the officer for the hospital (`preference from officer`)
 
