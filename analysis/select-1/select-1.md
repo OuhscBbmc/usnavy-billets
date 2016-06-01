@@ -41,14 +41,14 @@ A list of available billets will be published in the summer of 2016 for physicia
 What follows is a demonstration of the algorithm using theoretical data.
 
 ### Notes 
-1. The current demonstration covers 26 officers, 22 unique hospitals, and 39 total possible billets.  
+1. The current demonstration covers 26 officers, 22 unique commands, and 39 total possible billets.  In the specialty of emergency medicine, the term "command" and "command" can almost be used interchangably.  Almost all commands are located in a single command, and each command/command can have multiple billets.
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
-    * [roster of the hospitals](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/hospital-roster.csv).
+    * [roster of the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv).
     * [roster of the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv).
-    * [rankings inputted from the hospitals](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/hospital.csv).
+    * [rankings inputted from the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/command.csv).
     * [rankings inputted from the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/officer.csv).
-1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is considered during the matching process.
-1. The following survey adequately addresses the current project needs, which involves only a few dozen hospitals and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
+1. Although there can be multiple billets per command, an officer ranks the global command, instead of a specific billet.  Similarly, the command ranks an officer, instead of a billet ranking an officer.  The billet capacity of a command is considered during the matching process.
+1. The following survey adequately addresses the current project needs, which involves only a few dozen commands and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
 
 ### Sources
 1. This demonstration was developed primarily by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).  The code developed for the billet marketplace project is open source and [available online](https://github.com/OuhscBbmc/usnavy-billets).  
@@ -73,47 +73,47 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 
 # Raw Rankings
 
-These two tables represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+These two tables represent the raw/initial rankings provided from each command (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
-In the first table (i.e., "Input from Each *Hospital*"), each row represents a single hospital's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
+In the first table (i.e., "Input from Each *command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how hospital ``h_205`` ranked the 26 officers.  The hospital's initial four officers (i.e., ``o_401, o_402, o_403, o_404``) were ranked  2, 17, 10, and 13.
+To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how command ``c_205`` ranked the 26 officers.  The command's initial four officers (i.e., ``o_401, o_402, o_403, o_404``) were ranked  2, 17, 10, and 13.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ``o_402`` ranked the 22 hospitals.  The officer's initial three hospitals (i.e., ``h_201, h_202, h_203``) were ranked  4, 21, and  3.
+To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ``o_402`` ranked the 22 commands.  The officer's initial three commands (i.e., ``c_201, c_202, c_203``) were ranked  4, 21, and  3.
 
-<!-- To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer ``o_405``.  The first four hospitals (i.e., ``h_201, h_202, h_203, h_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
+<!-- To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how the 22 commands ranked officer ``o_405``.  The first four commands (i.e., ``c_201, c_202, c_203, c_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital ``h_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``h_202`` as 7, 21, 15, and 2.-->
-
-
-### Input Provided from Each Hospital
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked command ``c_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``c_202`` as 7, 21, 15, and 2.-->
 
 
+### Input Provided from Each command
 
-| hospital_id| o_401| o_402| o_403| o_404| o_405| o_406| o_407| o_408| o_409| o_410| o_411| o_412| o_413| o_414| o_415| o_416| o_417| o_418| o_419| o_420| o_421| o_422| o_423| o_424| o_425| o_426|
-|-----------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
-|       h_201|    25|    13|     6|    16|     1|     7|    19|    14|     2|     5|     8|    20|    18|    22|    12|    23|     4|    26|    10|    17|     9|    11|     3|    15|    24|    21|
-|       h_202|     2|     9|    23|    12|     1|     5|    20|    16|    11|    10|    25|     8|    17|    21|    14|    15|    24|     6|     4|    19|    18|    22|    13|     7|     3|    26|
-|       h_203|     3|    12|    13|     5|     6|    14|    20|    17|    21|    25|     2|    18|    19|     4|    16|    24|    11|    15|    10|    26|     7|    23|     9|     1|    22|     8|
-|       h_204|    20|    10|    16|     2|    24|    21|     8|    22|    26|    25|    18|     4|    15|    13|     5|     1|    17|    12|     6|    23|    11|     7|    19|     3|    14|     9|
-|       h_205|     2|    17|    10|    13|    14|     5|    19|     6|     9|    11|    24|    21|    12|    26|    16|     1|     4|    22|    25|    18|    15|    20|     8|    23|     7|     3|
-|       h_206|     2|    10|    23|     6|     8|    16|     4|    18|    17|     1|    22|     3|    13|    24|    19|    26|     9|    21|     7|    15|    14|    20|    12|    25|     5|    11|
-|       h_207|    16|    22|    14|     6|    21|     1|    13|    19|    20|    26|     9|    25|    10|    12|    17|     8|    24|     2|    15|    11|     5|     4|     7|     3|    18|    23|
-|       h_208|    16|    15|    26|     8|    12|    18|     9|    14|     3|     5|     2|    13|     6|     4|    22|    21|     7|    11|    23|    10|    20|    25|    24|    17|     1|    19|
-|       h_209|     8|    12|    10|     5|     1|     9|     4|    20|     3|    16|    21|    26|    19|    13|    14|    23|     7|     6|    17|     2|    15|    22|    25|    11|    18|    24|
-|       h_210|    23|     1|     3|    15|    20|    22|    25|     9|    18|     8|    13|    12|    11|    16|     2|     5|    21|    10|     6|     7|    19|     4|    17|    24|    14|    26|
-|       h_211|    10|     6|    20|    16|     5|     3|    15|     4|    14|     7|     1|     8|    17|    18|    22|     2|    19|    12|    26|    24|    21|    11|    23|    25|     9|    13|
-|       h_212|     3|    13|    17|    19|     2|    15|    20|     5|    22|     8|    12|    10|    21|    16|     1|    14|    25|    11|     7|    24|    18|    23|     6|     9|     4|    26|
-|       h_213|    26|     4|    20|    13|    21|    15|     5|    11|     6|    22|     7|     9|    19|    14|    16|    23|    18|    24|    17|     2|     3|    10|    12|     1|    25|     8|
-|       h_214|    10|    14|    21|    16|    23|    25|     2|     3|    19|    18|    17|     7|     6|     9|     1|     4|    11|    20|    13|    22|     8|     5|    12|    24|    15|    26|
-|       h_215|    25|    21|     6|     8|     3|     4|    18|    13|    12|    14|     5|    16|    10|    17|    20|     1|     7|    15|     2|    26|    23|    19|     9|    22|    24|    11|
-|       h_216|     4|    11|     6|     3|    15|    18|    12|    24|    20|    26|     7|     9|     1|    22|     8|     5|    19|    23|    14|    16|    25|     2|    13|    10|    21|    17|
-|       h_217|     1|     3|     7|     9|    12|     4|    16|    14|    24|    20|    10|     8|    26|    21|    18|     5|    17|    22|    11|    15|     6|    25|    19|    23|     2|    13|
-|       h_218|     8|    15|    23|    16|    11|    19|    13|    20|    18|     7|     5|    17|     3|     6|     1|    22|     4|    25|    24|    14|    12|    26|    21|     9|    10|     2|
-|       h_219|     4|    20|    26|    19|    11|    16|    18|    24|     9|     5|     7|     2|     6|    22|     8|    10|    25|     3|    23|    14|    12|    13|    15|     1|    17|    21|
-|       h_220|     9|     8|    13|    20|    18|     6|    24|     3|    19|     1|    23|    11|    26|    14|     5|    17|    25|    22|    12|    10|    21|     4|     7|     2|    16|    15|
-|       h_221|    24|    17|     5|    16|     6|     3|    22|    26|     7|    12|    23|    21|     9|    11|     8|     2|    19|     4|    25|    20|    18|    10|     1|    13|    15|    14|
-|       h_222|    17|    14|     9|    22|     4|    19|     3|     5|     8|    12|    15|     2|    25|    11|     7|     6|    23|    21|    16|    24|     1|    20|    26|    10|    13|    18|
+
+
+| command_id| o_401| o_402| o_403| o_404| o_405| o_406| o_407| o_408| o_409| o_410| o_411| o_412| o_413| o_414| o_415| o_416| o_417| o_418| o_419| o_420| o_421| o_422| o_423| o_424| o_425| o_426|
+|----------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
+|      c_201|    25|    13|     6|    16|     1|     7|    19|    14|     2|     5|     8|    20|    18|    22|    12|    23|     4|    26|    10|    17|     9|    11|     3|    15|    24|    21|
+|      c_202|     2|     9|    23|    12|     1|     5|    20|    16|    11|    10|    25|     8|    17|    21|    14|    15|    24|     6|     4|    19|    18|    22|    13|     7|     3|    26|
+|      c_203|     3|    12|    13|     5|     6|    14|    20|    17|    21|    25|     2|    18|    19|     4|    16|    24|    11|    15|    10|    26|     7|    23|     9|     1|    22|     8|
+|      c_204|    20|    10|    16|     2|    24|    21|     8|    22|    26|    25|    18|     4|    15|    13|     5|     1|    17|    12|     6|    23|    11|     7|    19|     3|    14|     9|
+|      c_205|     2|    17|    10|    13|    14|     5|    19|     6|     9|    11|    24|    21|    12|    26|    16|     1|     4|    22|    25|    18|    15|    20|     8|    23|     7|     3|
+|      c_206|     2|    10|    23|     6|     8|    16|     4|    18|    17|     1|    22|     3|    13|    24|    19|    26|     9|    21|     7|    15|    14|    20|    12|    25|     5|    11|
+|      c_207|    16|    22|    14|     6|    21|     1|    13|    19|    20|    26|     9|    25|    10|    12|    17|     8|    24|     2|    15|    11|     5|     4|     7|     3|    18|    23|
+|      c_208|    16|    15|    26|     8|    12|    18|     9|    14|     3|     5|     2|    13|     6|     4|    22|    21|     7|    11|    23|    10|    20|    25|    24|    17|     1|    19|
+|      c_209|     8|    12|    10|     5|     1|     9|     4|    20|     3|    16|    21|    26|    19|    13|    14|    23|     7|     6|    17|     2|    15|    22|    25|    11|    18|    24|
+|      c_210|    23|     1|     3|    15|    20|    22|    25|     9|    18|     8|    13|    12|    11|    16|     2|     5|    21|    10|     6|     7|    19|     4|    17|    24|    14|    26|
+|      c_211|    10|     6|    20|    16|     5|     3|    15|     4|    14|     7|     1|     8|    17|    18|    22|     2|    19|    12|    26|    24|    21|    11|    23|    25|     9|    13|
+|      c_212|     3|    13|    17|    19|     2|    15|    20|     5|    22|     8|    12|    10|    21|    16|     1|    14|    25|    11|     7|    24|    18|    23|     6|     9|     4|    26|
+|      c_213|    26|     4|    20|    13|    21|    15|     5|    11|     6|    22|     7|     9|    19|    14|    16|    23|    18|    24|    17|     2|     3|    10|    12|     1|    25|     8|
+|      c_214|    10|    14|    21|    16|    23|    25|     2|     3|    19|    18|    17|     7|     6|     9|     1|     4|    11|    20|    13|    22|     8|     5|    12|    24|    15|    26|
+|      c_215|    25|    21|     6|     8|     3|     4|    18|    13|    12|    14|     5|    16|    10|    17|    20|     1|     7|    15|     2|    26|    23|    19|     9|    22|    24|    11|
+|      c_216|     4|    11|     6|     3|    15|    18|    12|    24|    20|    26|     7|     9|     1|    22|     8|     5|    19|    23|    14|    16|    25|     2|    13|    10|    21|    17|
+|      c_217|     1|     3|     7|     9|    12|     4|    16|    14|    24|    20|    10|     8|    26|    21|    18|     5|    17|    22|    11|    15|     6|    25|    19|    23|     2|    13|
+|      c_218|     8|    15|    23|    16|    11|    19|    13|    20|    18|     7|     5|    17|     3|     6|     1|    22|     4|    25|    24|    14|    12|    26|    21|     9|    10|     2|
+|      c_219|     4|    20|    26|    19|    11|    16|    18|    24|     9|     5|     7|     2|     6|    22|     8|    10|    25|     3|    23|    14|    12|    13|    15|     1|    17|    21|
+|      c_220|     9|     8|    13|    20|    18|     6|    24|     3|    19|     1|    23|    11|    26|    14|     5|    17|    25|    22|    12|    10|    21|     4|     7|     2|    16|    15|
+|      c_221|    24|    17|     5|    16|     6|     3|    22|    26|     7|    12|    23|    21|     9|    11|     8|     2|    19|     4|    25|    20|    18|    10|     1|    13|    15|    14|
+|      c_222|    17|    14|     9|    22|     4|    19|     3|     5|     8|    12|    15|     2|    25|    11|     7|     6|    23|    21|    16|    24|     1|    20|    26|    10|    13|    18|
 
 
 
@@ -121,7 +121,7 @@ To walk through an example from the officer's perspective, look at the second ro
 
 
 
-| officer_id| h_201| h_202| h_203| h_204| h_205| h_206| h_207| h_208| h_209| h_210| h_211| h_212| h_213| h_214| h_215| h_216| h_217| h_218| h_219| h_220| h_221| h_222|
+| officer_id| c_201| c_202| c_203| c_204| c_205| c_206| c_207| c_208| c_209| c_210| c_211| c_212| c_213| c_214| c_215| c_216| c_217| c_218| c_219| c_220| c_221| c_222|
 |----------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
 |      o_401|    16|     7|    20|    21|    17|    19|     5|     8|     3|    13|    15|    12|     2|    18|    22|    11|     4|    10|     1|    14|     6|     9|
 |      o_402|     4|    21|     3|    16|     7|    11|     1|     9|     8|     5|    15|    12|    10|    18|    19|    20|    17|     2|    13|    14|    22|     6|
@@ -153,101 +153,98 @@ To walk through an example from the officer's perspective, look at the second ro
 Results
 ===========================================
 
-Matches
--------------------------------------------
+### Matches
 
-The skinny table below shows the pairs of hospital--officer matches.  Notice that not all entities were matched.  This is because there were 39 total billets (across 22 unique hospitals), but 26 officers.  This is only the essential information.  See the following section for a comprehensive table.
+The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were 39 total billets (across 22 unique commands), but 26 officers.  This is only the essential information.  See the following section for a comprehensive table.
 
-| hospital index|officer index |
-|--------------:|:-------------|
-|              1|19            |
-|              1|*not matched* |
-|              3|7             |
-|              3|*not matched* |
-|              4|2             |
-|              4|16            |
-|              5|18            |
-|              5|25            |
-|              5|22            |
-|              7|23            |
-|              7|21            |
-|              8|15            |
-|              9|4             |
-|              9|8             |
-|              9|9             |
-|             10|13            |
-|             11|11            |
-|             12|*not matched* |
-|             13|*not matched* |
-|             13|*not matched* |
-|             15|6             |
-|             15|*not matched* |
-|             15|*not matched* |
-|             16|1             |
-|             16|26            |
-|             16|*not matched* |
-|             16|*not matched* |
-|             16|*not matched* |
-|             16|*not matched* |
-|             17|*not matched* |
-|             17|*not matched* |
-|             18|14            |
-|             18|12            |
-|             19|20            |
-|             20|5             |
-|             21|24            |
-|             22|3             |
-|             22|17            |
-|             22|10            |
+| command index|officer index |
+|-------------:|:-------------|
+|             1|19            |
+|             1|*not matched* |
+|             3|7             |
+|             3|*not matched* |
+|             4|2             |
+|             4|16            |
+|             5|18            |
+|             5|25            |
+|             5|22            |
+|             7|23            |
+|             7|21            |
+|             8|15            |
+|             9|4             |
+|             9|8             |
+|             9|9             |
+|            10|13            |
+|            11|11            |
+|            12|*not matched* |
+|            13|*not matched* |
+|            13|*not matched* |
+|            15|6             |
+|            15|*not matched* |
+|            15|*not matched* |
+|            16|1             |
+|            16|26            |
+|            16|*not matched* |
+|            16|*not matched* |
+|            16|*not matched* |
+|            16|*not matched* |
+|            17|*not matched* |
+|            17|*not matched* |
+|            18|14            |
+|            18|12            |
+|            19|20            |
+|            20|5             |
+|            21|24            |
+|            22|3             |
+|            22|17            |
+|            22|10            |
 
-Display
--------------------------------------------
+### Display
 
 The final table shows the indices of only the successful matches, along with the following information:
 
-* the hopsital ID and name (`hospital id` and `hospital name`), 
-* the maximum number of billets for a hospital (`billet count max`),
+* the hopsital ID and name (`command id` and `command name`), 
+* the maximum number of billets for a command (`billet count max`),
 * the officer ID and name  (`officer id` and `officer name last`), 
-* the preference expressed from the hospital for the officer (`preference from hospital`)
-* the preference expressed from the officer for the hospital (`preference from officer`)
+* the preference expressed from the command for the officer (`preference from command`)
+* the preference expressed from the officer for the command (`preference from officer`)
 
-In this demonstration, notice that not all hospitals filled every billet.
-
-
-| hospital<br/>index| officer<br/>index|hospital<br/>id |hospital<br/>name | billet<br/>count<br/>max|officer<br/>id |officer<br/>name<br/>last | preference<br/>from<br/>hospital| preference<br/>from<br/>officer|
-|------------------:|-----------------:|:---------------|:-----------------|------------------------:|:--------------|:-------------------------|--------------------------------:|-------------------------------:|
-|                 16|                 1|h_216           |NMCP              |                        6|o_401          |Abraham                   |                                4|                              11|
-|                 16|                26|h_216           |NMCP              |                        6|o_426          |Zimmer                    |                               17|                              13|
-|                  5|                18|h_205           |NHCL              |                        3|o_418          |Rampling                  |                               22|                              19|
-|                  5|                22|h_205           |NHCL              |                        3|o_422          |Vaughan                   |                               20|                              12|
-|                  5|                25|h_205           |NHCL              |                        3|o_425          |Young                     |                                7|                              18|
-|                  9|                 4|h_209           |NHCP              |                        3|o_404          |Davidson                  |                                5|                               5|
-|                  9|                 8|h_209           |NHCP              |                        3|o_408          |Harris                    |                               20|                               5|
-|                  9|                 9|h_209           |NHCP              |                        3|o_409          |Ince                      |                                3|                              14|
-|                 15|                 6|h_215           |NH Napl           |                        3|o_406          |Forsyth                   |                                4|                              20|
-|                 22|                 3|h_222           |NH Yoko           |                        3|o_403          |Carr                      |                                9|                              14|
-|                 22|                10|h_222           |NH Yoko           |                        3|o_410          |Jones                     |                               12|                              19|
-|                 22|                17|h_222           |NH Yoko           |                        3|o_417          |Quinn                     |                               23|                               7|
-|                  1|                19|h_201           |NH Guam           |                        2|o_419          |Sutherland                |                               10|                               1|
-|                  3|                 7|h_203           |Lejeune MEU       |                        2|o_407          |Glover                    |                               20|                               9|
-|                  4|                 2|h_204           |Lejeune MLG       |                        2|o_402          |Bailey                    |                               10|                              16|
-|                  4|                16|h_204           |Lejeune MLG       |                        2|o_416          |Paige                     |                                1|                               6|
-|                  7|                21|h_207           |Oki MLG           |                        2|o_421          |Underwood                 |                                5|                               4|
-|                  7|                23|h_207           |Oki MLG           |                        2|o_423          |Walker                    |                                7|                               2|
-|                 18|                12|h_218           |NMCSD             |                        2|o_412          |Lambert                   |                               17|                               2|
-|                 18|                14|h_218           |NMCSD             |                        2|o_414          |Nash                      |                                6|                              11|
-|                  8|                15|h_208           |Oki MEU           |                        1|o_415          |Oliver                    |                               22|                              17|
-|                 10|                13|h_210           |Ft Belv           |                        1|o_413          |Murray                    |                               11|                               1|
-|                 11|                11|h_211           |Guant             |                        1|o_411          |Knox                      |                                1|                              20|
-|                 19|                20|h_219           |NH Sig            |                        1|o_420          |Taylor                    |                               14|                              18|
-|                 20|                 5|h_220           |NHTP              |                        1|o_405          |Ellison                   |                               18|                              15|
-|                 21|                24|h_221           |WHMP              |                        1|o_424          |Xiong                     |                               13|                              14|
+In this demonstration, notice that not all commands filled every billet.
 
 
-Desirability
--------------------------------------------
+| command<br/>index| officer<br/>index|command<br/>id |command<br/>name | billet<br/>count<br/>max|officer<br/>id |officer<br/>name<br/>last | preference<br/>from<br/>command| preference<br/>from<br/>officer|
+|-----------------:|-----------------:|:--------------|:----------------|------------------------:|:--------------|:-------------------------|-------------------------------:|-------------------------------:|
+|                16|                 1|c_216          |NMCP             |                        6|o_401          |Abraham                   |                               4|                              11|
+|                16|                26|c_216          |NMCP             |                        6|o_426          |Zimmer                    |                              17|                              13|
+|                 5|                18|c_205          |NHCL             |                        3|o_418          |Rampling                  |                              22|                              19|
+|                 5|                22|c_205          |NHCL             |                        3|o_422          |Vaughan                   |                              20|                              12|
+|                 5|                25|c_205          |NHCL             |                        3|o_425          |Young                     |                               7|                              18|
+|                 9|                 4|c_209          |NHCP             |                        3|o_404          |Davidson                  |                               5|                               5|
+|                 9|                 8|c_209          |NHCP             |                        3|o_408          |Harris                    |                              20|                               5|
+|                 9|                 9|c_209          |NHCP             |                        3|o_409          |Ince                      |                               3|                              14|
+|                15|                 6|c_215          |NH Napl          |                        3|o_406          |Forsyth                   |                               4|                              20|
+|                22|                 3|c_222          |NH Yoko          |                        3|o_403          |Carr                      |                               9|                              14|
+|                22|                10|c_222          |NH Yoko          |                        3|o_410          |Jones                     |                              12|                              19|
+|                22|                17|c_222          |NH Yoko          |                        3|o_417          |Quinn                     |                              23|                               7|
+|                 1|                19|c_201          |NH Guam          |                        2|o_419          |Sutherland                |                              10|                               1|
+|                 3|                 7|c_203          |Lejeune MEU      |                        2|o_407          |Glover                    |                              20|                               9|
+|                 4|                 2|c_204          |Lejeune MLG      |                        2|o_402          |Bailey                    |                              10|                              16|
+|                 4|                16|c_204          |Lejeune MLG      |                        2|o_416          |Paige                     |                               1|                               6|
+|                 7|                21|c_207          |Oki MLG          |                        2|o_421          |Underwood                 |                               5|                               4|
+|                 7|                23|c_207          |Oki MLG          |                        2|o_423          |Walker                    |                               7|                               2|
+|                18|                12|c_218          |NMCSD            |                        2|o_412          |Lambert                   |                              17|                               2|
+|                18|                14|c_218          |NMCSD            |                        2|o_414          |Nash                      |                               6|                              11|
+|                 8|                15|c_208          |Oki MEU          |                        1|o_415          |Oliver                    |                              22|                              17|
+|                10|                13|c_210          |Ft Belv          |                        1|o_413          |Murray                    |                              11|                               1|
+|                11|                11|c_211          |Guant            |                        1|o_411          |Knox                      |                               1|                              20|
+|                19|                20|c_219          |NH Sig           |                        1|o_420          |Taylor                    |                              14|                              18|
+|                20|                 5|c_220          |NHTP             |                        1|o_405          |Ellison                   |                              18|                              15|
+|                21|                24|c_221          |WHMP             |                        1|o_424          |Xiong                     |                              13|                              14|
 
-Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how each entity  ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all 22 blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
+
+### Desirability
+
+Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how each entity  ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all commands believed the officer was the best fit for them, all 22 blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each command, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
 
 ![](figure-png/graph-desirability-1.png)<!-- -->![](figure-png/graph-desirability-2.png)<!-- -->
 
@@ -260,7 +257,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-06-01, 12:48 -0500
+Report rendered by Will at 2016-06-01, 14:11 -0500
 ```
 
 ```

@@ -1,4 +1,4 @@
-hospital_id,hospital_name,billet_count_max
+command_id,command_name,billet_count_max
 201,NH Guam,2
 202,WRNMMC,0
 203,Lejeune MEU,2

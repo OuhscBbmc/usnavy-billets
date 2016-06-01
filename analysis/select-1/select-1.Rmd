@@ -77,14 +77,14 @@ A list of available billets will be published in the summer of 2016 for physicia
 What follows is a demonstration of the algorithm using theoretical data.
 
 ### Notes 
-1. The current demonstration covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_hospital_roster)` unique hospitals, and `r sum(ds_hospital_roster$billet_count_max)` total possible billets.  
+1. The current demonstration covers `r nrow(ds_officer_roster)` officers, `r nrow(ds_command_roster)` unique commands, and `r sum(ds_command_roster$billet_count_max)` total possible billets.  In the specialty of emergency medicine, the term "command" and "command" can almost be used interchangably.  Almost all commands are located in a single command, and each command/command can have multiple billets.
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
-    * [roster of the hospitals](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/hospital-roster.csv).
+    * [roster of the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv).
     * [roster of the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv).
-    * [rankings inputted from the hospitals](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/hospital.csv).
+    * [rankings inputted from the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/command.csv).
     * [rankings inputted from the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/officer.csv).
-1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is considered during the matching process.
-1. The following survey adequately addresses the current project needs, which involves only a few dozen hospitals and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
+1. Although there can be multiple billets per command, an officer ranks the global command, instead of a specific billet.  Similarly, the command ranks an officer, instead of a billet ranking an officer.  The billet capacity of a command is considered during the matching process.
+1. The following survey adequately addresses the current project needs, which involves only a few dozen commands and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
 
 ### Sources
 1. This demonstration was developed primarily by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).  The code developed for the billet marketplace project is open source and [available online](https://github.com/OuhscBbmc/usnavy-billets).  
@@ -109,17 +109,17 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 
 # Raw Rankings
 
-These two tables represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
+These two tables represent the raw/initial rankings provided from each command (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
-In the first table (i.e., "Input from Each *Hospital*"), each row represents a single hospital's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
+In the first table (i.e., "Input from Each *command*"), each row represents a single command's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how hospital ```r ds_hospital_transition$hospital_id[5]``` ranked the `r nrow(ds_officer_roster)` officers.  The hospital's initial four officers (i.e., ```r paste(colnames(ds_hospital_transition)[2:5], collapse=", ")```) were ranked `r as.data.frame(ds_hospital_transition[5, 2:4])`, and `r as.data.frame(ds_hospital_transition[5, 5])`.
+To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how command ```r ds_command_transition$command_id[5]``` ranked the `r nrow(ds_officer_roster)` officers.  The command's initial four officers (i.e., ```r paste(colnames(ds_command_transition)[2:5], collapse=", ")```) were ranked `r as.data.frame(ds_command_transition[5, 2:4])`, and `r as.data.frame(ds_command_transition[5, 5])`.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ```r ds_officer_transition$officer_id[2]``` ranked the `r nrow(ds_hospital_roster)` hospitals.  The officer's initial three hospitals (i.e., ```r paste(colnames(ds_officer_transition)[2:4], collapse=", ")```) were ranked `r as.data.frame(ds_officer_transition[2, 2:3])`, and `r as.data.frame(ds_officer_transition[2, 4])`.
+To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ```r ds_officer_transition$officer_id[2]``` ranked the `r nrow(ds_command_roster)` commands.  The officer's initial three commands (i.e., ```r paste(colnames(ds_officer_transition)[2:4], collapse=", ")```) were ranked `r as.data.frame(ds_officer_transition[2, 2:3])`, and `r as.data.frame(ds_officer_transition[2, 4])`.
 
-<!-- To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer ```r ds_hospital$officer_id[5]```.  The first four hospitals (i.e., ```r paste(colnames(ds_hospital)[2:5], collapse=", ")```) ranked officer ```r ds_hospital$officer_id[5]``` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
+<!-- To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_command_roster)` commands ranked officer ```r ds_command$officer_id[5]```.  The first four commands (i.e., ```r paste(colnames(ds_command)[2:5], collapse=", ")```) ranked officer ```r ds_command$officer_id[5]``` as `r as.data.frame(ds_command[5, 2:4])`, and `r as.data.frame(ds_command[5, 5])`.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked hospital ```r ds_officer$hospital_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$hospital_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.-->
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked command ```r ds_officer$command_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$command_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.-->
 
 ```{r rankings-raw, echo=echoChunks, message=FALSE, results='asis'}
 ```
@@ -127,34 +127,31 @@ To walk through an example from the officer's perspective, look at the second ro
 Results
 ===========================================
 
-Matches
--------------------------------------------
+### Matches
 
-The skinny table below shows the pairs of hospital--officer matches.  Notice that not all entities were matched.  This is because there were `r sum(ds_hospital_roster$billet_count_max)` total billets (across `r nrow(ds_hospital_roster)` unique hospitals), but `r nrow(ds_officer_roster)` officers.  This is only the essential information.  See the following section for a comprehensive table.
+The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were `r sum(ds_command_roster$billet_count_max)` total billets (across `r nrow(ds_command_roster)` unique commands), but `r nrow(ds_officer_roster)` officers.  This is only the essential information.  See the following section for a comprehensive table.
 ```{r match, echo=echoChunks, message=TRUE}
 ```
 
-Display
--------------------------------------------
+### Display
 
 The final table shows the indices of only the successful matches, along with the following information:
 
-* the hopsital ID and name (`hospital id` and `hospital name`), 
-* the maximum number of billets for a hospital (`billet count max`),
+* the hopsital ID and name (`command id` and `command name`), 
+* the maximum number of billets for a command (`billet count max`),
 * the officer ID and name  (`officer id` and `officer name last`), 
-* the preference expressed from the hospital for the officer (`preference from hospital`)
-* the preference expressed from the officer for the hospital (`preference from officer`)
+* the preference expressed from the command for the officer (`preference from command`)
+* the preference expressed from the officer for the command (`preference from officer`)
 
-In this demonstration, notice that not all hospitals filled every billet.
+In this demonstration, notice that not all commands filled every billet.
 
 ```{r display, echo=echoChunks, message=TRUE}
 ```
 
 
-Desirability
--------------------------------------------
+### Desirability
 
-Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how each entity  ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all `r nrow(ds_hospital_roster)` blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
+Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how each entity  ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all commands believed the officer was the best fit for them, all `r nrow(ds_command_roster)` blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each command, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
 
 ```{r graph-desirability, echo=echoChunks, message=TRUE, fig.width=8}
 ```

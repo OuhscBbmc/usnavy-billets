@@ -1,4 +1,4 @@
-hospital_id,officer_id,preference
+command_id,officer_id,preference
 201,401,25
 201,402,13
 201,403,6
