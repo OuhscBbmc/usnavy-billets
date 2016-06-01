@@ -54,8 +54,8 @@ officer <- ds_officer %>%
   as.matrix()
 row.names(officer) <- ds_officer$hospital_id
 
-ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_of_hospital"="preference")
-ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_of_officer"="preference")
+ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_from_hospital"="preference")
+ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_from_officer"="preference")
 
 
 # ---- rankings-raw ------------------------------------------------------------------
@@ -66,17 +66,28 @@ knitr::kable(ds_hospital, format="markdown")
 cat("\n\n### Input Provided from Each Officer\n\n")
 knitr::kable(ds_officer, format="markdown")
 
-# ---- select ------------------------------------------------------------------
+# ---- match ------------------------------------------------------------------
 m <- matchingMarkets::daa(
   c.prefs = hospital, #College/hospital preferences (each officer  is a row)
   s.prefs = officer, #Student/officer   preferences (each hospital is a row)
   nSlots  = ds_hospital_roster$billet_count_max
 )
-print(m)
+# print(m)
 
-knitr::kable(m$s.prefs)
+m$edgelist %>%
+  dplyr::mutate(
+    students         = ifelse(students==0, "*not matched*", students),
+    colleges         = ifelse(colleges==0, "*not matched*", colleges)
+  ) %>%
+  dplyr::rename_(
+    "hospital id"   = "colleges",
+    "officer id"    = "students"
+  ) %>%
+  knitr::kable(
+    format       = "markdown"
+  )
 
-# ---- join ------------------------------------------------------------------
+# ---- display ------------------------------------------------------------------
 ds_edge <- m$edgelist %>%
   dplyr::rename(
     hospital_index  = colleges,
@@ -88,4 +99,8 @@ ds_edge <- m$edgelist %>%
   dplyr::left_join(ds_officer_long , by=c("hospital_id", "officer_id")) %>%
   dplyr::arrange(desc(billet_count_max), hospital_id)
 
-knitr::kable(ds_edge, col.names=gsub("_", "<br/>", colnames(ds_edge)))
+ds_edge %>%
+  knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_edge)),
+    format       = "markdown"
+  )
