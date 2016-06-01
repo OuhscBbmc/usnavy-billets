@@ -62,6 +62,9 @@ read_chunk("./analysis/select-1/select-1.R") #This allows knitr to call chunks t
 ```{r tweak-data, echo=echoChunks, results='show', message=FALSE}
 ```
 
+```{r transpose-transitions, echo=echoChunks, message=FALSE, results='asis'}
+```
+
 Summary
 ===========================================
 
@@ -86,13 +89,17 @@ Summary
 
 These two tables represent the raw/initial rankings provided from each hospital (in the first table) and from each officer (in the second table).  No adjustments have been made yet to the rankings.
 
-In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
+In the first table (i.e., "Input from Each *Hospital*"), each row represents a single hospital's preferences; each column represents a officer being ranked.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a single officer's preferences; each column represents a hopsital being ranked.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer ```r ds_hospital$officer_id[5]```.  The first four hospitals (i.e., ```r paste(colnames(ds_hospital)[2:5], collapse=", ")```) ranked officer ```r ds_hospital$officer_id[5]``` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
+To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how hospital ```r ds_hospital_transition$hospital_id[5]``` ranked the `r nrow(ds_officer_roster)` officers.  The hospital's initial four officers (i.e., ```r paste(colnames(ds_hospital_transition)[2:5], collapse=", ")```) were ranked `r as.data.frame(ds_hospital_transition[5, 2:4])`, and `r as.data.frame(ds_hospital_transition[5, 5])`.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked hospital ```r ds_officer$hospital_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$hospital_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.
+To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ```r ds_officer_transition$officer_id[2]``` ranked the `r nrow(ds_hospital_roster)` hospitals.  The officer's initial three hospitals (i.e., ```r paste(colnames(ds_officer_transition)[2:4], collapse=", ")```) were ranked `r as.data.frame(ds_officer_transition[2, 2:3])`, and `r as.data.frame(ds_officer_transition[2, 4])`.
 
-```{r rankings-raw, echo=echoChunks, message=TRUE, results='asis'}
+<!-- To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_hospital_roster)` hospitals ranked officer ```r ds_hospital$officer_id[5]```.  The first four hospitals (i.e., ```r paste(colnames(ds_hospital)[2:5], collapse=", ")```) ranked officer ```r ds_hospital$officer_id[5]``` as `r as.data.frame(ds_hospital[5, 2:4])`, and `r as.data.frame(ds_hospital[5, 5])`.
+
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked hospital ```r ds_officer$hospital_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$hospital_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.-->
+
+```{r rankings-raw, echo=echoChunks, message=FALSE, results='asis'}
 ```
 
 Results

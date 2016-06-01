@@ -57,14 +57,31 @@ row.names(officer) <- ds_officer$hospital_id
 ds_hospital_long <- dplyr::rename_(ds_hospital_long, "preference_from_hospital"="preference")
 ds_officer_long  <- dplyr::rename_(ds_officer_long , "preference_from_officer"="preference")
 
+# ---- transpose-transitions ------------------------------------------------------------------
+library(dplyr)
+transpose_transition_frame <- function( d2, id_name ) {
+  # browser()
+  d <- as.data.frame(t(d2), stringsAsFactors = FALSE)
+  colnames(d) <- as.character(d[1, ])
+  # d <- d[-1, ] #Drop the first row (which became column headers)
+  d <- d %>%
+    dplyr::add_rownames(id_name) %>%
+    dplyr::slice(-1) %>%  #Drop the first row (which became column headers)
+    dplyr::mutate_each(dplyr::funs(as.integer), starts_with("^o_\\d+$"))
+  return( d )
+}
+ds_hospital_transition <- transpose_transition_frame(ds_hospital, id_name="hospital_id")
+ds_officer_transition  <- transpose_transition_frame(ds_officer, id_name="officer_id")
+detach("package:dplyr", character.only = TRUE)
 
 # ---- rankings-raw ------------------------------------------------------------------
-
 cat("\n\n### Input Provided from Each Hospital\n\n")
-knitr::kable(ds_hospital, format="markdown")
+ds_hospital_transition %>%
+  knitr::kable(format="markdown", align='r')
 
 cat("\n\n### Input Provided from Each Officer\n\n")
-knitr::kable(ds_officer, format="markdown")
+ds_officer_transition %>%
+  knitr::kable(format="markdown", align='r')
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::daa(
