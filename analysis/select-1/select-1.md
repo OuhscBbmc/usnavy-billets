@@ -40,6 +40,7 @@ Summary
     * [rankings inputted from the hospitals](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/hospital.csv).
     * [rankings inputted from the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/officer.csv).
 1. Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet.  Similarly, the hospital ranks an officer, instead of a billet ranking an officer.  The billet capacity of a hospital is considered during the matching process.
+1. The following survey adequately addresses the current project needs, which involves only a few dozen hospitals and officers in one specialty.  The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W
 
 ### Sources
 1. This demonstration was developed primarily by [Will Beasley](http://ouhsc.edu/bbmc/team/), Assistant Professor of Research, University of Oklahoma College of Medicine, [Department of Pediatrics](http://www.oumedicine.com/pediatrics).  The code developed for the billet marketplace project is open source and [available online](https://github.com/OuhscBbmc/usnavy-billets).  
@@ -49,7 +50,9 @@ Open Questions](https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferre
 
 ### Unanswered Questions
 
-1. How should the process be adjusted to accommodate issues like (a) recent tours overseas, (b) seniority, and (c) cliques?
+1. How should the process be adjusted to accommodate issues like (a) recent tours overseas, (b) seniority, and (c) cliques?  Our current plan is to set some a priori points, and approximate it with a transformation.  The transformed rankings are fed into the matching algorithm.
+1. How should spousal placement (and other hard restrictions) be handled?  We are currently investigating what will happen if the other (nonacceptable sites) are left blank for the officer, and fed into the matching algorithm.
+1. How should 'subjective retirement thresholds' be handled?  For instance, suppose an officer will retire if they don't match to San Diego.  If they're matched somewhere else and retire, how should their assigned billet be filled?  Does the algorithm need to be run another time?  If so, several runs might be required (if other people's thresholds fail on subsequent runs), which is undesirable.
 
 ### Answered Questions
 
@@ -140,49 +143,49 @@ Results
 Matches
 -------------------------------------------
 
-The skinny table below shows the pairs of hospital--officer matches.  Notice that not all entities were matched.  This is because there were 39 total billets (across 22 unique hospitals), but 26 officers.
+The skinny table below shows the pairs of hospital--officer matches.  Notice that not all entities were matched.  This is because there were 39 total billets (across 22 unique hospitals), but 26 officers.  This is only the essential information.  See the following section for a comprehensive table.
 
-| hospital id|officer id    |
-|-----------:|:-------------|
-|           1|19            |
-|           1|*not matched* |
-|           3|7             |
-|           3|*not matched* |
-|           4|2             |
-|           4|16            |
-|           5|18            |
-|           5|25            |
-|           5|22            |
-|           7|23            |
-|           7|21            |
-|           8|15            |
-|           9|4             |
-|           9|8             |
-|           9|9             |
-|          10|13            |
-|          11|11            |
-|          12|*not matched* |
-|          13|*not matched* |
-|          13|*not matched* |
-|          15|6             |
-|          15|*not matched* |
-|          15|*not matched* |
-|          16|1             |
-|          16|26            |
-|          16|*not matched* |
-|          16|*not matched* |
-|          16|*not matched* |
-|          16|*not matched* |
-|          17|*not matched* |
-|          17|*not matched* |
-|          18|14            |
-|          18|12            |
-|          19|20            |
-|          20|5             |
-|          21|24            |
-|          22|3             |
-|          22|17            |
-|          22|10            |
+| hospital index|officer index |
+|--------------:|:-------------|
+|              1|19            |
+|              1|*not matched* |
+|              3|7             |
+|              3|*not matched* |
+|              4|2             |
+|              4|16            |
+|              5|18            |
+|              5|25            |
+|              5|22            |
+|              7|23            |
+|              7|21            |
+|              8|15            |
+|              9|4             |
+|              9|8             |
+|              9|9             |
+|             10|13            |
+|             11|11            |
+|             12|*not matched* |
+|             13|*not matched* |
+|             13|*not matched* |
+|             15|6             |
+|             15|*not matched* |
+|             15|*not matched* |
+|             16|1             |
+|             16|26            |
+|             16|*not matched* |
+|             16|*not matched* |
+|             16|*not matched* |
+|             16|*not matched* |
+|             17|*not matched* |
+|             17|*not matched* |
+|             18|14            |
+|             18|12            |
+|             19|20            |
+|             20|5             |
+|             21|24            |
+|             22|3             |
+|             22|17            |
+|             22|10            |
 
 Display
 -------------------------------------------
@@ -195,7 +198,7 @@ The final table shows the indices of only the successful matches, along with the
 * the preference expressed from the hospital for the officer (`preference from hospital`)
 * the preference expressed from the officer for the hospital (`preference from officer`)
 
-In this dmeonstration, notice that not all hospitals filled every billet.
+In this demonstration, notice that not all hospitals filled every billet.
 
 
 | hospital<br/>index| officer<br/>index| hospital<br/>id|hospital<br/>name | billet<br/>count<br/>max| officer<br/>id|officer<br/>name<br/>last | preference<br/>from<br/>hospital| preference<br/>from<br/>officer|
@@ -244,7 +247,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-06-01, 00:02 -0500
+Report rendered by Will at 2016-06-01, 10:50 -0500
 ```
 
 ```

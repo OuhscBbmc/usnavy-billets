@@ -164,6 +164,7 @@ $(document).ready(function () {
 <li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/officer.csv">rankings inputted from the officers</a>.</li>
 </ul></li>
 <li>Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet. Similarly, the hospital ranks an officer, instead of a billet ranking an officer. The billet capacity of a hospital is considered during the matching process.</li>
+<li>The following survey adequately addresses the current project needs, which involves only a few dozen hospitals and officers in one specialty. The survey framework would need to be generalized and scaled out, depending on the additional volume and types of specializations. <a href="https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W" class="uri">https://bbmc.ouhsc.edu/redcap/surveys/?s=7XNAFK337W</a></li>
 </ol>
 </div>
 <div id="sources" class="section level3">
@@ -178,7 +179,9 @@ $(document).ready(function () {
 <div id="unanswered-questions" class="section level3">
 <h3>Unanswered Questions</h3>
 <ol style="list-style-type: decimal">
-<li>How should the process be adjusted to accommodate issues like (a) recent tours overseas, (b) seniority, and (c) cliques?</li>
+<li>How should the process be adjusted to accommodate issues like (a) recent tours overseas, (b) seniority, and (c) cliques? Our current plan is to set some a priori points, and approximate it with a transformation. The transformed rankings are fed into the matching algorithm.</li>
+<li>How should spousal placement (and other hard restrictions) be handled? We are currently investigating what will happen if the other (nonacceptable sites) are left blank for the officer, and fed into the matching algorithm.</li>
+<li>How should ‘subjective retirement thresholds’ be handled? For instance, suppose an officer will retire if they don’t match to San Diego. If they’re matched somewhere else and retire, how should their assigned billet be filled? Does the algorithm need to be run another time? If so, several runs might be required (if other people’s thresholds fail on subsequent runs), which is undesirable.</li>
 </ol>
 </div>
 <div id="answered-questions" class="section level3">
@@ -1616,12 +1619,12 @@ To walk through an example from the officer's perspective, look at the second ro
 <h1>Results</h1>
 <div id="matches" class="section level2">
 <h2>Matches</h2>
-<p>The skinny table below shows the pairs of hospital–officer matches. Notice that not all entities were matched. This is because there were 39 total billets (across 22 unique hospitals), but 26 officers.</p>
+<p>The skinny table below shows the pairs of hospital–officer matches. Notice that not all entities were matched. This is because there were 39 total billets (across 22 unique hospitals), but 26 officers. This is only the essential information. See the following section for a comprehensive table.</p>
 <table>
 <thead>
 <tr class="header">
-<th align="right">hospital id</th>
-<th align="left">officer id</th>
+<th align="right">hospital index</th>
+<th align="left">officer index</th>
 </tr>
 </thead>
 <tbody>
@@ -1794,7 +1797,7 @@ To walk through an example from the officer's perspective, look at the second ro
 <li>the preference expressed from the hospital for the officer (<code>preference from hospital</code>)</li>
 <li>the preference expressed from the officer for the hospital (<code>preference from officer</code>)</li>
 </ul>
-<p>In this dmeonstration, notice that not all hospitals filled every billet.</p>
+<p>In this demonstration, notice that not all hospitals filled every billet.</p>
 <table style="width:293%;">
 <colgroup>
 <col width="27%"></col>
@@ -2120,7 +2123,7 @@ To walk through an example from the officer's perspective, look at the second ro
 <h1>Session Information</h1>
 <p>We would like to address any questions or suggestions during any stage of the evaluation. Please contact <a href="mailto:richard.childers@navy.mil">Richard C. Childers</a>, CDR NPC, PERS-4415.</p>
 <p>For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.</p>
-<pre><code>Report rendered by Will at 2016-06-01, 00:02 -0500</code></pre>
+<pre><code>Report rendered by Will at 2016-06-01, 10:50 -0500</code></pre>
 <pre><code>R version 3.3.0 Patched (2016-05-05 r70588)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows &gt;= 8 x64 (build 9200)

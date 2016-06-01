@@ -99,8 +99,8 @@ m$edgelist %>%
     colleges         = ifelse(colleges==0, "*not matched*", colleges)
   ) %>%
   dplyr::rename_(
-    "hospital id"   = "colleges",
-    "officer id"    = "students"
+    "hospital index"   = "colleges",
+    "officer index"    = "students"
   ) %>%
   knitr::kable(
     format       = "markdown"
