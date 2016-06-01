@@ -53,7 +53,7 @@ These two tables represent the raw/initial rankings provided from each hospital 
 
 In the first table (i.e., "Input from Each *Hospital*"), each row represents an officer being ranked; each column represents a hospital providing their preferences.  In constrast, in the second table (i.e., "Input Provided from Each *Officer*"), each row represents a hospital being ranked; each column represents an officer providing their preferences.
 
-To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer ``o_405``.  The first four hospitals (i.e., ``b_201, b_202, b_203, b_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
+To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer ``o_405``.  The first four hospitals (i.e., ``h_201, h_202, h_203, h_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
 
 To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital ``b_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``b_202`` as 7, 21, 15, and 2.
 
@@ -62,7 +62,7 @@ To walk through an example from the officer's perspective, look at the second ro
 
 
 
-|officer_id | b_201| b_202| b_203| b_204| b_205| b_206| b_207| b_208| b_209| b_210| b_211| b_212| b_213| b_214| b_215| b_216| b_217| b_218| b_219| b_220| b_221| b_222|
+|officer_id | h_201| h_202| h_203| h_204| h_205| h_206| h_207| h_208| h_209| h_210| h_211| h_212| h_213| h_214| h_215| h_216| h_217| h_218| h_219| h_220| h_221| h_222|
 |:----------|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
 |o_401      |    25|     2|     3|    20|     2|     2|    16|    16|     8|    23|    10|     3|    26|    10|    25|     4|     1|     8|     4|     9|    24|    17|
 |o_402      |    13|     9|    12|    10|    17|    10|    22|    15|    12|     1|     6|    13|     4|    14|    21|    11|     3|    15|    20|     8|    17|    14|
@@ -223,7 +223,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-05-31, 22:34 -0500
+Report rendered by Will at 2016-05-31, 22:36 -0500
 ```
 
 ```

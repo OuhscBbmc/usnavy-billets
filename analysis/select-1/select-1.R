@@ -32,7 +32,7 @@ ds_officer_roster$officer_index   <- seq_len(nrow(ds_officer_roster))
 
 ds_hospital <- ds_hospital_long %>%
   dplyr::mutate(
-    hospital_id  = sprintf("b_%03d", hospital_id),
+    hospital_id  = sprintf("h_%03d", hospital_id),
     officer_id   = sprintf("o_%03d", officer_id)
   ) %>%
   tidyr::spread(key=hospital_id, value=preference)
