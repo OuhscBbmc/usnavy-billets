@@ -115,7 +115,7 @@ $(document).ready(function () {
 
 
 <h1 class="title toc-ignore">Selection Demo of US Navy Billets</h1>
-<h4 class="date"><em>Date: 2016-05-31</em></h4>
+<h4 class="date"><em>Date: 2016-06-01</em></h4>
 
 </div>
 
@@ -154,8 +154,16 @@ $(document).ready(function () {
 <div id="notes" class="section level3">
 <h3>Notes</h3>
 <ol style="list-style-type: decimal">
-<li>The current demonstration covers 26 officers, 22 unique hospitals, and 39 total possible billets.</li>
-<li>Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet. Similarly, the hospital ranks an officer, instead of a billet ranking an officer. The billet capacity of a hospital is accommodated during the matching process.</li>
+<li>The current demonstration covers 26 officers, 22 unique hospitals, and 39 total possible billets.<br />
+</li>
+<li>The four simulated datasets are viewable and editable <a href="https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free">online</a>.
+<ul>
+<li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/hospital-roster.csv">roster of the hospitals</a>.</li>
+<li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv">roster of the officers</a>.</li>
+<li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/hospital.csv">rankings inputted from the hospitals</a>.</li>
+<li><a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/derived/officer.csv">rankings inputted from the officers</a>.</li>
+</ul></li>
+<li>Although there can be multiple billets per hospital, an officer ranks the global hospital, instead of a specific billet. Similarly, the hospital ranks an officer, instead of a billet ranking an officer. The billet capacity of a hospital is considered during the matching process.</li>
 </ol>
 </div>
 <div id="sources" class="section level3">
@@ -163,7 +171,7 @@ $(document).ready(function () {
 <ol style="list-style-type: decimal">
 <li>This demonstration was developed primarily by <a href="http://ouhsc.edu/bbmc/team/">Will Beasley</a>, Assistant Professor of Research, University of Oklahoma College of Medicine, <a href="http://www.oumedicine.com/pediatrics">Department of Pediatrics</a>. The code developed for the billet marketplace project is open source and <a href="https://github.com/OuhscBbmc/usnavy-billets">available online</a>.<br />
 </li>
-<li>The project members are appreciative of the open source <a href="https://cran.r-project.org/package=matchingMarkets"><code>matchingMarkets</code></a> R package, (independently developed by <a href="https://github.com/thiloklein">Thilo Klein</a> since <a href="https://github.com/thiloklein/matchingMarkets/commits/master">2013</a>) that implements the Gale-Shapley (1962) Deferred Acceptance Algorithm. For further discussion, see <a href="https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferred%20Acceptance.pdf">Roth, 2007</a> and the <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/2012/press.html">2012 Nobel Prize material</a>.</li>
+<li>The project members are appreciative of the open source <a href="https://cran.r-project.org/package=matchingMarkets"><code>matchingMarkets</code></a> R package, (independently developed by <a href="https://github.com/thiloklein">Thilo Klein</a> since <a href="https://github.com/thiloklein/matchingMarkets/commits/master">2013</a>) that implements the Gale-Shapley (1962) Deferred Acceptance Algorithm. For further discussion, see <a href="https://dash.harvard.edu/bitstream/handle/1/2579651/Roth_Deferred%20Acceptance.pdf">Roth (2007) Deferred Acceptance Algorithms: History, Theory, Practice, and Open Questions</a> and the <a href="http://www.nobelprize.org/nobel_prizes/economic-sciences/laureates/2012/press.html">2012 Nobel Prize material</a>.</li>
 <li>The most recent version of this demonstration report is available at <a href="https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md" class="uri">https://github.com/OuhscBbmc/usnavy-billets/blob/master/analysis/select-1/select-1.md</a>.</li>
 </ol>
 </div>
@@ -2112,7 +2120,7 @@ To walk through an example from the officer's perspective, look at the second ro
 <h1>Session Information</h1>
 <p>We would like to address any questions or suggestions during any stage of the evaluation. Please contact <a href="mailto:richard.childers@navy.mil">Richard C. Childers</a>, CDR NPC, PERS-4415.</p>
 <p>For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.</p>
-<pre><code>Report rendered by Will at 2016-05-31, 23:52 -0500</code></pre>
+<pre><code>Report rendered by Will at 2016-06-01, 00:02 -0500</code></pre>
 <pre><code>R version 3.3.0 Patched (2016-05-05 r70588)
 Platform: x86_64-w64-mingw32/x64 (64-bit)
 Running under: Windows &gt;= 8 x64 (build 9200)
