@@ -116,7 +116,11 @@ ds_edge <- m$edgelist %>%
   dplyr::right_join(ds_officer_roster , by="officer_index" ) %>%
   dplyr::left_join(ds_hospital_long, by=c("hospital_id", "officer_id")) %>%
   dplyr::left_join(ds_officer_long , by=c("hospital_id", "officer_id")) %>%
-  dplyr::arrange(desc(billet_count_max), hospital_id)
+  dplyr::arrange(desc(billet_count_max), hospital_id) %>%
+  dplyr::mutate(
+    hospital_id  = sprintf("h_%03d", hospital_id),
+    officer_id   = sprintf("o_%03d", officer_id)
+  )
 
 ds_edge %>%
   knitr::kable(

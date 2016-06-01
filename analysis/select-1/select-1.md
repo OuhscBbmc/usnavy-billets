@@ -201,34 +201,34 @@ The final table shows the indices of only the successful matches, along with the
 In this demonstration, notice that not all hospitals filled every billet.
 
 
-| hospital<br/>index| officer<br/>index| hospital<br/>id|hospital<br/>name | billet<br/>count<br/>max| officer<br/>id|officer<br/>name<br/>last | preference<br/>from<br/>hospital| preference<br/>from<br/>officer|
-|------------------:|-----------------:|---------------:|:-----------------|------------------------:|--------------:|:-------------------------|--------------------------------:|-------------------------------:|
-|                 16|                 1|             216|NMCP              |                        6|            401|Abraham                   |                                4|                              11|
-|                 16|                26|             216|NMCP              |                        6|            426|Zimmer                    |                               17|                              13|
-|                  5|                18|             205|NHCL              |                        3|            418|Rampling                  |                               22|                              19|
-|                  5|                22|             205|NHCL              |                        3|            422|Vaughan                   |                               20|                              12|
-|                  5|                25|             205|NHCL              |                        3|            425|Young                     |                                7|                              18|
-|                  9|                 4|             209|NHCP              |                        3|            404|Davidson                  |                                5|                               5|
-|                  9|                 8|             209|NHCP              |                        3|            408|Harris                    |                               20|                               5|
-|                  9|                 9|             209|NHCP              |                        3|            409|Ince                      |                                3|                              14|
-|                 15|                 6|             215|NH Napl           |                        3|            406|Forsyth                   |                                4|                              20|
-|                 22|                 3|             222|NH Yoko           |                        3|            403|Carr                      |                                9|                              14|
-|                 22|                10|             222|NH Yoko           |                        3|            410|Jones                     |                               12|                              19|
-|                 22|                17|             222|NH Yoko           |                        3|            417|Quinn                     |                               23|                               7|
-|                  1|                19|             201|NH Guam           |                        2|            419|Sutherland                |                               10|                               1|
-|                  3|                 7|             203|Lejeune MEU       |                        2|            407|Glover                    |                               20|                               9|
-|                  4|                 2|             204|Lejeune MLG       |                        2|            402|Bailey                    |                               10|                              16|
-|                  4|                16|             204|Lejeune MLG       |                        2|            416|Paige                     |                                1|                               6|
-|                  7|                21|             207|Oki MLG           |                        2|            421|Underwood                 |                                5|                               4|
-|                  7|                23|             207|Oki MLG           |                        2|            423|Walker                    |                                7|                               2|
-|                 18|                12|             218|NMCSD             |                        2|            412|Lambert                   |                               17|                               2|
-|                 18|                14|             218|NMCSD             |                        2|            414|Nash                      |                                6|                              11|
-|                  8|                15|             208|Oki MEU           |                        1|            415|Oliver                    |                               22|                              17|
-|                 10|                13|             210|Ft Belv           |                        1|            413|Murray                    |                               11|                               1|
-|                 11|                11|             211|Guant             |                        1|            411|Knox                      |                                1|                              20|
-|                 19|                20|             219|NH Sig            |                        1|            420|Taylor                    |                               14|                              18|
-|                 20|                 5|             220|NHTP              |                        1|            405|Ellison                   |                               18|                              15|
-|                 21|                24|             221|WHMP              |                        1|            424|Xiong                     |                               13|                              14|
+| hospital<br/>index| officer<br/>index|hospital<br/>id |hospital<br/>name | billet<br/>count<br/>max|officer<br/>id |officer<br/>name<br/>last | preference<br/>from<br/>hospital| preference<br/>from<br/>officer|
+|------------------:|-----------------:|:---------------|:-----------------|------------------------:|:--------------|:-------------------------|--------------------------------:|-------------------------------:|
+|                 16|                 1|h_216           |NMCP              |                        6|o_401          |Abraham                   |                                4|                              11|
+|                 16|                26|h_216           |NMCP              |                        6|o_426          |Zimmer                    |                               17|                              13|
+|                  5|                18|h_205           |NHCL              |                        3|o_418          |Rampling                  |                               22|                              19|
+|                  5|                22|h_205           |NHCL              |                        3|o_422          |Vaughan                   |                               20|                              12|
+|                  5|                25|h_205           |NHCL              |                        3|o_425          |Young                     |                                7|                              18|
+|                  9|                 4|h_209           |NHCP              |                        3|o_404          |Davidson                  |                                5|                               5|
+|                  9|                 8|h_209           |NHCP              |                        3|o_408          |Harris                    |                               20|                               5|
+|                  9|                 9|h_209           |NHCP              |                        3|o_409          |Ince                      |                                3|                              14|
+|                 15|                 6|h_215           |NH Napl           |                        3|o_406          |Forsyth                   |                                4|                              20|
+|                 22|                 3|h_222           |NH Yoko           |                        3|o_403          |Carr                      |                                9|                              14|
+|                 22|                10|h_222           |NH Yoko           |                        3|o_410          |Jones                     |                               12|                              19|
+|                 22|                17|h_222           |NH Yoko           |                        3|o_417          |Quinn                     |                               23|                               7|
+|                  1|                19|h_201           |NH Guam           |                        2|o_419          |Sutherland                |                               10|                               1|
+|                  3|                 7|h_203           |Lejeune MEU       |                        2|o_407          |Glover                    |                               20|                               9|
+|                  4|                 2|h_204           |Lejeune MLG       |                        2|o_402          |Bailey                    |                               10|                              16|
+|                  4|                16|h_204           |Lejeune MLG       |                        2|o_416          |Paige                     |                                1|                               6|
+|                  7|                21|h_207           |Oki MLG           |                        2|o_421          |Underwood                 |                                5|                               4|
+|                  7|                23|h_207           |Oki MLG           |                        2|o_423          |Walker                    |                                7|                               2|
+|                 18|                12|h_218           |NMCSD             |                        2|o_412          |Lambert                   |                               17|                               2|
+|                 18|                14|h_218           |NMCSD             |                        2|o_414          |Nash                      |                                6|                              11|
+|                  8|                15|h_208           |Oki MEU           |                        1|o_415          |Oliver                    |                               22|                              17|
+|                 10|                13|h_210           |Ft Belv           |                        1|o_413          |Murray                    |                               11|                               1|
+|                 11|                11|h_211           |Guant             |                        1|o_411          |Knox                      |                                1|                              20|
+|                 19|                20|h_219           |NH Sig            |                        1|o_420          |Taylor                    |                               14|                              18|
+|                 20|                 5|h_220           |NHTP              |                        1|o_405          |Ellison                   |                               18|                              15|
+|                 21|                24|h_221           |WHMP              |                        1|o_424          |Xiong                     |                               13|                              14|
 
 
 Desirability
@@ -247,7 +247,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by Will at 2016-06-01, 10:50 -0500
+Report rendered by Will at 2016-06-01, 11:06 -0500
 ```
 
 ```
