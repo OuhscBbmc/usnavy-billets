@@ -46,7 +46,7 @@ row.names(hospital) <- ds_hospital$officer_id
 
 ds_officer <- ds_officer_long %>%
   dplyr::mutate(
-    hospital_id  = sprintf("b_%03d", hospital_id),
+    hospital_id  = sprintf("h_%03d", hospital_id),
     officer_id   = sprintf("o_%03d", officer_id)
   ) %>%
   tidyr::spread(key=officer_id, value=preference)

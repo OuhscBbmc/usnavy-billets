@@ -57,11 +57,11 @@ In the first table (i.e., "Input from Each *Hospital*"), each row represents a s
 
 To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how hospital ``h_205`` ranked the 26 officers.  The hospital's initial four officers (i.e., ``o_401, o_402, o_403, o_404``) were ranked  2, 17, 10, and 13.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ``o_402`` ranked the 22 hospitals.  The officer's initial three hospitals (i.e., ``b_201, b_202, b_203``) were ranked  4, 21, and  3.
+To walk through an example from the officer's perspective, look at the second row in the second table.    The values represent how officer ``o_402`` ranked the 22 hospitals.  The officer's initial three hospitals (i.e., ``h_201, h_202, h_203``) were ranked  4, 21, and  3.
 
 <!-- To walk through an example from the hospital's perspective, look at the fifth row in the first table.  The values represent how the 22 hospitals ranked officer ``o_405``.  The first four hospitals (i.e., ``h_201, h_202, h_203, h_204``) ranked officer ``o_405`` as 1, 1, 6, and 24.
 
-To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital ``b_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``b_202`` as 7, 21, 15, and 2.-->
+To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the 26 officers ranked hospital ``h_202``.  The first four officers (i.e., ``o_401, o_402, o_403, o_404``) ranked officer ``h_202`` as 7, 21, 15, and 2.-->
 
 
 ### Input Provided from Each Hospital
@@ -99,7 +99,7 @@ To walk through an example from the officer's perspective, look at the second ro
 
 
 
-| officer_id| b_201| b_202| b_203| b_204| b_205| b_206| b_207| b_208| b_209| b_210| b_211| b_212| b_213| b_214| b_215| b_216| b_217| b_218| b_219| b_220| b_221| b_222|
+| officer_id| h_201| h_202| h_203| h_204| h_205| h_206| h_207| h_208| h_209| h_210| h_211| h_212| h_213| h_214| h_215| h_216| h_217| h_218| h_219| h_220| h_221| h_222|
 |----------:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|-----:|
 |      o_401|    16|     7|    20|    21|    17|    19|     5|     8|     3|    13|    15|    12|     2|    18|    22|    11|     4|    10|     1|    14|     6|     9|
 |      o_402|     4|    21|     3|    16|     7|    11|     1|     9|     8|     5|    15|    12|    10|    18|    19|    20|    17|     2|    13|    14|    22|     6|
@@ -238,6 +238,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
+Report rendered by Will at 2016-05-31, 23:52 -0500
 ```
 
 ```
