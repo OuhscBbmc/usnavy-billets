@@ -222,14 +222,22 @@ In this dmeonstration, notice that not all hospitals filled every billet.
 |                 21|                24|             221|WHMP              |                        1|            424|Xiong                     |                               13|                              14|
 
 
+Desirability
+-------------------------------------------
+
+Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how the each ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all 22 blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
+
+![](figure-png/graph-desirability-1.png)<!-- -->![](figure-png/graph-desirability-2.png)<!-- -->
+
+
 Session Information
 ===========================================
+We would like to address any questions or suggestions during any stage of the evaluation. Please contact [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415.
 
 For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.
 
 
 ```
-Report rendered by Will at 2016-05-31, 23:18 -0500
 ```
 
 ```
@@ -246,13 +254,15 @@ attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] magrittr_1.5 knitr_1.13  
+[1] ggplot2_2.1.0 magrittr_1.5  knitr_1.13   
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.5           tidyr_0.4.1           assertthat_0.1        dplyr_0.4.3          
- [5] digest_0.6.9          gmp_0.5-12            R6_2.1.2              DBI_0.4-1            
- [9] formatR_1.4           evaluate_0.9          highr_0.6             stringi_1.1.1        
-[13] lazyeval_0.1.10       rmarkdown_0.9.6       partitions_1.9-18     polynom_1.3-8        
-[17] tools_3.3.0           stringr_1.0.0         readr_0.2.2           matchingMarkets_0.2-1
-[21] parallel_3.3.0        yaml_2.1.13           htmltools_0.3.5       lpSolve_5.6.13       
+ [1] Rcpp_0.12.5           partitions_1.9-18     munsell_0.4.3         colorspace_1.2-6     
+ [5] R6_2.1.2              highr_0.6             stringr_1.0.0         plyr_1.8.3           
+ [9] dplyr_0.4.3           tools_3.3.0           parallel_3.3.0        grid_3.3.0           
+[13] lpSolve_5.6.13        gtable_0.2.0          DBI_0.4-1             htmltools_0.3.5      
+[17] matchingMarkets_0.2-1 lazyeval_0.1.10       assertthat_0.1        yaml_2.1.13          
+[21] digest_0.6.9          gmp_0.5-12            readr_0.2.2           formatR_1.4          
+[25] tidyr_0.4.1           evaluate_0.9          rmarkdown_0.9.6       labeling_0.3         
+[29] stringi_1.1.1         scales_0.4.0          polynom_1.3-8        
 ```

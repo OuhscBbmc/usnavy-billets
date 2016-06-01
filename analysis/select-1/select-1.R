@@ -4,11 +4,13 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 # ---- load-sources ------------------------------------------------------------
 
 # ---- load-packages -----------------------------------------------------------
+# Run this line if necessary: install.packages(c("magrittr", "ggplot2", "matchingMarkets", "readr", "tidyr", "dplyr"))
+
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
 library(magrittr, quietly=TRUE)
+library(ggplot2, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-# run this line if necessary: install.packages(c("matchingMarkets", "readr", "tidyr", "dplyr"))
 requireNamespace("matchingMarkets")
 requireNamespace("readr")
 requireNamespace("tidyr")
@@ -20,8 +22,8 @@ path_in_officer    <- "./data-phi-free/derived/officer.csv"
 
 # ---- load-data ---------------------------------------------------------------
 # Read the CSVs
-ds_hospital_long   <- readr::read_csv(path_in_hospital)
-ds_officer_long    <- readr::read_csv(path_in_officer)
+ds_hospital_long   <- readr::read_csv(path_in_hospital) #Ranked by the hospitals
+ds_officer_long    <- readr::read_csv(path_in_officer)  #Ranked by the officers
 
 ds_hospital_roster <- readr::read_csv("./data-phi-free/raw/hospital-roster.csv")
 ds_officer_roster  <- readr::read_csv("./data-phi-free/raw/officer-roster.csv")
@@ -121,3 +123,17 @@ ds_edge %>%
     col.names    = gsub("_", "<br/>", colnames(ds_edge)),
     format       = "markdown"
   )
+
+# ---- graph-desirability ------------------------------------------------------------------
+set.seed(23) #For the sake of keeping the jittering constant between runs.
+ggplot(ds_hospital_long, aes(x=officer_id, y=preference_from_hospital))  +
+  stat_summary(fun.y="mean", geom="point", shape=23, size=5, fill="white", alpha=.3, na.rm=T) + #See Chang (2013), Recipe 6.8.
+  geom_point(shape=21, color="royalblue", fill="skyblue", alpha=.2, position=position_jitter(width=.4, height=0)) +
+  theme_light() +
+  labs(title="How the Hospitals Ranked the Officers", x="Officer ID", y="Preference from Hospital\n(lower is a more desirable officer)")
+
+last_plot() %+%
+  ds_officer_long %+%
+  aes(x=hospital_id, y=preference_from_officer) +
+  labs(title="How the Officers Ranked the Hospitals", x="Hospital ID", y="Preference from Officer\n(lower is a more desirable hospital)")
+

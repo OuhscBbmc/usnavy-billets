@@ -125,12 +125,22 @@ The final table shows the indices of only the successful matches, along with the
 
 In this dmeonstration, notice that not all hospitals filled every billet.
 
-```{r display, echo=echoChunks, message=TRUE, fig.width=7}
+```{r display, echo=echoChunks, message=TRUE}
+```
+
+
+Desirability
+-------------------------------------------
+
+Finally, the desirability of the the entities can be represented several ways.  Perhaps the simplest is plotting how the each ranked each other.  In the first graph, each column represents the rankings received by an officer; the diamond represents the officer's mean rank.  If all hospitals believed the officer was the best fit for them, all `r nrow(ds_hospital_roster)` blue dots (as well as the diamond) would be at $y$=1.  The second graph is similar, but reflects the desirability of each hospital, from the officer's perspective.  These blue points are distributed more evenly than in the real world, because the preference data was (simply) generated.
+
+```{r graph-desirability, echo=echoChunks, message=TRUE, fig.width=8}
 ```
 
 
 Session Information
 ===========================================
+We would like to address any questions or suggestions during any stage of the evaluation. Please contact [Richard C. Childers](mailto:richard.childers@navy.mil), CDR NPC, PERS-4415.
 
 For the sake of documentation and reproducibility, the current report was rendered on a system using the following software.
 
