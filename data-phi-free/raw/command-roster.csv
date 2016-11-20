@@ -1,23 +1,21 @@
 command_id,command_name,billet_count_max
-201,NH Guam,1
-202,WRNMMC,0
-203,Lejeune MEU,2
-204,Lejeune MLG,2
-205,NHCL,3
-206,NH Oki,0
-207,Oki MLG,2
-208,Oki MEU,1
-209,NHCP,3
-210,Ft Belv,1
-211,Guant,1
-212,CBIRF,1
-213,NH Jax,2
-214,NTTC,0
-215,NH Napl,3
-216,NMCP,6
-217,NH Rota,2
-218,NMCSD,2
-219,NH Sig,1
-220,NHTP,1
-221,WHMP,1
-222,NH Yoko,3
+201,Guam,1
+202,NH Oki,2
+203,Oki MEU,2
+204,3rd MLG,4
+205,NH Yoko,2
+206,Rota,1
+207,Napl,2
+208,Sig,1
+209,NMCP,6
+210,Jax,4
+211,Gitmo,1
+212,NHCL,5
+213,2nd MLG,2
+214,2nd MEU,2
+215,CBIRF,1
+216,NMCSD,4
+217,NH 29P,3
+218,NH Pend,1
+219,1st MLG,6
+220,1st MEU,4
