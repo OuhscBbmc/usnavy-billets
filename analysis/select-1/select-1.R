@@ -19,17 +19,47 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 # ---- declare-globals ---------------------------------------------------------
 path_in_command    <- "./data-phi-free/derived/command.csv"
 path_in_officer    <- "./data-phi-free/derived/officer.csv"
+path_in_roster_command    <- "./data-phi-free/derived/command-roster.csv"
+path_in_roster_officer    <- "./data-phi-free/derived/officer-roster.csv"
+
+col_types_command <- readr::cols_only(
+  command_id          = readr::col_integer(),
+  officer_id          = readr::col_integer(),
+  preference          = readr::col_integer(),
+  command_name        = readr::col_character(),
+  billet_count_max    = readr::col_integer()
+)
+
+col_types_officer <- readr::cols_only(
+  command_id        = readr::col_integer(),
+  officer_id        = readr::col_integer(),
+  preference        = readr::col_integer(),
+  command_name      = readr::col_character(),
+  billet_count_max  = readr::col_integer()
+)
+
+col_types_roster_command <- readr::cols_only(
+  command_id         = readr::col_integer(),
+  command_name       = readr::col_character(),
+  billet_count_max   = readr::col_integer()
+)
+
+col_types_roster_officer <- readr::cols_only(
+  officer_id         = readr::col_integer(),
+  officer_tag        = readr::col_character(),
+  officer_name_last  = readr::col_character()
+)
 
 # ---- load-data ---------------------------------------------------------------
 # Read the CSVs
-ds_command_long    <- readr::read_csv(path_in_command) #Ranked by the commands
-ds_officer_long    <- readr::read_csv(path_in_officer)  #Ranked by the officers
+ds_command_long    <- readr::read_csv(path_in_command       , col_types=col_types_command       ) #Ranked by the commands
+ds_officer_long    <- readr::read_csv(path_in_officer       , col_types=col_types_officer       ) #Ranked by the officers
 
-ds_command_roster  <- readr::read_csv("./data-phi-free/raw/command-roster.csv")
-ds_officer_roster  <- readr::read_csv("./data-phi-free/raw/officer-roster.csv")
+ds_command_roster  <- readr::read_csv(path_in_roster_command, col_types=col_types_roster_command)
+ds_officer_roster  <- readr::read_csv(path_in_roster_officer, col_types=col_types_roster_officer)
 
 # ---- tweak-data --------------------------------------------------------------
-ds_command_roster$command_index <- seq_len(nrow(ds_command_roster))
+ds_command_roster$command_index   <- seq_len(nrow(ds_command_roster))
 ds_officer_roster$officer_index   <- seq_len(nrow(ds_officer_roster))
 
 ds_command <- ds_command_long %>%
@@ -67,7 +97,7 @@ transpose_transition_frame <- function( d2, id_name ) {
   colnames(d) <- as.character(d[1, ])
   # d <- d[-1, ] #Drop the first row (which became column headers)
   d <- d %>%
-    dplyr::add_rownames(id_name) %>%
+    tibble::rownames_to_column(id_name) %>%
     dplyr::slice(-1) %>%  #Drop the first row (which became column headers)
     dplyr::mutate_each(dplyr::funs(as.integer), starts_with("^o_\\d+$"))
   return( d )
