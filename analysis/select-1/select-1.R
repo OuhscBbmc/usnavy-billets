@@ -17,10 +17,10 @@ requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 
 # ---- declare-globals ---------------------------------------------------------
-path_in_command    <- "./data-phi-free/derived/command.csv"
-path_in_officer    <- "./data-phi-free/derived/officer.csv"
-path_in_roster_command    <- "./data-phi-free/derived/command-roster.csv"
-path_in_roster_officer    <- "./data-phi-free/derived/officer-roster.csv"
+path_in_roster_command    <- "./data-phi-free/raw/command-roster.csv"
+path_in_roster_officer    <- "./data-phi-free/raw/officer-roster.csv"
+path_in_command           <- "./data-phi-free/derived/command.csv"
+path_in_officer           <- "./data-phi-free/derived/officer.csv"
 
 col_types_command <- readr::cols_only(
   command_id          = readr::col_integer(),
@@ -63,6 +63,10 @@ ds_command_roster$command_index   <- seq_len(nrow(ds_command_roster))
 ds_officer_roster$officer_index   <- seq_len(nrow(ds_officer_roster))
 
 ds_command <- ds_command_long %>%
+  dplyr::select(
+    -command_name,
+    -billet_count_max
+  ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
     officer_id   = sprintf("o_%03d", officer_id)
@@ -75,6 +79,10 @@ command <- ds_command %>%
 row.names(command) <- ds_command$officer_id
 
 ds_officer <- ds_officer_long %>%
+  dplyr::select(
+    -command_name#,
+    # -billet_count_max
+  ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
     officer_id   = sprintf("o_%03d", officer_id)
