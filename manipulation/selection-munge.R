@@ -76,7 +76,12 @@ ds_officer_long <- ds_officer_wide %>%
   # dplyr::mutate(
   #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(command_name))
   # ) %>%
-  dplyr::left_join(ds_command_roster, by="command_name") %>%
+  dplyr::left_join(
+    ds_command_roster %>%
+      dplyr::select(command_id, command_name),
+    by="command_name"
+  ) %>%
+  dplyr::left_join(ds_officer_roster, by="officer_id") %>%
   dplyr::arrange(command_id, officer_id)
 
 # ---- verify-values-command -----------------------------------------------------------
@@ -94,15 +99,14 @@ testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_officer_long$
 testit::assert("The command_name must be nonmissing.", all(!is.na(ds_officer_long$command_name)))
 testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$preference)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
-testit::assert("The billet_count_max must be nonmissing.", all(!is.na(ds_officer_long$billet_count_max)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # dput(colnames(ds_command_long)) # Print colnames for line below.
 ds_command_long <- ds_command_long %>%
-  dplyr::select_(.dots=c("command_id", "officer_id", "preference", "command_name", "billet_count_max"))
+  dplyr::select_(.dots=c("command_id", "officer_id", "preference"))#, "command_name", "billet_count_max"))
 ds_officer_long <- ds_officer_long %>%
-  dplyr::select_(.dots=c("command_id", "officer_id", "preference", "command_name", "billet_count_max"))
+  dplyr::select_(.dots=c("command_id", "officer_id", "preference"))#, "officer_tag" , "officer_name_last"))
 
 # ---- save-to-disk ------------------------------------------------------------
 readr::write_csv(ds_command_long, path_out_command_wide)

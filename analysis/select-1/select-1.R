@@ -25,17 +25,13 @@ path_in_officer           <- "./data-phi-free/derived/officer.csv"
 col_types_command <- readr::cols_only(
   command_id          = readr::col_integer(),
   officer_id          = readr::col_integer(),
-  preference          = readr::col_integer(),
-  command_name        = readr::col_character(),
-  billet_count_max    = readr::col_integer()
+  preference          = readr::col_integer()
 )
 
 col_types_officer <- readr::cols_only(
   command_id        = readr::col_integer(),
   officer_id        = readr::col_integer(),
-  preference        = readr::col_integer(),
-  command_name      = readr::col_character(),
-  billet_count_max  = readr::col_integer()
+  preference        = readr::col_integer()
 )
 
 col_types_roster_command <- readr::cols_only(
@@ -59,13 +55,16 @@ ds_command_roster  <- readr::read_csv(path_in_roster_command, col_types=col_type
 ds_officer_roster  <- readr::read_csv(path_in_roster_officer, col_types=col_types_roster_officer)
 
 # ---- tweak-data --------------------------------------------------------------
+# OuhscMunge::column_rename_headstart(ds_officer_long)
+
 ds_command_roster$command_index   <- seq_len(nrow(ds_command_roster))
 ds_officer_roster$officer_index   <- seq_len(nrow(ds_officer_roster))
 
 ds_command <- ds_command_long %>%
-  dplyr::select(
-    -command_name,
-    -billet_count_max
+  dplyr::select_(
+    "command_id"              = "`command_id`"
+    , "officer_id"            = "`officer_id`"
+    , "preference"            = "`preference`"
   ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
@@ -79,9 +78,10 @@ command <- ds_command %>%
 row.names(command) <- ds_command$officer_id
 
 ds_officer <- ds_officer_long %>%
-  dplyr::select(
-    -command_name,
-    -billet_count_max
+  dplyr::select_(
+    "command_id"              = "`command_id`"
+    , "officer_id"            = "`officer_id`"
+    , "preference"            = "`preference`"
   ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
@@ -146,8 +146,9 @@ m$edgelist %>%
 
 # ---- display ------------------------------------------------------------------
 ds_edge <- m$edgelist %>%
+  tibble::as_tibble() %>%
   dplyr::rename(
-    command_index  = colleges,
+    command_index   = colleges,
     officer_index   = students
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
