@@ -11,7 +11,7 @@ library(magrittr, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingMarkets")
+requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
 requireNamespace("readr")
 requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -80,8 +80,8 @@ row.names(command) <- ds_command$officer_id
 
 ds_officer <- ds_officer_long %>%
   dplyr::select(
-    -command_name#,
-    # -billet_count_max
+    -command_name,
+    -billet_count_max
   ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),

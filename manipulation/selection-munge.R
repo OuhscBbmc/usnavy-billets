@@ -15,6 +15,7 @@ requireNamespace("testit") #For asserting conditions meet expected patterns.
 
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
+set.seed(43) #So the random sampling won't change.
 path_in_command_roster              <- "data-phi-free/raw/command-roster.csv"
 path_in_command_wide                <- "data-phi-free/raw/command-wide.csv"
 path_out_command_wide               <- "data-phi-free/derived/command.csv"
@@ -50,9 +51,14 @@ ds_command_long <- ds_command_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
+  dplyr::group_by(command_name) %>%
   dplyr::mutate(
-    preference    = dplyr::coalesce(preference, 0L)
+    preference    = sample(dplyr::n_distinct(officer_id))
   ) %>%
+  dplyr::ungroup() %>%
+  # dplyr::mutate(
+  #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(officer_id))
+  # ) %>%
   dplyr::left_join(ds_command_roster, by="command_name") %>%
   dplyr::arrange(command_id, officer_id)
 
@@ -61,9 +67,14 @@ ds_officer_long <- ds_officer_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
+  dplyr::group_by(officer_id) %>%
   dplyr::mutate(
-    preference    = dplyr::coalesce(preference, 0L)
+    preference    = sample(dplyr::n_distinct(command_name))
   ) %>%
+  dplyr::ungroup() %>%
+  # dplyr::mutate(
+  #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(command_name))
+  # ) %>%
   dplyr::left_join(ds_command_roster, by="command_name") %>%
   dplyr::arrange(command_id, officer_id)
 
