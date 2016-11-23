@@ -53,6 +53,7 @@ ds_command_long <- ds_command_wide %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
   dplyr::group_by(command_name) %>%
   dplyr::mutate(
+    # missing_ranks  = setdiff(seq_len(n()), preference)
     preference    = sample(dplyr::n_distinct(officer_id))
   ) %>%
   dplyr::ungroup() %>%
