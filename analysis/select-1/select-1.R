@@ -124,32 +124,36 @@ ds_officer_transition %>%
   knitr::kable(format="markdown", align='r')
 
 # ---- match ------------------------------------------------------------------
-m <- matchingMarkets::daa(
+m <- matchingMarkets::hri(
   c.prefs = command, #College/command preferences (each officer is a row)
   s.prefs = officer, #Student/officer preferences (each command is a row)
   nSlots  = ds_command_roster$billet_count_max
 )
 # print(m)
 
-m$edgelist %>%
-  dplyr::mutate(
-    students         = ifelse(students==0, "*not matched*", students),
-    colleges         = ifelse(colleges==0, "*not matched*", colleges)
-  ) %>%
+m$matchings %>%
+  dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
+  # dplyr::mutate(
+  #   student          = ifelse(student==0, "*not matched*", student),
+  #   college          = ifelse(college==0, "*not matched*", college)
+  # ) %>%
+  dplyr::arrange(college, student) %>%
   dplyr::rename_(
-    "command<br/>index"    = "colleges",
-    "officer<br/>index"    = "students"
+    "command<br/>index"    = "college",
+    "officer<br/>index"    = "student"
   ) %>%
   knitr::kable(
     format       = "markdown"
+    , align = c("r", "l")
   )
 
 # ---- display ------------------------------------------------------------------
-ds_edge <- m$edgelist %>%
+ds_edge <- m$matchings %>%
   tibble::as_tibble() %>%
+  dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
   dplyr::rename(
-    command_index   = colleges,
-    officer_index   = students
+    command_index   = college,
+    officer_index   = student
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%

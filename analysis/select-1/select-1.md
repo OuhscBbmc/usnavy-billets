@@ -183,35 +183,35 @@ The skinny table below shows the pairs of command--officer matches.  Notice that
 | command<br/>index|officer<br/>index |
 |-----------------:|:-----------------|
 |                 1|25                |
-|                 2|47                |
 |                 2|45                |
-|                 3|28                |
+|                 2|47                |
 |                 3|14                |
-|                 4|32                |
-|                 4|29                |
+|                 3|28                |
 |                 4|2                 |
+|                 4|29                |
+|                 4|32                |
 |                 4|39                |
 |                 5|27                |
 |                 5|42                |
 |                 6|11                |
-|                 7|13                |
 |                 7|1                 |
+|                 7|13                |
 |                 8|21                |
-|                 9|50                |
 |                 9|19                |
 |                 9|33                |
-|                 9|40                |
 |                 9|36                |
+|                 9|40                |
 |                 9|49                |
+|                 9|50                |
 |                10|5                 |
+|                10|9                 |
 |                10|10                |
 |                10|34                |
-|                10|9                 |
 |                11|38                |
+|                12|6                 |
 |                12|15                |
 |                12|22                |
 |                12|31                |
-|                12|6                 |
 |                12|51                |
 |                13|20                |
 |                13|48                |
@@ -219,23 +219,20 @@ The skinny table below shows the pairs of command--officer matches.  Notice that
 |                14|16                |
 |                15|37                |
 |                16|23                |
-|                16|*not matched*     |
-|                16|*not matched*     |
-|                16|*not matched*     |
-|                17|46                |
-|                17|44                |
 |                17|43                |
+|                17|44                |
+|                17|46                |
 |                18|35                |
-|                19|12                |
-|                19|41                |
 |                19|3                 |
+|                19|7                 |
+|                19|12                |
 |                19|18                |
 |                19|24                |
-|                19|7                 |
-|                20|26                |
+|                19|41                |
 |                20|8                 |
-|                20|30                |
 |                20|17                |
+|                20|26                |
+|                20|30                |
 
 ### Display
 
@@ -331,7 +328,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-11-24, 15:04 -0600
+Report rendered by wbeasley at 2016-11-24, 15:20 -0600
 ```
 
 ```
@@ -353,10 +350,10 @@ other attached packages:
 loaded via a namespace (and not attached):
  [1] Rcpp_0.12.8           partitions_1.9-18     munsell_0.4.3         colorspace_1.3-1     
  [5] R6_2.2.0              highr_0.6             dplyr_0.5.0           stringr_1.1.0        
- [9] plyr_1.8.4            tools_3.3.2           grid_3.3.2            lpSolve_5.6.13       
-[13] gtable_0.2.0          DBI_0.5-1             htmltools_0.3.5       matchingMarkets_0.2-1
-[17] yaml_2.1.14           lazyeval_0.2.0        rprojroot_1.1         digest_0.6.10        
-[21] assertthat_0.1        tibble_1.2            gmp_0.5-12            tidyr_0.6.0          
+ [9] plyr_1.8.4            tools_3.3.2           grid_3.3.2            gtable_0.2.0         
+[13] DBI_0.5-1             htmltools_0.3.5       matchingMarkets_0.3-2 yaml_2.1.14          
+[17] lazyeval_0.2.0        rprojroot_1.1         digest_0.6.10         assertthat_0.1       
+[21] tibble_1.2            gmp_0.5-12            rJava_0.9-8           tidyr_0.6.0          
 [25] readr_1.0.0           evaluate_0.10         rmarkdown_1.2         labeling_0.3         
 [29] stringi_1.1.2         scales_0.4.1          backports_1.0.4       polynom_1.3-8        
 ```
