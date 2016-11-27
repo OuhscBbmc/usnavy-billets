@@ -27,7 +27,7 @@ base::rm(path_install_packages)
 # Load the necessary packages ---------------------------------------------
 base::requireNamespace("base")
 base::requireNamespace("knitr")
-base::requireNamespace("markdown")
+base::requireNamespace("rmarkdown")
 base::requireNamespace("testit")
 
 ######################################################################################################
@@ -77,8 +77,6 @@ rm(path_manipulation, path_md)
 for( path_rmd in path_rmds ) {
   path_md   <- base::gsub(pattern="\\.Rmd$", replacement=".md"  , x=path_rmd)
   path_html <- base::gsub(pattern="\\.Rmd$", replacement=".html", x=path_rmd)
-  rmarkdown::render(input=path_rmd, envir = new.env(), knit_root_dir=getwd())
-  # knitr::knit(input=path_rmd, output=path_md, envir = new.env(), )
-  # markdown::markdownToHTML(file=path_md, output=path_html)
+  rmarkdown::render(input=path_rmd, envir=base::new.env())
 }
 rm(path_rmd, path_md, path_html)

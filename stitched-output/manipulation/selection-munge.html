@@ -215,10 +215,10 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 library(magrittr, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace(&quot;readr&quot;)
-requireNamespace(&quot;tidyr&quot;)
-requireNamespace(&quot;dplyr&quot;) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
-requireNamespace(&quot;testit&quot;) #For asserting conditions meet expected patterns.
+requireNamespace(&quot;readr&quot;         , quietly=TRUE)
+requireNamespace(&quot;tidyr&quot;         , quietly=TRUE)
+requireNamespace(&quot;dplyr&quot;         , quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace(&quot;testit&quot;        , quietly=TRUE) #For asserting conditions meet expected patterns.
 </code></pre>
 
 <pre><code class="r"># Constant values that won&#39;t change.
@@ -469,35 +469,24 @@ packages used):</p>
 ## [1] ggplot2_2.2.0 knitr_1.15.1  magrittr_1.5 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] matchingMarkets_0.3-2 partitions_1.9-18     reshape2_1.4.2       
-##  [4] ggthemes_3.3.0        rJava_0.9-8           lattice_0.20-34      
-##  [7] testthat_1.0.2        colorspace_1.3-1      htmltools_0.3.5      
-## [10] yaml_2.1.14           gmp_0.5-12            e1071_1.6-7          
-## [13] withr_1.0.2           DBI_0.5-1             sp_1.2-3             
-## [16] RColorBrewer_1.1-2    jpeg_0.1-8            plyr_1.8.4           
-## [19] stringr_1.1.0         munsell_0.4.3         gtable_0.2.0         
-## [22] devtools_1.12.0       RgoogleMaps_1.4.1     mapproj_1.2-4        
-## [25] codetools_0.2-15      memoise_1.0.0         evaluate_0.10        
-## [28] labeling_0.3          modeest_2.1           OuhscMunge_0.1.7.9000
-## [31] curl_2.3              class_7.3-14          markdown_0.7.7       
-## [34] highr_0.6             proto_1.0.0           Rcpp_0.12.8          
-## [37] geosphere_1.5-5       readr_1.0.0           polynom_1.3-8        
-## [40] backports_1.0.4       scales_0.4.1          classInt_0.1-23      
-## [43] jsonlite_1.1          googleVis_0.6.1       gridExtra_2.2.1      
-## [46] testit_0.6            rjson_0.2.15          png_0.1-7            
-## [49] digest_0.6.10         stringi_1.1.2         dplyr_0.5.0          
-## [52] rprojroot_1.1         grid_3.3.2            tools_3.3.2          
-## [55] maps_3.1.1            lazyeval_0.2.0        tibble_1.2           
-## [58] tidyr_0.6.0           crayon_1.3.2          random_0.2.5         
-## [61] lubridate_1.6.0       assertthat_0.1        rmarkdown_1.2        
-## [64] httr_1.2.1            R6_2.2.0              ggmap_2.6.1          
-## [67] git2r_0.16.0
+##  [1] Rcpp_0.12.8           partitions_1.9-18     munsell_0.4.3        
+##  [4] testit_0.6            colorspace_1.3-1      R6_2.2.0             
+##  [7] highr_0.6             plyr_1.8.4            stringr_1.1.0        
+## [10] dplyr_0.5.0           tools_3.3.2           grid_3.3.2           
+## [13] gtable_0.2.0          DBI_0.5-1             matchingMarkets_0.3-2
+## [16] htmltools_0.3.5       yaml_2.1.14           lazyeval_0.2.0       
+## [19] assertthat_0.1        rprojroot_1.1         digest_0.6.10        
+## [22] tibble_1.2            gmp_0.5-12            rJava_0.9-8          
+## [25] readr_1.0.0           tidyr_0.6.0           evaluate_0.10        
+## [28] rmarkdown_1.2         labeling_0.3          stringi_1.1.2        
+## [31] scales_0.4.1          backports_1.0.4       polynom_1.3-8        
+## [34] markdown_0.7.7
 </code></pre>
 
 <pre><code class="r">Sys.time()
 </code></pre>
 
-<pre><code>## [1] &quot;2016-11-26 23:08:12 CST&quot;
+<pre><code>## [1] &quot;2016-11-26 23:14:26 CST&quot;
 </code></pre>
 
 </body>

@@ -328,7 +328,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-11-26, 23:08 -0600
+Report rendered by wbeasley at 2016-11-26, 23:14 -0600
 ```
 
 ```
@@ -348,21 +348,13 @@ other attached packages:
 [1] ggplot2_2.2.0 knitr_1.15.1  magrittr_1.5 
 
 loaded via a namespace (and not attached):
- [1] matchingMarkets_0.3-2 partitions_1.9-18     reshape2_1.4.2        ggthemes_3.3.0       
- [5] rJava_0.9-8           lattice_0.20-34       testthat_1.0.2        colorspace_1.3-1     
- [9] htmltools_0.3.5       yaml_2.1.14           gmp_0.5-12            e1071_1.6-7          
-[13] withr_1.0.2           DBI_0.5-1             sp_1.2-3              RColorBrewer_1.1-2   
-[17] jpeg_0.1-8            plyr_1.8.4            stringr_1.1.0         munsell_0.4.3        
-[21] gtable_0.2.0          devtools_1.12.0       RgoogleMaps_1.4.1     mapproj_1.2-4        
-[25] codetools_0.2-15      memoise_1.0.0         evaluate_0.10         labeling_0.3         
-[29] modeest_2.1           OuhscMunge_0.1.7.9000 curl_2.3              class_7.3-14         
-[33] markdown_0.7.7        highr_0.6             proto_1.0.0           Rcpp_0.12.8          
-[37] geosphere_1.5-5       readr_1.0.0           polynom_1.3-8         backports_1.0.4      
-[41] scales_0.4.1          classInt_0.1-23       jsonlite_1.1          googleVis_0.6.1      
-[45] gridExtra_2.2.1       testit_0.6            rjson_0.2.15          png_0.1-7            
-[49] digest_0.6.10         stringi_1.1.2         dplyr_0.5.0           rprojroot_1.1        
-[53] grid_3.3.2            tools_3.3.2           maps_3.1.1            lazyeval_0.2.0       
-[57] tibble_1.2            tidyr_0.6.0           crayon_1.3.2          random_0.2.5         
-[61] lubridate_1.6.0       assertthat_0.1        rmarkdown_1.2         httr_1.2.1           
-[65] R6_2.2.0              ggmap_2.6.1           git2r_0.16.0         
+ [1] Rcpp_0.12.8           partitions_1.9-18     munsell_0.4.3         testit_0.6           
+ [5] colorspace_1.3-1      R6_2.2.0              highr_0.6             plyr_1.8.4           
+ [9] stringr_1.1.0         dplyr_0.5.0           tools_3.3.2           grid_3.3.2           
+[13] gtable_0.2.0          DBI_0.5-1             matchingMarkets_0.3-2 htmltools_0.3.5      
+[17] yaml_2.1.14           lazyeval_0.2.0        assertthat_0.1        rprojroot_1.1        
+[21] digest_0.6.10         tibble_1.2            gmp_0.5-12            rJava_0.9-8          
+[25] readr_1.0.0           tidyr_0.6.0           evaluate_0.10         rmarkdown_1.2        
+[29] labeling_0.3          stringi_1.1.2         scales_0.4.1          backports_1.0.4      
+[33] polynom_1.3-8         markdown_0.7.7       
 ```
