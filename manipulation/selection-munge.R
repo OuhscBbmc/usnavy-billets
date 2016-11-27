@@ -93,6 +93,7 @@ testit::assert("The preference must be nonmissing.", all(!is.na(ds_command_long$
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_command_long$command_id)))
 testit::assert("The billet_count_max must be nonmissing.", all(!is.na(ds_command_long$billet_count_max)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_command_long$officer_id, ds_command_long$command_id))))
+testit::assert("The command_id-preference combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$preference))))
 
 # ---- verify-values-officer -----------------------------------------------------------
 # Sniff out problems
@@ -101,6 +102,7 @@ testit::assert("The command_name must be nonmissing.", all(!is.na(ds_officer_lon
 testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$preference)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
+testit::assert("The officer_id-preference combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference))))
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # dput(colnames(ds_command_long)) # Print colnames for line below.
