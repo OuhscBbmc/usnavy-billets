@@ -1,3 +1,4 @@
+# knitr::stitch_rmd(script="./manipulation/selection-munge.R", output="./stitched-output/manipulation/selection-munge.md")
 rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 
 # ---- load-sources ------------------------------------------------------------
