@@ -180,16 +180,16 @@ ds_officer_wide
 ## # A tibble: 51 × 21
 ##     Code  Guam `NH Oki` `Oki MEU` `3rd MLG` `NH Yoko`  Rota  Napl   Sig
 ##    <int> <int>    <int>     <int>     <int>     <int> <int> <int> <int>
-## 1    401     1        2         3         4         5     6     7     8
-## 2    402     4        2         3         4         5     2     1     3
-## 3    403     3        4         3         4         5     6     7     8
-## 4    404     6        2         3         4         5     4     7     8
-## 5    405     1        2         3         4         5     6     7     8
-## 6    406     1        2         3         4         5     6     1     8
-## 7    407     1        5         6         7         4     8     9     8
-## 8    408     1        2         3         4         5     6     7     8
-## 9    409     1        2         3         4         5     6     7     8
-## 10   410     1        2         3         4         5     6     7     8
+## 1    401     7        8         9        10        11    12    13    14
+## 2    402     4        6         7         8         9     2     1     3
+## 3    403     3        4         9        10        11    12    13    14
+## 4    404     6        7         8         9         5     4    10    11
+## 5    405     6        7         8         9        10    11    12    13
+## 6    406     9       10        11        12        13    14     1    15
+## 7    407    10        5         6         7         4     8     9    11
+## 8    408     3        4         5         6         7     8     9    10
+## 9    409     3        4         5         6         7     8     9    10
+## 10   410     5        6         7         8         9    10    11    12
 ## # ... with 41 more rows, and 12 more variables: NMCP <int>, Jax <int>,
 ## #   Gitmo <int>, NHCL <int>, `2nd MLG` <int>, `2nd MEU` <int>,
 ## #   CBIRF <int>, NMCSD <int>, `NH 29P` <int>, `NH Pend` <int>, `1st
@@ -205,12 +205,12 @@ ds_command_long <- ds_command_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
-  dplyr::group_by(command_name) %>%
-  dplyr::mutate(
-    # missing_ranks  = setdiff(seq_len(n()), preference)
-    preference    = sample(dplyr::n_distinct(officer_id))
-  ) %>%
-  dplyr::ungroup() %>%
+  # dplyr::group_by(command_name) %>%
+  # dplyr::mutate(
+  #   # missing_ranks  = setdiff(seq_len(n()), preference)
+  #   preference    = sample(dplyr::n_distinct(officer_id))
+  # ) %>%
+  # dplyr::ungroup() %>%
   # dplyr::mutate(
   #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(officer_id))
   # ) %>%
@@ -224,7 +224,7 @@ ds_officer_long <- ds_officer_wide %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
   dplyr::group_by(officer_id) %>%
   dplyr::mutate(
-    preference    = sample(dplyr::n_distinct(command_name))
+    # preference    = sample(dplyr::n_distinct(command_name))
   ) %>%
   dplyr::ungroup() %>%
   # dplyr::mutate(
@@ -258,6 +258,13 @@ testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
 testit::assert("The officer_id-preference combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference))))
+as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference)), ])
+```
+
+```
+## [1] officer_id        command_name      preference        command_id       
+## [5] officer_tag       officer_name_last
+## <0 rows> (or 0-length row.names)
 ```
 
 ```r
@@ -297,21 +304,13 @@ sessionInfo()
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
 ## 
 ## other attached packages:
-## [1] ggplot2_2.2.0 knitr_1.15.1  magrittr_1.5 
+## [1] magrittr_1.5
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.8           partitions_1.9-18     munsell_0.4.3        
-##  [4] testit_0.6            colorspace_1.3-1      R6_2.2.0             
-##  [7] highr_0.6             plyr_1.8.4            stringr_1.1.0        
-## [10] dplyr_0.5.0           tools_3.3.2           grid_3.3.2           
-## [13] gtable_0.2.0          DBI_0.5-1             matchingMarkets_0.3-2
-## [16] htmltools_0.3.5       yaml_2.1.14           lazyeval_0.2.0       
-## [19] assertthat_0.1        rprojroot_1.1         digest_0.6.10        
-## [22] tibble_1.2            gmp_0.5-12            rJava_0.9-8          
-## [25] readr_1.0.0           tidyr_0.6.0           evaluate_0.10        
-## [28] rmarkdown_1.2         labeling_0.3          stringi_1.1.2        
-## [31] scales_0.4.1          backports_1.0.4       polynom_1.3-8        
-## [34] markdown_0.7.7
+##  [1] readr_1.0.0      lazyeval_0.2.0   R6_2.2.0         assertthat_0.1  
+##  [5] DBI_0.5-1        tools_3.3.2      dplyr_0.5.0.9000 tibble_1.2      
+##  [9] Rcpp_0.12.8      stringi_1.1.2    knitr_1.15.1     stringr_1.1.0   
+## [13] testit_0.6       tidyr_0.6.0      evaluate_0.10
 ```
 
 ```r
@@ -319,6 +318,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-11-26 23:14:26 CST"
+## [1] "2016-12-14 12:36:16 CST"
 ```
 

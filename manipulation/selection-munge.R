@@ -52,12 +52,12 @@ ds_command_long <- ds_command_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
-  dplyr::group_by(command_name) %>%
-  dplyr::mutate(
-    # missing_ranks  = setdiff(seq_len(n()), preference)
-    preference    = sample(dplyr::n_distinct(officer_id))
-  ) %>%
-  dplyr::ungroup() %>%
+  # dplyr::group_by(command_name) %>%
+  # dplyr::mutate(
+  #   # missing_ranks  = setdiff(seq_len(n()), preference)
+  #   preference    = sample(dplyr::n_distinct(officer_id))
+  # ) %>%
+  # dplyr::ungroup() %>%
   # dplyr::mutate(
   #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(officer_id))
   # ) %>%
@@ -71,7 +71,7 @@ ds_officer_long <- ds_officer_wide %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
   dplyr::group_by(officer_id) %>%
   dplyr::mutate(
-    preference    = sample(dplyr::n_distinct(command_name))
+    # preference    = sample(dplyr::n_distinct(command_name))
   ) %>%
   dplyr::ungroup() %>%
   # dplyr::mutate(
@@ -103,6 +103,7 @@ testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
 testit::assert("The officer_id-preference combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference))))
+as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference)), ])
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # dput(colnames(ds_command_long)) # Print colnames for line below.
