@@ -26,17 +26,28 @@ command_transition <- matrix(as.integer(c(
 # 2, 2, 1,  # Officer 2
 # 1, 4, 3,  # Officer 3
 # 4, 1, 4   # Officer 4
-  1, 3, 2,  # Officer 1
-  2, 1, 3,  # Officer 2
-  3, 2, 1,  # Officer 3
+
+# 1, 3, 2,  # Officer 1
+# 2, 1, 3,  # Officer 2
+# 3, 2, 1,  # Officer 3
+# 4, 4, 4   # Officer 4
+
+  1, 2, 3,  # Officer 1
+  2, 3, 1,  # Officer 2
+  3, 1, 2,  # Officer 3
   4, 4, 4   # Officer 4
+
 )), ncol=3, byrow=TRUE)
 
 officer_transition <- matrix(as.integer(c(
   #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
-  1, 3, 2, 3,  # Command 1
-  2, 1, 3, 1,  # Command 2
-  3, 2, 1, 2   # Command 3
+  # 1, 3, 2, 3,  # Command 1
+  # 2, 1, 3, 1,  # Command 2
+  # 3, 2, 1, 2   # Command 3
+
+  1, 2, 3, 3,  # Command 1
+  2, 3, 1, 1,  # Command 2
+  3, 1, 2, 2   # Command 3
 )), ncol=4, byrow=TRUE)
 
 # ---- load-data ---------------------------------------------------------------
@@ -46,8 +57,8 @@ officer_transition <- matrix(as.integer(c(
 # ---- match ------------------------------------------------------------------
 
 matchingR::galeShapley.validate(
-  reviewerPref = officer_transition,
-  proposerPref = command_transition
+  reviewerPref = command_transition,
+  proposerPref = officer_transition
 )
 matchingR::galeShapley.collegeAdmissions(
   collegePref = command_transition,
