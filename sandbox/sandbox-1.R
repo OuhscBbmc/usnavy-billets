@@ -22,10 +22,14 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 
 command_transition <- matrix(c(
   #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
-  3L, 3L, 2L,  # Officer 1
-  2L, 2L, 1L,  # Officer 2
-  1L, 4L, 3L,  # Officer 3
-  4L, 1L, 4L   # Officer 4
+# 3L, 3L, 2L,  # Officer 1
+# 2L, 2L, 1L,  # Officer 2
+# 1L, 4L, 3L,  # Officer 3
+# 4L, 1L, 4L   # Officer 4
+  2L, 2L, 1L,  # Officer 1
+  3L, 4L, 3L,  # Officer 2
+  1L, 3L, 4L,  # Officer 3
+  4L, 1L, 2L   # Officer 4
 ), ncol=3, byrow=TRUE)
 
 officer_transition <- matrix(c(

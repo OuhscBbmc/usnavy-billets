@@ -32,10 +32,14 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 
 command_transition <- matrix(c(
   #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
-  3L, 3L, 2L,  # Officer 1
-  2L, 2L, 1L,  # Officer 2
-  1L, 4L, 3L,  # Officer 3
-  4L, 1L, 4L   # Officer 4
+# 3L, 3L, 2L,  # Officer 1
+# 2L, 2L, 1L,  # Officer 2
+# 1L, 4L, 3L,  # Officer 3
+# 4L, 1L, 4L   # Officer 4
+  2L, 2L, 1L,  # Officer 1
+  3L, 4L, 3L,  # Officer 2
+  1L, 3L, 4L,  # Officer 3
+  4L, 1L, 2L   # Officer 4
 ), ncol=3, byrow=TRUE)
 
 officer_transition <- matrix(c(
@@ -70,10 +74,10 @@ matchingR::galeShapley.validate(
 ## 
 ## $reviewerUtils
 ##      [,1] [,2] [,3]
-## [1,]   -2   -3   -1
-## [2,]   -1   -1    0
-## [3,]    0    0   -2
-## [4,]   -3   -2   -3
+## [1,]   -2   -3    0
+## [2,]    0    0   -3
+## [3,]   -1   -2   -1
+## [4,]   -3   -1   -2
 ```
 
 ```r
@@ -85,22 +89,22 @@ matchingR::galeShapley.collegeAdmissions(
 
 ```
 ## $unmatched.students
-## [1] 1
+## [1] 3
 ## 
 ## $unmatched.colleges
 ## numeric(0)
 ## 
 ## $matched.colleges
 ##      [,1]
-## [1,]    3
+## [1,]    2
 ## [2,]    4
-## [3,]    2
+## [3,]    1
 ## 
 ## $matched.students
 ##      [,1]
-## [1,]   NA
-## [2,]    3
-## [3,]    1
+## [1,]    3
+## [2,]    1
+## [3,]   NA
 ## [4,]    2
 ```
 
@@ -155,6 +159,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-21 00:51:17 CST"
+## [1] "2016-12-21 10:31:05 CST"
 ```
 
