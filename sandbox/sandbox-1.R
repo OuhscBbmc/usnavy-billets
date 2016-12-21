@@ -20,24 +20,24 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
 
-command_transition <- matrix(c(
+command_transition <- matrix(as.integer(c(
   #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
-# 3L, 3L, 2L,  # Officer 1
-# 2L, 2L, 1L,  # Officer 2
-# 1L, 4L, 3L,  # Officer 3
-# 4L, 1L, 4L   # Officer 4
-  1L, 3L, 2L,  # Officer 1
-  2L, 1L, 3L,  # Officer 2
-  3L, 2L, 1L,  # Officer 3
-  4L, 4L, 4L   # Officer 4
-), ncol=3, byrow=TRUE)
+# 3, 3, 2,  # Officer 1
+# 2, 2, 1,  # Officer 2
+# 1, 4, 3,  # Officer 3
+# 4, 1, 4   # Officer 4
+  1, 3, 2,  # Officer 1
+  2, 1, 3,  # Officer 2
+  3, 2, 1,  # Officer 3
+  4, 4, 4   # Officer 4
+)), ncol=3, byrow=TRUE)
 
-officer_transition <- matrix(c(
+officer_transition <- matrix(as.integer(c(
   #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
-  1L, 3L, 2L, 3L,  # Command 1
-  2L, 1L, 3L, 1L,  # Command 2
-  3L, 2L, 1L, 2L   # Command 3
-), ncol=4, byrow=TRUE)
+  1, 3, 2, 3,  # Command 1
+  2, 1, 3, 1,  # Command 2
+  3, 2, 1, 2   # Command 3
+)), ncol=4, byrow=TRUE)
 
 # ---- load-data ---------------------------------------------------------------
 
