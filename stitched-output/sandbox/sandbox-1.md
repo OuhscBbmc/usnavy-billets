@@ -20,7 +20,8 @@ library(magrittr, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("matchingR")  # devtools::install_version("jtilly/matchingR")
+# requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
 requireNamespace("readr")
 requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -65,7 +66,7 @@ ds_command_long
 ```
 
 ```
-## # A tibble: 12 × 6
+## # A tibble: 12 Ã— 6
 ##    command_index officer_index command_id officer_id preference
 ##            <int>         <int>      <chr>      <chr>      <int>
 ## 1              1             1      c_201      o_401          2
@@ -88,7 +89,7 @@ ds_officer_long
 ```
 
 ```
-## # A tibble: 12 × 5
+## # A tibble: 12 Ã— 5
 ##    command_index officer_index command_id officer_id preference
 ##            <int>         <int>      <chr>      <chr>      <int>
 ## 1              1             1      c_201      o_401          2
@@ -146,35 +147,81 @@ officer_transition <- ds_officer_long %>%
 ```
 
 ```r
+matchingR::galeShapley.validate(
+  reviewerPref = command_transition,
+  proposerPref = officer_transition
+)
+```
+
+```
+## $proposerPref
+##      [,1] [,2] [,3] [,4]
+## [1,]    1    2    0    2
+## [2,]    0    0    2    0
+## [3,]    2    1    1    1
+## 
+## $proposerUtils
+##      [,1] [,2] [,3] [,4]
+## [1,]   -1   -1    0   -1
+## [2,]    0   -2   -2   -2
+## [3,]   -2    0   -1    0
+## 
+## $reviewerUtils
+##      [,1] [,2] [,3]
+## [1,]   -2   -3    0
+## [2,]    0    0   -3
+## [3,]   -1   -2   -1
+## [4,]   -3   -1   -2
+```
+
+```r
+matchingR::galeShapley.collegeAdmissions(
+  collegePref = command_transition,
+  studentPref = officer_transition
+)
+```
+
+```
+## $unmatched.students
+## [1] 3
+## 
+## $unmatched.colleges
+## numeric(0)
+## 
+## $matched.colleges
+##      [,1]
+## [1,]    2
+## [2,]    4
+## [3,]    1
+## 
+## $matched.students
+##      [,1]
+## [1,]    3
+## [2,]    1
+## [3,]   NA
+## [4,]    2
+```
+
+```r
 m <- matchingMarkets::hri(
   c.prefs = command_transition, #College/command preferences (each officer is a row)
   s.prefs = officer_transition, #Student/officer preferences (each command is a row)
   nSlots  =c(1,1,1)
 )
+```
+
+```
+## Error in loadNamespace(name): there is no package called 'matchingMarkets'
+```
+
+```r
 # print(m)
 
 m
 ```
 
 ```
-## $s.prefs.smi
-##      [,1] [,2] [,3] [,4]
-## [1,]    2    3    1    3
-## [2,]    1    1    3    1
-## [3,]    3    2    2    2
-## 
-## $c.prefs.smi
-##      [,1] [,2] [,3]
-## [1,]    2    2    1
-## [2,]    3    4    3
-## [3,]    1    3    4
-## [4,]    4    1    2
-## 
-## $matchings
-##   matching college student sOptimal cOptimal
-## 1        1       1       2        1        1
-## 2        1       2       4        1        1
-## 3        1       3       1        1        1
+## Error in eval(expr, envir, enclos): object 'm' not found
 ```
 
 ```r
@@ -196,13 +243,9 @@ m$matchings %>%
   )
 ```
 
-
-
-| command<br/>index|officer<br/>index |
-|-----------------:|:-----------------|
-|                 1|2                 |
-|                 2|4                 |
-|                 3|1                 |
+```
+## Error in eval(expr, envir, enclos): object 'm' not found
+```
 
 ```r
 # # ---- display ------------------------------------------------------------------
@@ -253,16 +296,17 @@ sessionInfo()
 ```
 
 ```
-## R version 3.3.2 Patched (2016-11-07 r71639)
-## Platform: x86_64-w64-mingw32/x64 (64-bit)
-## Running under: Windows 7 x64 (build 7601) Service Pack 1
+## R version 3.3.1 (2016-06-21)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.1 LTS
 ## 
 ## locale:
-## [1] LC_COLLATE=English_United States.1252 
-## [2] LC_CTYPE=English_United States.1252   
-## [3] LC_MONETARY=English_United States.1252
-## [4] LC_NUMERIC=C                          
-## [5] LC_TIME=English_United States.1252    
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
 ## 
 ## attached base packages:
 ## [1] stats     graphics  grDevices utils     datasets  methods   base     
@@ -271,16 +315,12 @@ sessionInfo()
 ## [1] ggplot2_2.2.0 magrittr_1.5 
 ## 
 ## loaded via a namespace (and not attached):
-##  [1] Rcpp_0.12.8           knitr_1.15.1          partitions_1.9-18    
-##  [4] munsell_0.4.3         testit_0.6            colorspace_1.3-2     
-##  [7] R6_2.2.0              stringr_1.1.0         highr_0.6            
-## [10] plyr_1.8.4            dplyr_0.5.0.9000      tools_3.3.2          
-## [13] grid_3.3.2            gtable_0.2.0          DBI_0.5-1            
-## [16] matchingMarkets_0.3-2 lazyeval_0.2.0        assertthat_0.1       
-## [19] tibble_1.2            gmp_0.5-12            rJava_0.9-8          
-## [22] readr_1.0.0           tidyr_0.6.0           evaluate_0.10        
-## [25] stringi_1.1.2         scales_0.4.1          polynom_1.3-9        
-## [28] markdown_0.7.7
+##  [1] Rcpp_0.12.8      tidyr_0.6.0      dplyr_0.5.0.9000 assertthat_0.1  
+##  [5] plyr_1.8.4       grid_3.3.1       R6_2.2.0         gtable_0.2.0    
+##  [9] DBI_0.5-1        evaluate_0.10    scales_0.4.1     stringi_1.1.2   
+## [13] lazyeval_0.2.0   testit_0.6       tools_3.3.1      stringr_1.1.0   
+## [17] readr_1.0.0      munsell_0.4.3    colorspace_1.3-2 matchingR_1.2.1 
+## [21] knitr_1.15.1     tibble_1.2
 ```
 
 ```r
@@ -288,6 +328,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-20 01:15:42 CST"
+## [1] "2016-12-20 23:25:52 CST"
 ```
 

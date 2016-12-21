@@ -11,7 +11,8 @@ library(magrittr, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("matchingR")  # devtools::install_version("jtilly/matchingR")
+# requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
 requireNamespace("readr")
 requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -92,6 +93,16 @@ officer_transition <- ds_officer_long %>%
 
 
 # ---- match ------------------------------------------------------------------
+
+matchingR::galeShapley.validate(
+  reviewerPref = command_transition,
+  proposerPref = officer_transition
+)
+matchingR::galeShapley.collegeAdmissions(
+  collegePref = command_transition,
+  studentPref = officer_transition
+)
+
 m <- matchingMarkets::hri(
   c.prefs = command_transition, #College/command preferences (each officer is a row)
   s.prefs = officer_transition, #Student/officer preferences (each command is a row)
