@@ -56,37 +56,45 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 # Constant values that won't change.
 
 
+
+# Each element is the rank (1 is the command's top choice).
 commmand_utility <- -matrix(as.integer(c(
   # 3, 3, 2,  # Officer 1
   # 2, 2, 1,  # Officer 2
   # 1, 4, 3,  # Officer 3
   # 4, 1, 4   # Officer 4
-
-  1, 3, 2,  # Officer 1
-  2, 1, 3,  # Officer 2
-  3, 2, 1,  # Officer 3
-  4, 4, 4   # Officer 4
+#C1, C2, C3   # The 3 commands --each column represents a command's 4 preferences.
+  1,  3,  2,  # Officer 1
+  2,  1,  3,  # Officer 2
+  3,  2,  1,  # Officer 3
+  4,  4,  4   # Officer 4
 )), ncol=3, byrow=TRUE)
 
+
+# Each element is the rank (1 is the officer's top choice).
 officer_utility <- -matrix(as.integer(c(
-  1, 3, 2, 2,  # Command 1
-  2, 1, 3, 3,  # Command 2
-  3, 2, 1, 1   # Command 3
+#O1, O2, O3, O4   # The 4 officers --each column represents an officer's 3 preferences
+  1,  3,  2,  2,  # Command 1
+  2,  1,  3,  3,  # Command 2
+  3,  2,  1,  1   # Command 3
 )), ncol=4, byrow=TRUE)
 
+
+# Each element is the officer index/id
 command_preference <- matrix(as.integer(c(
-  #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
-  1, 2, 3,  # Officer 1
-  2, 3, 1,  # Officer 2
-  3, 1, 2,  # Officer 3
-  4, 4, 4   # Officer 4
+#C1,C2,C3   # The 3 commands --each column represents a command's 4 preferences.
+  1, 2, 3,  # Preference 1
+  2, 3, 1,  # Preference 2
+  3, 1, 2,  # Preference 3
+  4, 4, 4   # Preference 4
 )), ncol=3, byrow=TRUE)
 
+# Each element is the command index/id
 officer_preference <- matrix(as.integer(c(
-  #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
-  1, 2, 3, 3,  # Command 1
-  2, 3, 1, 1,  # Command 2
-  3, 1, 2, 2   # Command 3
+#O1, O2, O3, O4   # The 4 officers --each column represents an officer's 3 preferences
+  1, 2, 3, 3,  # Preference 1
+  2, 3, 1, 1,  # Preference 2
+  3, 1, 2, 2   # Preference 3
 )), ncol=4, byrow=TRUE)
 
 
@@ -253,6 +261,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-21 15:52:43 CST"
+## [1] "2016-12-21 17:28:14 CST"
 ```
 
