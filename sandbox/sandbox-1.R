@@ -26,17 +26,17 @@ command_transition <- matrix(c(
 # 2L, 2L, 1L,  # Officer 2
 # 1L, 4L, 3L,  # Officer 3
 # 4L, 1L, 4L   # Officer 4
-  2L, 2L, 1L,  # Officer 1
-  3L, 4L, 3L,  # Officer 2
-  1L, 3L, 4L,  # Officer 3
-  4L, 1L, 2L   # Officer 4
+  1L, 3L, 2L,  # Officer 1
+  2L, 1L, 3L,  # Officer 2
+  3L, 2L, 1L,  # Officer 3
+  4L, 4L, 4L   # Officer 4
 ), ncol=3, byrow=TRUE)
 
 officer_transition <- matrix(c(
   #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
-  2L, 3L, 1L, 3L,  # Command 1
-  1L, 1L, 3L, 1L,  # Command 2
-  3L, 2L, 2L, 2L   # Command 3
+  1L, 3L, 2L, 3L,  # Command 1
+  2L, 1L, 3L, 1L,  # Command 2
+  3L, 2L, 1L, 2L   # Command 3
 ), ncol=4, byrow=TRUE)
 
 # ---- load-data ---------------------------------------------------------------
@@ -46,12 +46,13 @@ officer_transition <- matrix(c(
 # ---- match ------------------------------------------------------------------
 
 matchingR::galeShapley.validate(
-  reviewerPref = command_transition,
-  proposerPref = officer_transition
+  reviewerPref = officer_transition,
+  proposerPref = command_transition
 )
 matchingR::galeShapley.collegeAdmissions(
   collegePref = command_transition,
-  studentPref = officer_transition
+  studentPref = officer_transition,
+  slots = 1
 )
 
 # m <- matchingMarkets::hri(
