@@ -29,122 +29,24 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 
 ```r
 # Constant values that won't change.
-set.seed(43) #So the random sampling won't change.
-command_count  <- 3L
-officer_count  <- 4L
 
-ds_base <-
-  tidyr::crossing(
-    command_index   = seq_len(command_count),
-    officer_index   = seq_len(officer_count)
-  ) %>%
-  dplyr::mutate(
-    command_id      = sprintf("c_%03d", command_index + 200L),
-    officer_id      = sprintf("o_%03d", officer_index + 400L)
-  )
+command_transition <- matrix(c(
+  #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
+  3L, 3L, 2L,  # Officer 1
+  2L, 2L, 1L,  # Officer 2
+  1L, 4L, 3L,  # Officer 3
+  4L, 1L, 4L   # Officer 4
+), ncol=3, byrow=TRUE)
 
-ds_command_long <- ds_base %>%
-  dplyr::group_by(command_index) %>%
-  dplyr::mutate(
-    preference       = sample(n()),
-    billet_count_max = 1L
-  ) %>%
-  dplyr::ungroup()
-
-ds_officer_long <- ds_base %>%
-  dplyr::group_by(officer_index) %>%
-  dplyr::mutate(
-    preference      = sample(n())
-  ) %>%
-  dplyr::ungroup()
+officer_transition <- matrix(c(
+  #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
+  2L, 3L, 1L, 3L,  # Command 1
+  1L, 1L, 3L, 1L,  # Command 2
+  3L, 2L, 2L, 2L   # Command 3
+), ncol=4, byrow=TRUE)
 ```
 
-```r
-# Read the CSVs
 
-ds_command_long
-```
-
-```
-## # A tibble: 12 × 6
-##    command_index officer_index command_id officer_id preference
-##            <int>         <int>      <chr>      <chr>      <int>
-## 1              1             1      c_201      o_401          2
-## 2              1             2      c_201      o_402          3
-## 3              1             3      c_201      o_403          1
-## 4              1             4      c_201      o_404          4
-## 5              2             1      c_202      o_401          2
-## 6              2             2      c_202      o_402          4
-## 7              2             3      c_202      o_403          3
-## 8              2             4      c_202      o_404          1
-## 9              3             1      c_203      o_401          1
-## 10             3             2      c_203      o_402          3
-## 11             3             3      c_203      o_403          4
-## 12             3             4      c_203      o_404          2
-## # ... with 1 more variables: billet_count_max <int>
-```
-
-```r
-ds_officer_long
-```
-
-```
-## # A tibble: 12 × 5
-##    command_index officer_index command_id officer_id preference
-##            <int>         <int>      <chr>      <chr>      <int>
-## 1              1             1      c_201      o_401          2
-## 2              1             2      c_201      o_402          3
-## 3              1             3      c_201      o_403          1
-## 4              1             4      c_201      o_404          3
-## 5              2             1      c_202      o_401          1
-## 6              2             2      c_202      o_402          1
-## 7              2             3      c_202      o_403          3
-## 8              2             4      c_202      o_404          1
-## 9              3             1      c_203      o_401          3
-## 10             3             2      c_203      o_402          2
-## 11             3             3      c_203      o_403          2
-## 12             3             4      c_203      o_404          2
-```
-
-```r
-# OuhscMunge::column_rename_headstart(ds_county) #Spit out columns to help write call ato `dplyr::rename()`.
-```
-
-```r
-# Sniff out problems
-testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_command_long$officer_id)))
-testit::assert("The preference must be nonmissing.", all(!is.na(ds_command_long$preference)))
-testit::assert("The command_id must be nonmissing.", all(!is.na(ds_command_long$command_id)))
-testit::assert("The billet_count_max must be nonmissing.", all(!is.na(ds_command_long$billet_count_max)))
-testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_command_long$officer_id, ds_command_long$command_id))))
-testit::assert("The command_id-preference combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$preference))))
-```
-
-```r
-# Sniff out problems
-testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_officer_long$officer_id)))
-testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$preference)))
-testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
-testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
-testit::assert("The officer_id-preference combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference))))
-# as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference)), ])
-```
-
-```r
-command_transition <- ds_command_long %>%
-  dplyr::select(command_index, officer_index, preference) %>%
-  tidyr::spread(key=command_index, value=preference) %>%
-  dplyr::select(-officer_index) %>%
-  as.matrix() %>%
-  unname()
-
-officer_transition <- ds_officer_long %>%
-  dplyr::select(command_index, officer_index, preference) %>%
-  tidyr::spread(key=officer_index, value=preference) %>%
-  dplyr::select(-command_index) %>%
-  as.matrix() %>%
-  unname()
-```
 
 ```r
 matchingR::galeShapley.validate(
@@ -168,10 +70,10 @@ matchingR::galeShapley.validate(
 ## 
 ## $reviewerUtils
 ##      [,1] [,2] [,3]
-## [1,]   -2   -3    0
-## [2,]    0    0   -3
-## [3,]   -1   -2   -1
-## [4,]   -3   -1   -2
+## [1,]   -2   -3   -1
+## [2,]   -1   -1    0
+## [3,]    0    0   -2
+## [4,]   -3   -2   -3
 ```
 
 ```r
@@ -183,22 +85,22 @@ matchingR::galeShapley.collegeAdmissions(
 
 ```
 ## $unmatched.students
-## [1] 3
+## [1] 1
 ## 
 ## $unmatched.colleges
 ## numeric(0)
 ## 
 ## $matched.colleges
 ##      [,1]
-## [1,]    2
+## [1,]    3
 ## [2,]    4
-## [3,]    1
+## [3,]    2
 ## 
 ## $matched.students
 ##      [,1]
-## [1,]    3
-## [2,]    1
-## [3,]   NA
+## [1,]   NA
+## [2,]    3
+## [3,]    1
 ## [4,]    2
 ```
 
@@ -209,62 +111,6 @@ matchingR::galeShapley.collegeAdmissions(
 #   nSlots  =c(1,1,1)
 # )
 # # print(m)
-#
-# m
-#
-# m$matchings %>%
-#   dplyr::select(-matching, -sOptimal, -cOptimal) %>%
-#   # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-#   # dplyr::mutate(
-#   #   student          = ifelse(student==0, "*not matched*", student),
-#   #   college          = ifelse(college==0, "*not matched*", college)
-#   # ) %>%
-#   dplyr::arrange(college, student) %>%
-#   dplyr::rename_(
-#     "command<br/>index"    = "college",
-#     "officer<br/>index"    = "student"
-#   ) %>%
-#   knitr::kable(
-#     format       = "markdown"
-#     , align = c("r", "l")
-#   )
-
-# # ---- display ------------------------------------------------------------------
-# ds_edge <- m$matchings %>%
-#   tibble::as_tibble() %>%
-#   dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-#   dplyr::rename(
-#     command_index   = college,
-#     officer_index   = student
-#   ) %>%
-#   dplyr::right_join(ds_command_roster, by="command_index") %>%
-#   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
-#   dplyr::left_join(ds_command_long, by=c("command_id", "officer_id")) %>%
-#   dplyr::left_join(ds_officer_long, by=c("command_id", "officer_id")) %>%
-#   dplyr::arrange(desc(billet_count_max), command_id) %>%
-#   dplyr::mutate(
-#     command_id   = sprintf("c_%03d", command_id),
-#     officer_id   = sprintf("o_%03d", officer_id)
-#   )
-#
-# ds_edge %>%
-#   knitr::kable(
-#     col.names    = gsub("_", "<br/>", colnames(ds_edge)),
-#     format       = "markdown"
-#   )
-#
-# # ---- graph-desirability ------------------------------------------------------------------
-# set.seed(23) #For the sake of keeping the jittering constant between runs.
-# ggplot(ds_command_long, aes(x=officer_id, y=preference_from_command))  +
-#   stat_summary(fun.y="mean", geom="point", shape=23, size=5, fill="white", alpha=.3, na.rm=T) + #See Chang (2013), Recipe 6.8.
-#   geom_point(shape=21, color="royalblue", fill="skyblue", alpha=.2, position=position_jitter(width=.4, height=0)) +
-#   theme_light() +
-#   labs(title="How the Commands Ranked the Officers", x="Officer ID", y="Preference from Command\n(lower is a more desirable officer)")
-#
-# last_plot() %+%
-#   ds_officer_long %+%
-#   aes(x=command_id, y=preference_from_officer) +
-#   labs(title="How the Officers Ranked the Commands", x="command ID", y="Preference from Officer\n(lower is a more desirable command)")
 #
 ```
 
@@ -309,6 +155,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-20 23:38:20 CST"
+## [1] "2016-12-21 00:51:17 CST"
 ```
 
