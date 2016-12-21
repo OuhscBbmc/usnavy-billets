@@ -103,31 +103,31 @@ matchingR::galeShapley.collegeAdmissions(
   studentPref = officer_transition
 )
 
-m <- matchingMarkets::hri(
-  c.prefs = command_transition, #College/command preferences (each officer is a row)
-  s.prefs = officer_transition, #Student/officer preferences (each command is a row)
-  nSlots  =c(1,1,1)
-)
-# print(m)
-
-m
-
-m$matchings %>%
-  dplyr::select(-matching, -sOptimal, -cOptimal) %>%
-  # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-  # dplyr::mutate(
-  #   student          = ifelse(student==0, "*not matched*", student),
-  #   college          = ifelse(college==0, "*not matched*", college)
-  # ) %>%
-  dplyr::arrange(college, student) %>%
-  dplyr::rename_(
-    "command<br/>index"    = "college",
-    "officer<br/>index"    = "student"
-  ) %>%
-  knitr::kable(
-    format       = "markdown"
-    , align = c("r", "l")
-  )
+# m <- matchingMarkets::hri(
+#   c.prefs = command_transition, #College/command preferences (each officer is a row)
+#   s.prefs = officer_transition, #Student/officer preferences (each command is a row)
+#   nSlots  =c(1,1,1)
+# )
+# # print(m)
+#
+# m
+#
+# m$matchings %>%
+#   dplyr::select(-matching, -sOptimal, -cOptimal) %>%
+#   # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
+#   # dplyr::mutate(
+#   #   student          = ifelse(student==0, "*not matched*", student),
+#   #   college          = ifelse(college==0, "*not matched*", college)
+#   # ) %>%
+#   dplyr::arrange(college, student) %>%
+#   dplyr::rename_(
+#     "command<br/>index"    = "college",
+#     "officer<br/>index"    = "student"
+#   ) %>%
+#   knitr::kable(
+#     format       = "markdown"
+#     , align = c("r", "l")
+#   )
 
 # # ---- display ------------------------------------------------------------------
 # ds_edge <- m$matchings %>%

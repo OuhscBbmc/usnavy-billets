@@ -203,51 +203,32 @@ matchingR::galeShapley.collegeAdmissions(
 ```
 
 ```r
-m <- matchingMarkets::hri(
-  c.prefs = command_transition, #College/command preferences (each officer is a row)
-  s.prefs = officer_transition, #Student/officer preferences (each command is a row)
-  nSlots  =c(1,1,1)
-)
-```
+# m <- matchingMarkets::hri(
+#   c.prefs = command_transition, #College/command preferences (each officer is a row)
+#   s.prefs = officer_transition, #Student/officer preferences (each command is a row)
+#   nSlots  =c(1,1,1)
+# )
+# # print(m)
+#
+# m
+#
+# m$matchings %>%
+#   dplyr::select(-matching, -sOptimal, -cOptimal) %>%
+#   # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
+#   # dplyr::mutate(
+#   #   student          = ifelse(student==0, "*not matched*", student),
+#   #   college          = ifelse(college==0, "*not matched*", college)
+#   # ) %>%
+#   dplyr::arrange(college, student) %>%
+#   dplyr::rename_(
+#     "command<br/>index"    = "college",
+#     "officer<br/>index"    = "student"
+#   ) %>%
+#   knitr::kable(
+#     format       = "markdown"
+#     , align = c("r", "l")
+#   )
 
-```
-## Error in loadNamespace(name): there is no package called 'matchingMarkets'
-```
-
-```r
-# print(m)
-
-m
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'm' not found
-```
-
-```r
-m$matchings %>%
-  dplyr::select(-matching, -sOptimal, -cOptimal) %>%
-  # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-  # dplyr::mutate(
-  #   student          = ifelse(student==0, "*not matched*", student),
-  #   college          = ifelse(college==0, "*not matched*", college)
-  # ) %>%
-  dplyr::arrange(college, student) %>%
-  dplyr::rename_(
-    "command<br/>index"    = "college",
-    "officer<br/>index"    = "student"
-  ) %>%
-  knitr::kable(
-    format       = "markdown"
-    , align = c("r", "l")
-  )
-```
-
-```
-## Error in eval(expr, envir, enclos): object 'm' not found
-```
-
-```r
 # # ---- display ------------------------------------------------------------------
 # ds_edge <- m$matchings %>%
 #   tibble::as_tibble() %>%
@@ -316,11 +297,11 @@ sessionInfo()
 ## 
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.8      tidyr_0.6.0      dplyr_0.5.0.9000 assertthat_0.1  
-##  [5] plyr_1.8.4       grid_3.3.1       R6_2.2.0         gtable_0.2.0    
-##  [9] DBI_0.5-1        evaluate_0.10    scales_0.4.1     stringi_1.1.2   
-## [13] lazyeval_0.2.0   testit_0.6       tools_3.3.1      stringr_1.1.0   
-## [17] readr_1.0.0      munsell_0.4.3    colorspace_1.3-2 matchingR_1.2.1 
-## [21] knitr_1.15.1     tibble_1.2
+##  [5] R6_2.2.0         grid_3.3.1       plyr_1.8.4       DBI_0.5-1       
+##  [9] gtable_0.2.0     evaluate_0.10    scales_0.4.1     stringi_1.1.2   
+## [13] lazyeval_0.2.0   testit_0.6       tools_3.3.1      readr_1.0.0     
+## [17] stringr_1.1.0    markdown_0.7.7   munsell_0.4.3    colorspace_1.3-2
+## [21] matchingR_1.2.1  knitr_1.15.1     tibble_1.2
 ```
 
 ```r
@@ -328,6 +309,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-20 23:25:52 CST"
+## [1] "2016-12-20 23:38:20 CST"
 ```
 
