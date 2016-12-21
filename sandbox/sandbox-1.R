@@ -20,35 +20,57 @@ requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflic
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
 
-command_transition <- matrix(as.integer(c(
+
+commmand_utility <- -matrix(as.integer(c(
+  # 3, 3, 2,  # Officer 1
+  # 2, 2, 1,  # Officer 2
+  # 1, 4, 3,  # Officer 3
+  # 4, 1, 4   # Officer 4
+
+  1, 3, 2,  # Officer 1
+  2, 1, 3,  # Officer 2
+  3, 2, 1,  # Officer 3
+  4, 4, 4   # Officer 4
+)), ncol=3, byrow=TRUE)
+
+officer_utility <- -matrix(as.integer(c(
+  1, 3, 2, 2,  # Command 1
+  2, 1, 3, 3,  # Command 2
+  3, 2, 1, 1   # Command 3
+)), ncol=4, byrow=TRUE)
+
+command_preference <- matrix(as.integer(c(
   #1,  2,  3   # The 3 commands --each column represents a command's 4 preferences.
-# 3, 3, 2,  # Officer 1
-# 2, 2, 1,  # Officer 2
-# 1, 4, 3,  # Officer 3
-# 4, 1, 4   # Officer 4
-
-# 1, 3, 2,  # Officer 1
-# 2, 1, 3,  # Officer 2
-# 3, 2, 1,  # Officer 3
-# 4, 4, 4   # Officer 4
-
   1, 2, 3,  # Officer 1
   2, 3, 1,  # Officer 2
   3, 1, 2,  # Officer 3
   4, 4, 4   # Officer 4
-
 )), ncol=3, byrow=TRUE)
 
-officer_transition <- matrix(as.integer(c(
+officer_preference <- matrix(as.integer(c(
   #1,  2,  3,  4   # The 4 officers --each column represents an officer's 3 preferences.
-  # 1, 3, 2, 3,  # Command 1
-  # 2, 1, 3, 1,  # Command 2
-  # 3, 2, 1, 2   # Command 3
-
   1, 2, 3, 3,  # Command 1
   2, 3, 1, 1,  # Command 2
   3, 1, 2, 2   # Command 3
 )), ncol=4, byrow=TRUE)
+
+
+testit::assert(
+  "Command's conversion from utility to preference should be correct.",
+  all.equal(
+    target  = matchingR::sortIndex(commmand_utility) + 1,
+    current = command_preference
+  )
+)
+testit::assert(
+  "Officer's conversion from utility to preference should be correct.",
+  all.equal(
+    target  = matchingR::sortIndex(officer_utility) + 1,
+    current = officer_preference
+  )
+)
+
+
 
 # ---- load-data ---------------------------------------------------------------
 
@@ -57,19 +79,19 @@ officer_transition <- matrix(as.integer(c(
 # ---- match ------------------------------------------------------------------
 
 matchingR::galeShapley.validate(
-  reviewerPref = command_transition,
-  proposerPref = officer_transition
+  reviewerPref = command_preference,
+  proposerPref = officer_preference
 )
 matchingR::galeShapley.collegeAdmissions(
-  collegePref = command_transition,
-  studentPref = officer_transition,
+  collegePref = command_preference,
+  studentPref = officer_preference,
   slots = 1
 )
 
-# m <- matchingMarkets::hri(
-#   c.prefs = command_transition, #College/command preferences (each officer is a row)
-#   s.prefs = officer_transition, #Student/officer preferences (each command is a row)
-#   nSlots  =c(1,1,1)
-# )
-# # print(m)
-#
+m <- matchingMarkets::hri(
+  c.prefs = command_preference, #College/command preferences (each officer is a row)
+  s.prefs = officer_preference, #Student/officer preferences (each command is a row)
+  nSlots  =c(2,1,1)
+)
+print(m)
+
