@@ -4,7 +4,8 @@
 #' @description A long-format dataset (where each row is a specific rank) for the school and for the students
 #' are converted to a wide-format preference matrix.
 
-
+#' @param d_rank_school How the schools ranked the students.  A 1 represents a school's top choice.
+#' @param d_rank_student How the students ranked the schools.  A 1 represents a student's top choice.
 
 #' @author Will Beasley
 

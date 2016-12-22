@@ -33,7 +33,7 @@ ds_student_rank_long <- tibble::tribble(
           "p",        "c",    1L
 )
 
-long_to_preference(d_rank_school=ds_school_rank_long, d_rank_student=ds_student_rank_long)
+USNavyBillets::long_to_preference(d_rank_school=ds_school_rank_long, d_rank_student=ds_student_rank_long)
 
 # Each element is the student index
 school_preference <- matrix(as.integer(c(
