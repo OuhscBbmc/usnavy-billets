@@ -16,47 +16,21 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 # Run this line if necessary: install.packages(c("magrittr", "ggplot2", "matchingMarkets", "readr", "tidyr", "dplyr"))
 
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-library(magrittr, quietly=TRUE)
-library(ggplot2, quietly=TRUE)
+library(magrittr      , quietly=TRUE)
+library(ggplot2       , quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingR")  # devtools::install_version("jtilly/matchingR")
-```
-
-```
-## Loading required namespace: matchingR
-```
-
-```r
-# requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
-requireNamespace("readr")
-```
-
-```
-## Loading required namespace: readr
-```
-
-```r
-requireNamespace("tidyr")
-```
-
-```
-## Loading required namespace: tidyr
-```
-
-```r
-requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
-```
-
-```
-## Loading required namespace: dplyr
+requireNamespace("matchingMarkets"      , quietly=TRUE)  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("readr"                , quietly=TRUE)
+requireNamespace("tidyr"                , quietly=TRUE)
+requireNamespace("dplyr"                , quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 ```
 
 ```r
 # Constant values that won't change.
 
 convert_utility_to_preference <- function( utility ) {
-  p <- apply(utility, 2, function( x ) {
+  apply(utility, 2, function( x ) {
     # Determine the order of (negative) values within a row.
     s <- sort.list(x, decreasing=T)
 
@@ -64,9 +38,6 @@ convert_utility_to_preference <- function( utility ) {
     missing_indices <- which(is.na(x))
     ifelse(s %in% missing_indices, NA_integer_, s)
   })
-
-  # Return the preference matrix to the caller.
-  return( p )
 }
 
 # Each element is the rank (1 is the command's top choice).
@@ -157,7 +128,7 @@ testit::assert(
 m <- matchingMarkets::hri(
   c.prefs = command_preference, #College/command preferences (each officer is a row)
   s.prefs = officer_preference, #Student/officer preferences (each command is a row)
-  nSlots  =c(2,1,1)
+  nSlots  = c(2, 1, 1)
 )
 print(m)
 ```
@@ -198,10 +169,6 @@ print(m)
 ## 4        1       3     4       3        1        1
 ```
 
-```r
-#
-```
-
 The R session information (including the OS info, R version and all
 packages used):
 
@@ -231,13 +198,13 @@ sessionInfo()
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.8           knitr_1.15.1          partitions_1.9-18    
 ##  [4] munsell_0.4.3         testit_0.6            colorspace_1.3-2     
-##  [7] R6_2.2.0              matchingR_1.2.1       stringr_1.1.0        
-## [10] plyr_1.8.4            dplyr_0.5.0.9000      tools_3.3.2          
-## [13] grid_3.3.2            gtable_0.2.0          DBI_0.5-1            
-## [16] matchingMarkets_0.3-2 lazyeval_0.2.0        assertthat_0.1       
-## [19] tibble_1.2            gmp_0.5-12            rJava_0.9-8          
-## [22] readr_1.0.0           tidyr_0.6.0           evaluate_0.10        
-## [25] stringi_1.1.2         scales_0.4.1          polynom_1.3-9
+##  [7] R6_2.2.0              stringr_1.1.0         plyr_1.8.4           
+## [10] dplyr_0.5.0.9000      tools_3.3.2           grid_3.3.2           
+## [13] gtable_0.2.0          DBI_0.5-1             matchingMarkets_0.3-2
+## [16] lazyeval_0.2.0        assertthat_0.1        tibble_1.2           
+## [19] gmp_0.5-12            rJava_0.9-8           readr_1.0.0          
+## [22] tidyr_0.6.0           evaluate_0.10         stringi_1.1.2        
+## [25] scales_0.4.1          polynom_1.3-9
 ```
 
 ```r
@@ -245,6 +212,6 @@ Sys.time()
 ```
 
 ```
-## [1] "2016-12-22 01:25:07 CST"
+## [1] "2016-12-22 01:34:02 CST"
 ```
 

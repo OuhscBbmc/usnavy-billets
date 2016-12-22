@@ -7,21 +7,20 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 # Run this line if necessary: install.packages(c("magrittr", "ggplot2", "matchingMarkets", "readr", "tidyr", "dplyr"))
 
 # Attach these packages so their functions don't need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-library(magrittr, quietly=TRUE)
-library(ggplot2, quietly=TRUE)
+library(magrittr      , quietly=TRUE)
+library(ggplot2       , quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingR")  # devtools::install_version("jtilly/matchingR")
-# requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
-requireNamespace("readr")
-requireNamespace("tidyr")
-requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace("matchingMarkets"      , quietly=TRUE)  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("readr"                , quietly=TRUE)
+requireNamespace("tidyr"                , quietly=TRUE)
+requireNamespace("dplyr"                , quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
 
 convert_utility_to_preference <- function( utility ) {
-  p <- apply(utility, 2, function( x ) {
+  apply(utility, 2, function( x ) {
     # Determine the order of (negative) values within a row.
     s <- sort.list(x, decreasing=T)
 
@@ -29,9 +28,6 @@ convert_utility_to_preference <- function( utility ) {
     missing_indices <- which(is.na(x))
     ifelse(s %in% missing_indices, NA_integer_, s)
   })
-
-  # Return the preference matrix to the caller.
-  return( p )
 }
 
 # Each element is the rank (1 is the command's top choice).
@@ -103,7 +99,6 @@ testit::assert(
 m <- matchingMarkets::hri(
   c.prefs = command_preference, #College/command preferences (each officer is a row)
   s.prefs = officer_preference, #Student/officer preferences (each command is a row)
-  nSlots  =c(2,1,1)
+  nSlots  = c(2, 1, 1)
 )
 print(m)
-#

@@ -211,39 +211,20 @@ rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
 <pre><code class="r"># Run this line if necessary: install.packages(c(&quot;magrittr&quot;, &quot;ggplot2&quot;, &quot;matchingMarkets&quot;, &quot;readr&quot;, &quot;tidyr&quot;, &quot;dplyr&quot;))
 
 # Attach these packages so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-library(magrittr, quietly=TRUE)
-library(ggplot2, quietly=TRUE)
+library(magrittr      , quietly=TRUE)
+library(ggplot2       , quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace(&quot;matchingR&quot;)  # devtools::install_version(&quot;jtilly/matchingR&quot;)
-</code></pre>
-
-<pre><code>## Loading required namespace: matchingR
-</code></pre>
-
-<pre><code class="r"># requireNamespace(&quot;matchingMarkets&quot;)  # devtools::install_version(&quot;matchingMarkets&quot;, version = &quot;0.2-1&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
-requireNamespace(&quot;readr&quot;)
-</code></pre>
-
-<pre><code>## Loading required namespace: readr
-</code></pre>
-
-<pre><code class="r">requireNamespace(&quot;tidyr&quot;)
-</code></pre>
-
-<pre><code>## Loading required namespace: tidyr
-</code></pre>
-
-<pre><code class="r">requireNamespace(&quot;dplyr&quot;) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
-</code></pre>
-
-<pre><code>## Loading required namespace: dplyr
+requireNamespace(&quot;matchingMarkets&quot;      , quietly=TRUE)  # devtools::install_version(&quot;matchingMarkets&quot;, version = &quot;0.2-1&quot;, repos = &quot;http://cran.us.r-project.org&quot;)
+requireNamespace(&quot;readr&quot;                , quietly=TRUE)
+requireNamespace(&quot;tidyr&quot;                , quietly=TRUE)
+requireNamespace(&quot;dplyr&quot;                , quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 </code></pre>
 
 <pre><code class="r"># Constant values that won&#39;t change.
 
 convert_utility_to_preference &lt;- function( utility ) {
-  p &lt;- apply(utility, 2, function( x ) {
+  apply(utility, 2, function( x ) {
     # Determine the order of (negative) values within a row.
     s &lt;- sort.list(x, decreasing=T)
 
@@ -251,9 +232,6 @@ convert_utility_to_preference &lt;- function( utility ) {
     missing_indices &lt;- which(is.na(x))
     ifelse(s %in% missing_indices, NA_integer_, s)
   })
-
-  # Return the preference matrix to the caller.
-  return( p )
 }
 
 # Each element is the rank (1 is the command&#39;s top choice).
@@ -337,7 +315,7 @@ testit::assert(
 <pre><code class="r">m &lt;- matchingMarkets::hri(
   c.prefs = command_preference, #College/command preferences (each officer is a row)
   s.prefs = officer_preference, #Student/officer preferences (each command is a row)
-  nSlots  =c(2,1,1)
+  nSlots  = c(2, 1, 1)
 )
 print(m)
 </code></pre>
@@ -377,9 +355,6 @@ print(m)
 ## 4        1       3     4       3        1        1
 </code></pre>
 
-<pre><code class="r">#
-</code></pre>
-
 <p>The R session information (including the OS info, R version and all
 packages used):</p>
 
@@ -406,19 +381,19 @@ packages used):</p>
 ## loaded via a namespace (and not attached):
 ##  [1] Rcpp_0.12.8           knitr_1.15.1          partitions_1.9-18    
 ##  [4] munsell_0.4.3         testit_0.6            colorspace_1.3-2     
-##  [7] R6_2.2.0              matchingR_1.2.1       stringr_1.1.0        
-## [10] plyr_1.8.4            dplyr_0.5.0.9000      tools_3.3.2          
-## [13] grid_3.3.2            gtable_0.2.0          DBI_0.5-1            
-## [16] matchingMarkets_0.3-2 lazyeval_0.2.0        assertthat_0.1       
-## [19] tibble_1.2            gmp_0.5-12            rJava_0.9-8          
-## [22] readr_1.0.0           tidyr_0.6.0           evaluate_0.10        
-## [25] stringi_1.1.2         scales_0.4.1          polynom_1.3-9
+##  [7] R6_2.2.0              stringr_1.1.0         plyr_1.8.4           
+## [10] dplyr_0.5.0.9000      tools_3.3.2           grid_3.3.2           
+## [13] gtable_0.2.0          DBI_0.5-1             matchingMarkets_0.3-2
+## [16] lazyeval_0.2.0        assertthat_0.1        tibble_1.2           
+## [19] gmp_0.5-12            rJava_0.9-8           readr_1.0.0          
+## [22] tidyr_0.6.0           evaluate_0.10         stringi_1.1.2        
+## [25] scales_0.4.1          polynom_1.3-9
 </code></pre>
 
 <pre><code class="r">Sys.time()
 </code></pre>
 
-<pre><code>## [1] &quot;2016-12-22 01:25:07 CST&quot;
+<pre><code>## [1] &quot;2016-12-22 01:34:02 CST&quot;
 </code></pre>
 
 </body>
