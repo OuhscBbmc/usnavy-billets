@@ -6,7 +6,7 @@
 
 #' @param d_rank_school How the schools ranked the students.  A 1 represents a school's top choice.
 #' @param d_rank_student How the students ranked the schools.  A 1 represents a student's top choice.
-
+#' @importFrom magrittr %>%
 #' @author Will Beasley
 
 long_to_preference <- function( d_rank_school, d_rank_student ) {
