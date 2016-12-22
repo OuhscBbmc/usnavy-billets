@@ -52,15 +52,6 @@ ds_command_long <- ds_command_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
-  # dplyr::group_by(command_name) %>%
-  # dplyr::mutate(
-  #   # missing_ranks  = setdiff(seq_len(n()), preference)
-  #   preference    = sample(dplyr::n_distinct(officer_id))
-  # ) %>%
-  # dplyr::ungroup() %>%
-  # dplyr::mutate(
-  #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(officer_id))
-  # ) %>%
   dplyr::left_join(ds_command_roster, by="command_name") %>%
   dplyr::arrange(command_id, officer_id)
 
@@ -69,14 +60,6 @@ ds_officer_long <- ds_officer_wide %>%
     "officer_id"     = "Code"
   ) %>%
   tidyr::gather(key=command_name, value=preference, -officer_id) %>%
-  dplyr::group_by(officer_id) %>%
-  dplyr::mutate(
-    # preference    = sample(dplyr::n_distinct(command_name))
-  ) %>%
-  dplyr::ungroup() %>%
-  # dplyr::mutate(
-  #   preference    = dplyr::coalesce(preference, dplyr::n_distinct(command_name))
-  # ) %>%
   dplyr::left_join(
     ds_command_roster %>%
       dplyr::select(command_id, command_name),
