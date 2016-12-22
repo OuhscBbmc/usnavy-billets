@@ -25,13 +25,13 @@ path_in_officer           <- "./data-phi-free/derived/officer.csv"
 col_types_command <- readr::cols_only(
   command_id          = readr::col_integer(),
   officer_id          = readr::col_integer(),
-  preference          = readr::col_integer()
+  rank                = readr::col_integer()
 )
 
 col_types_officer <- readr::cols_only(
   command_id        = readr::col_integer(),
   officer_id        = readr::col_integer(),
-  preference        = readr::col_integer()
+  rank              = readr::col_integer()
 )
 
 col_types_roster_command <- readr::cols_only(
@@ -55,21 +55,43 @@ ds_command_roster  <- readr::read_csv(path_in_roster_command, col_types=col_type
 ds_officer_roster  <- readr::read_csv(path_in_roster_officer, col_types=col_types_roster_officer)
 
 # ---- tweak-data --------------------------------------------------------------
-# OuhscMunge::column_rename_headstart(ds_officer_long)
+# OuhscMunge::column_rename_headstart(ds_command_long)
+ds_command_long <- ds_command_long %>%
+  dplyr::select_(
+    "school_id"             = "`command_id`"
+    , "student_id"          = "`officer_id`"
+    , "rank"
+  )
+
+ds_officer_long <- ds_officer_long %>%
+  dplyr::select_(
+    "school_id"             = "`command_id`"
+    , "student_id"          = "`officer_id`"
+    , "rank"
+  )
+
+converted <- USNavyBillets::long_to_preference(d_rank_school=ds_command_long, d_rank_student=ds_officer_long)
+
+ds_command_roster <- ds_command_roster %>%
+  dplyr::left_join(converted$d_roster_school, by=c("command_id"="school_id")) %>%
+  dplyr::rename_("command_index" = "school_index")
+ds_officer_roster <- ds_officer_roster %>%
+  dplyr::left_join(converted$d_roster_student, by=c("officer_id"="student_id")) %>%
+  dplyr::rename_("officer_index" = "student_index")
 
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
-command_preference %>%
+converted$preference_school %>%
   knitr::kable(format="markdown", align='r')
 
 cat("\n\n### Input Provided from Each Officer\n\n")
-officer %>%
+converted$preference_student %>%
   knitr::kable(format="markdown", align='r')
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::hri(
-  c.prefs = command_preference, #College/command preferences (each officer is a row)
-  s.prefs = officer_preference, #Student/officer preferences (each command is a row)
+  c.prefs = converted$preference_school, #College/command preferences (each officer is a row)
+  s.prefs = converted$preference_student, #Student/officer preferences (each command is a row)
   nSlots  = ds_command_roster$billet_count_max
 )
 # print(m)
@@ -100,8 +122,8 @@ ds_edge <- m$matchings %>%
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
-  dplyr::left_join(ds_command_long, by=c("command_id", "officer_id")) %>%
-  dplyr::left_join(ds_officer_long, by=c("command_id", "officer_id")) %>%
+  dplyr::left_join(ds_command_long, by=c("command_id"="school_id", "officer_id"="student_id")) %>%
+  dplyr::left_join(ds_officer_long, by=c("command_id"="school_id", "officer_id"="student_id")) %>%
   dplyr::arrange(desc(billet_count_max), command_id) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
@@ -116,7 +138,7 @@ ds_edge %>%
 
 # ---- graph-desirability ------------------------------------------------------------------
 set.seed(23) #For the sake of keeping the jittering constant between runs.
-ggplot(ds_command_long, aes(x=officer_id, y=preference_from_command))  +
+ggplot(ds_command_long, aes(x=student_id, y=rank))  +
   stat_summary(fun.y="mean", geom="point", shape=23, size=5, fill="white", alpha=.3, na.rm=T) + #See Chang (2013), Recipe 6.8.
   geom_point(shape=21, color="royalblue", fill="skyblue", alpha=.2, position=position_jitter(width=.4, height=0)) +
   theme_light() +
@@ -124,6 +146,6 @@ ggplot(ds_command_long, aes(x=officer_id, y=preference_from_command))  +
 
 last_plot() %+%
   ds_officer_long %+%
-  aes(x=command_id, y=preference_from_officer) +
+  aes(x=student_id) +
   labs(title="How the Officers Ranked the Commands", x="command ID", y="Preference from Officer\n(lower is a more desirable command)")
 

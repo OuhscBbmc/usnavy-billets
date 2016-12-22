@@ -94,3 +94,11 @@ officer_preference <- ds_officer %>%
   dplyr::select(-command_id) %>%
   convert_ranking_to_preference()
 
+
+# ---- rmd-walk-through --------------------------------------------------------
+
+# <!-- To walk through an example from the command's perspective, look at the fifth row in the first table.  The values represent how the `r nrow(ds_command_roster)` commands ranked officer ```r ds_command$officer_id[5]```.  The first four commands (i.e., ```r paste(colnames(ds_command)[2:5], collapse=", ")```) ranked officer ```r ds_command$officer_id[5]``` as `r as.data.frame(ds_command[5, 2:4])`, and `r as.data.frame(ds_command[5, 5])`.
+#
+# To walk through an example from the officer's perspective, look at the second row in the second table.  The values represent how the `r nrow(ds_officer_roster)` officers ranked command ```r ds_officer$command_id[2]```.  The first four officers (i.e., ```r paste(colnames(ds_officer)[2:5], collapse=", ")```) ranked officer ```r ds_officer$command_id[2]``` as `r as.data.frame(ds_officer[2, 2:4])`, and `r as.data.frame(ds_officer[2, 5])`.-->
+
+
