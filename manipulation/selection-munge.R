@@ -51,7 +51,7 @@ ds_command_long <- ds_command_wide %>%
   dplyr::rename_(
     "officer_id"     = "Code"
   ) %>%
-  tidyr::gather(key=command_name, value=preference, -officer_id) %>%
+  tidyr::gather(key=command_name, value=rank, -officer_id) %>%
   dplyr::left_join(ds_command_roster, by="command_name") %>%
   dplyr::arrange(command_id, officer_id)
 
@@ -59,7 +59,7 @@ ds_officer_long <- ds_officer_wide %>%
   dplyr::rename_(
     "officer_id"     = "Code"
   ) %>%
-  tidyr::gather(key=command_name, value=preference, -officer_id) %>%
+  tidyr::gather(key=command_name, value=rank, -officer_id) %>%
   dplyr::left_join(
     ds_command_roster %>%
       dplyr::select(command_id, command_name),
@@ -72,28 +72,28 @@ ds_officer_long <- ds_officer_wide %>%
 # Sniff out problems
 testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_command_long$officer_id)))
 testit::assert("The command_name must be nonmissing.", all(!is.na(ds_command_long$command_name)))
-testit::assert("The preference must be nonmissing.", all(!is.na(ds_command_long$preference)))
+testit::assert("The rank must be nonmissing.", all(!is.na(ds_command_long$rank)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_command_long$command_id)))
 testit::assert("The billet_count_max must be nonmissing.", all(!is.na(ds_command_long$billet_count_max)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_command_long$officer_id, ds_command_long$command_id))))
-testit::assert("The command_id-preference combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$preference))))
+testit::assert("The command_id-rank combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$rank))))
 
 # ---- verify-values-officer -----------------------------------------------------------
 # Sniff out problems
 testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_officer_long$officer_id)))
 testit::assert("The command_name must be nonmissing.", all(!is.na(ds_officer_long$command_name)))
-testit::assert("The preference must be nonmissing.", all(!is.na(ds_officer_long$preference)))
+testit::assert("The rank must be nonmissing.", all(!is.na(ds_officer_long$rank)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
-testit::assert("The officer_id-preference combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference))))
-as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$preference)), ])
+testit::assert("The officer_id-rank combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$rank))))
+as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$rank)), ])
 
 # ---- specify-columns-to-upload -----------------------------------------------
 # dput(colnames(ds_command_long)) # Print colnames for line below.
 ds_command_long <- ds_command_long %>%
-  dplyr::select_(.dots=c("command_id", "officer_id", "preference"))#, "command_name", "billet_count_max"))
+  dplyr::select_(.dots=c("command_id", "officer_id", "rank"))#, "command_name", "billet_count_max"))
 ds_officer_long <- ds_officer_long %>%
-  dplyr::select_(.dots=c("command_id", "officer_id", "preference"))#, "officer_tag" , "officer_name_last"))
+  dplyr::select_(.dots=c("command_id", "officer_id", "rank"))#, "officer_tag" , "officer_name_last"))
 
 # ---- save-to-disk ------------------------------------------------------------
 readr::write_csv(ds_command_long, path_out_command_wide)
