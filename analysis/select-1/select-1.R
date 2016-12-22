@@ -97,36 +97,39 @@ row.names(officer) <- ds_officer$command_id
 ds_command_long  <- dplyr::rename_(ds_command_long, "preference_from_command"="preference")
 ds_officer_long  <- dplyr::rename_(ds_officer_long, "preference_from_officer"="preference")
 
-# ---- transpose-transitions ------------------------------------------------------------------
-library(dplyr)
-transpose_transition_frame <- function( d2, id_name ) {
-  # browser()
-  d <- as.data.frame(t(d2), stringsAsFactors = FALSE)
-  colnames(d) <- as.character(d[1, ])
-  # d <- d[-1, ] #Drop the first row (which became column headers)
-  d <- d %>%
-    tibble::rownames_to_column(id_name) %>%
-    dplyr::slice(-1) %>%  #Drop the first row (which became column headers)
-    dplyr::mutate_each(dplyr::funs(as.integer), starts_with("^o_\\d+$"))
-  return( d )
+convert_ranking_to_preference <- function( utility ) {
+
+  apply(utility, 2, function( x ) {
+    # Determine the order of (negative) values within a row.
+    s <- sort.list(x, decreasing=F)
+
+    # Re-establish the missing values.
+    missing_indices <- which(is.na(x))
+    ifelse(s %in% missing_indices, NA_integer_, s)
+  })
 }
-ds_command_transition  <- transpose_transition_frame(ds_command, id_name="command_id")
-ds_officer_transition  <- transpose_transition_frame(ds_officer, id_name="officer_id")
-detach("package:dplyr", character.only = TRUE)
+
+command_preference <- ds_command %>%
+  dplyr::select(-officer_id) %>%
+  convert_ranking_to_preference()
+officer_preference <- ds_officer %>%
+  dplyr::select(-command_id) %>%
+  convert_ranking_to_preference()
+
 
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
-ds_command_transition %>%
+command_preference %>%
   knitr::kable(format="markdown", align='r')
 
 cat("\n\n### Input Provided from Each Officer\n\n")
-ds_officer_transition %>%
+officer %>%
   knitr::kable(format="markdown", align='r')
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::hri(
-  c.prefs = command, #College/command preferences (each officer is a row)
-  s.prefs = officer, #Student/officer preferences (each command is a row)
+  c.prefs = command_preference, #College/command preferences (each officer is a row)
+  s.prefs = officer_preference, #Student/officer preferences (each command is a row)
   nSlots  = ds_command_roster$billet_count_max
 )
 # print(m)
