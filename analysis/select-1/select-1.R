@@ -66,16 +66,28 @@ ds_command <- ds_command_long %>%
     , "officer_id"            = "`officer_id`"
     , "preference"            = "`preference`"
   ) %>%
+  dplyr::left_join(
+    ds_officer_roster %>%
+      dplyr::select(officer_id, officer_index),
+    by="officer_id"
+  ) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
     officer_id   = sprintf("o_%03d", officer_id)
   ) %>%
   tidyr::spread(key=command_id, value=preference)
 
-command <- ds_command %>%
+command_rank <- ds_command %>%
   dplyr::select(-officer_id) %>%
   as.matrix()
-row.names(command) <- ds_command$officer_id
+row.names(command_rank) <- command_rank[, "officer_index"]
+command_rank <-  command_rank[, "-officer_index"]
+
+
+ds_command_roster %>%
+  dplyr::left_join(command_rank)
+
+match(13:1, 1:4)
 
 ds_officer <- ds_officer_long %>%
   dplyr::select_(
@@ -87,8 +99,12 @@ ds_officer <- ds_officer_long %>%
     command_id   = sprintf("c_%03d", command_id),
     officer_id   = sprintf("o_%03d", officer_id)
   ) %>%
-  tidyr::spread(key=officer_id, value=preference)
-
+  tidyr::spread(key=officer_id, value=preference) %>%
+  dplyr::left_join(
+    ds_command_roster %>%
+      dplyr::select(command_id, command_index),
+    by="command_id"
+  )
 officer <- ds_officer %>%
   dplyr::select(-command_id) %>%
   as.matrix()
