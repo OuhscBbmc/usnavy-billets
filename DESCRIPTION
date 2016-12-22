@@ -1,0 +1,29 @@
+Package: USNavyBillets
+Title: Matching Billets and Officers 
+Description: Software to assist CDR Richard C Childers, MC, Non-Surgical Medical Corps Detailer
+Version: 0.1.1.9000
+Date: 2016-12-22
+Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
+    "wibeasley@hotmail.com"), person("Richard", "Childers", role = "ctb"))
+Author: Will Beasley [aut, cre],
+    Richard Childers [ctb]
+Maintainer: Will Beasley <wibeasley@hotmail.com>
+URL: https://github.com/OuhscBbmc/usnavy-billets, http://ouhsc.edu/bbmc/
+BugReports: https://github.com/OuhscBbmc/usnavy-billets/issues
+Depends:
+    R(>= 3.0.0),
+    stats
+Imports:
+    dplyr,
+    matchingMarkets,
+    readr,
+    tidyr
+Suggests:
+    knitr,
+    rmarkdown,
+    testit,
+    testthat (>= 0.9)
+License: GPL-2
+LazyData: TRUE
+VignetteBuilder: knitr
+RoxygenNote: 5.0.1
