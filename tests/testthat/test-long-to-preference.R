@@ -33,7 +33,6 @@ ds_student_rank_long <- tibble::tribble(
           "p",        "c",    1L
 )
 
-USNavyBillets::long_to_preference(d_rank_school=ds_school_rank_long, d_rank_student=ds_student_rank_long)
 
 # Each element is the student index
 school_preference <- matrix(as.integer(c(
@@ -53,5 +52,18 @@ student_preference <- matrix(as.integer(c(
   3, 1, 2,NA   # Preference 3
 )), ncol=4, byrow=TRUE)
 
-test_that("RelativePath", {
+test_that("Scenario 1", {
+  observed <- USNavyBillets::long_to_preference(d_rank_school=ds_school_rank_long, d_rank_student=ds_student_rank_long)
+
+  testthat::expect_equal(
+    object   = unname(observed$preference_school),
+    expected = school_preference,
+    label    = "The school's preference matrix should be correct."
+  )
+
+  testthat::expect_equal(
+    object   = unname(observed$preference_student),
+    expected = student_preference,
+    label    = "The student's preference matrix should be correct."
+  )
 })
