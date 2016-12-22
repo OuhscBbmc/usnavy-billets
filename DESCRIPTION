@@ -15,6 +15,7 @@ Depends:
     stats
 Imports:
     dplyr,
+    magrittr,
     matchingMarkets,
     readr,
     tidyr
