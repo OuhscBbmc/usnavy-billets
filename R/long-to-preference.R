@@ -7,6 +7,7 @@
 #' @param d_rank_school How the schools ranked the students.  A 1 represents a school's top choice.
 #' @param d_rank_student How the students ranked the schools.  A 1 represents a student's top choice.
 #' @importFrom magrittr %>%
+#' @importFrom dplyr n
 #' @author Will Beasley
 
 long_to_preference <- function( d_rank_school, d_rank_student ) {
@@ -14,11 +15,11 @@ long_to_preference <- function( d_rank_school, d_rank_student ) {
   # Create the two roster datasets, which link the ID in the INDEX
   d_roster_school <- d_rank_school %>%
     dplyr::distinct_("school_id", .keep_all=FALSE) %>%
-    dplyr::mutate(school_index = seq_len(nrow(.)))
+    dplyr::mutate(school_index = seq_len(n()))
 
   d_roster_student <- d_rank_student %>%
     dplyr::distinct_("student_id", .keep_all=FALSE) %>%
-    dplyr::mutate(student_index = seq_len(nrow(.)))
+    dplyr::mutate(student_index = seq_len(n()))
 
   # Create the two preference datasets, where each cell represent the index.
   d_preference_school <- d_rank_school %>%
