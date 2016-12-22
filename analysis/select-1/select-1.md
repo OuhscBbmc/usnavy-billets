@@ -321,7 +321,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-12-22, 16:22 -0600
+Report rendered by wbeasley at 2016-12-22, 16:28 -0600
 ```
 
 ```

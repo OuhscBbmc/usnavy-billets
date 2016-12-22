@@ -79,6 +79,11 @@ ds_officer_roster <- ds_officer_roster %>%
   dplyr::left_join(converted$d_roster_student, by=c("officer_id"="student_id")) %>%
   dplyr::rename_("officer_index" = "student_index")
 
+billet_count_ordered_by_index <- ds_command_roster %>%
+  dplyr::arrange(command_index) %>%
+  .[["billet_count_max"]]
+
+
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
 converted$preference_school %>%
@@ -92,7 +97,7 @@ converted$preference_student %>%
 m <- matchingMarkets::hri(
   c.prefs = converted$preference_school, #College/command preferences (each officer is a row)
   s.prefs = converted$preference_student, #Student/officer preferences (each command is a row)
-  nSlots  = ds_command_roster$billet_count_max
+  nSlots  = billet_count_ordered_by_index
 )
 # print(m)
 
