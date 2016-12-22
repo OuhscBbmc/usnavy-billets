@@ -72,20 +72,20 @@ ds_officer_long <- ds_officer_wide %>%
 # Sniff out problems
 testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_command_long$officer_id)))
 testit::assert("The command_name must be nonmissing.", all(!is.na(ds_command_long$command_name)))
-testit::assert("The rank must be nonmissing.", all(!is.na(ds_command_long$rank)))
+# testit::assert("The rank must be nonmissing.", all(!is.na(ds_command_long$rank)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_command_long$command_id)))
 testit::assert("The billet_count_max must be nonmissing.", all(!is.na(ds_command_long$billet_count_max)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_command_long$officer_id, ds_command_long$command_id))))
-testit::assert("The command_id-rank combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$rank))))
+# testit::assert("The command_id-rank combination should be unique.", all(!duplicated(paste(ds_command_long$command_id, ds_command_long$rank))))
 
 # ---- verify-values-officer -----------------------------------------------------------
 # Sniff out problems
 testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_officer_long$officer_id)))
 testit::assert("The command_name must be nonmissing.", all(!is.na(ds_officer_long$command_name)))
-testit::assert("The rank must be nonmissing.", all(!is.na(ds_officer_long$rank)))
+# testit::assert("The rank must be nonmissing.", all(!is.na(ds_officer_long$rank)))
 testit::assert("The command_id must be nonmissing.", all(!is.na(ds_officer_long$command_id)))
 testit::assert("The officer_id-command_id combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$command_id))))
-testit::assert("The officer_id-rank combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$rank))))
+# testit::assert("The officer_id-rank combination should be unique.", all(!duplicated(paste(ds_officer_long$officer_id, ds_officer_long$rank))))
 as.data.frame(ds_officer_long[duplicated(paste(ds_officer_long$officer_id, ds_officer_long$rank)), ])
 
 # ---- specify-columns-to-upload -----------------------------------------------
