@@ -1,6 +1,6 @@
 Package: USNavyBillets
 Title: Matching Billets and Officers 
-Description: This software assists CDR Richard C Childers, MC, Non-Surgical Medical Corps Detailer
+Description: This software assists the Non-Surgical Medical Corps Detailer of the US Navy.
 Version: 0.1.1.9000
 Date: 2016-12-22
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
@@ -23,7 +23,7 @@ Suggests:
     rmarkdown,
     testit,
     testthat (>= 0.9)
-License: GPL-2
+License: GPL-3 + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
