@@ -85,6 +85,29 @@ ds_officer_long <- ds_officer_wide %>%
   dplyr::left_join(ds_officer_roster, by="officer_id") %>%
   dplyr::arrange(command_id, officer_id)
 
+
+# ---- verify-not-all-missing --------------------------------------------------
+ds_command_missing_ranks <- ds_command_long %>%
+  dplyr::group_by(command_id) %>%
+  dplyr::summarize(
+    nonmissing_rank_count  = sum(!is.na(rank))
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(nonmissing_rank_count == 0L)
+
+ds_officer_missing_ranks <- ds_officer_long %>%
+  dplyr::group_by(officer_id) %>%
+  dplyr::summarize(
+    nonmissing_rank_count  = sum(!is.na(rank))
+  ) %>%
+  dplyr::ungroup() %>%
+  # as.data.frame() %>%
+  dplyr::filter(nonmissing_rank_count == 0L)
+
+testit::assert("All commands should rank at least one officer.", nrow(ds_command_missing_ranks) == 0L)
+testit::assert("All officers should rank at least one command.", nrow(ds_officer_missing_ranks) == 0L)
+
+
 # ---- verify-values-command -----------------------------------------------------------
 # Sniff out problems
 testit::assert("The officer_id must be nonmissing.", all(!is.na(ds_command_long$officer_id)))
