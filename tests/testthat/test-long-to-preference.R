@@ -1,8 +1,8 @@
 library(testthat)
 context("Convert Long Rank to Preference")
 
-ds_school_rank_long <- tibble::tribble(
-  ~school_id, ~student_id, ~rank,
+ds_college_rank_long <- tibble::tribble(
+  ~college_id, ~student_id, ~rank,
          "a",         "m",    1L,
          "a",         "n",    2L,
          "a",         "o",    3L,
@@ -18,7 +18,7 @@ ds_school_rank_long <- tibble::tribble(
 )
 
 ds_student_rank_long <- tibble::tribble(
-  ~student_id, ~school_id, ~rank,
+  ~student_id, ~college_id, ~rank,
           "m",        "a",    1L,
           "m",        "b",    2L,
           "m",        "c",    3L,
@@ -35,8 +35,8 @@ ds_student_rank_long <- tibble::tribble(
 
 
 # Each element is the student index
-school_preference <- matrix(as.integer(c(
-#C1,C2,C3   # The 3 schools --each column represents a school's 4 preferences.
+college_preference <- matrix(as.integer(c(
+#C1,C2,C3   # The 3 colleges --each column represents a college's 4 preferences.
   1, 2, 3,  # Preference 1
   2, 3, 1,  # Preference 2
   3, 1,NA,  # Preference 3
@@ -44,7 +44,7 @@ school_preference <- matrix(as.integer(c(
 )), ncol=3, byrow=TRUE)
 
 
-# Each element is the school index/id
+# Each element is the college index/id
 student_preference <- matrix(as.integer(c(
 #S1,S2,S3,S4   # The 4 students --each column represents an student's 3 preferences
   1, 2, 3, 3,  # Preference 1
@@ -53,12 +53,12 @@ student_preference <- matrix(as.integer(c(
 )), ncol=4, byrow=TRUE)
 
 test_that("Scenario 1", {
-  observed <- USNavyBillets::long_to_preference(d_rank_school=ds_school_rank_long, d_rank_student=ds_student_rank_long)
+  observed <- USNavyBillets::long_to_preference(d_rank_college=ds_college_rank_long, d_rank_student=ds_student_rank_long)
 
   testthat::expect_equal(
-    object   = unname(observed$preference_school),
-    expected = school_preference,
-    label    = "The school's preference matrix should be correct."
+    object   = unname(observed$preference_college),
+    expected = college_preference,
+    label    = "The college's preference matrix should be correct."
   )
 
   testthat::expect_equal(

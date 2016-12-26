@@ -58,23 +58,23 @@ ds_officer_roster  <- readr::read_csv(path_in_roster_officer, col_types=col_type
 # OuhscMunge::column_rename_headstart(ds_command_long)
 ds_command_long <- ds_command_long %>%
   dplyr::select_(
-    "school_id"             = "`command_id`"
+    "college_id"             = "`command_id`"
     , "student_id"          = "`officer_id`"
     , "rank"
   )
 
 ds_officer_long <- ds_officer_long %>%
   dplyr::select_(
-    "school_id"             = "`command_id`"
+    "college_id"             = "`command_id`"
     , "student_id"          = "`officer_id`"
     , "rank"
   )
 
-converted <- USNavyBillets::long_to_preference(d_rank_school=ds_command_long, d_rank_student=ds_officer_long)
+converted <- USNavyBillets::long_to_preference(d_rank_college=ds_command_long, d_rank_student=ds_officer_long)
 
 ds_command_roster <- ds_command_roster %>%
-  dplyr::left_join(converted$d_roster_school, by=c("command_id"="school_id")) %>%
-  dplyr::rename_("command_index" = "school_index")
+  dplyr::left_join(converted$d_roster_college, by=c("command_id"="college_id")) %>%
+  dplyr::rename_("command_index" = "college_index")
 ds_officer_roster <- ds_officer_roster %>%
   dplyr::left_join(converted$d_roster_student, by=c("officer_id"="student_id")) %>%
   dplyr::rename_("officer_index" = "student_index")
@@ -86,7 +86,7 @@ billet_count_ordered_by_index <- ds_command_roster %>%
 
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
-converted$preference_school %>%
+converted$preference_college %>%
   knitr::kable(format="markdown", align='r')
 
 cat("\n\n### Input Provided from Each Officer\n\n")
@@ -95,7 +95,7 @@ converted$preference_student %>%
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::hri(
-  c.prefs = converted$preference_school, #College/command preferences (each officer is a row)
+  c.prefs = converted$preference_college, #College/command preferences (each officer is a row)
   s.prefs = converted$preference_student, #Student/officer preferences (each command is a row)
   nSlots  = billet_count_ordered_by_index
 )
@@ -127,8 +127,8 @@ ds_edge <- m$matchings %>%
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
-  dplyr::left_join(ds_command_long, by=c("command_id"="school_id", "officer_id"="student_id")) %>%
-  dplyr::left_join(ds_officer_long, by=c("command_id"="school_id", "officer_id"="student_id")) %>%
+  dplyr::left_join(ds_command_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
+  dplyr::left_join(ds_officer_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
   dplyr::arrange(desc(billet_count_max), command_id) %>%
   dplyr::mutate(
     command_id   = sprintf("c_%03d", command_id),
