@@ -25,16 +25,33 @@ path_in_officer_roster              <- "data-phi-free/raw/officer-roster.csv"
 path_in_officer_wide                <- "data-phi-free/raw/officer-wide.csv"
 path_out_officer_wide               <- "data-phi-free/derived/officer.csv"
 
+col_types_command_roster <- readr::cols_only(
+  command_id          = readr::col_integer(),
+  command_name        = readr::col_character(),
+  billet_count_max    = readr::col_integer()
+)
+col_types_officer_roster <- readr::cols_only(
+  officer_id          = readr::col_integer(),
+  officer_tag         = readr::col_character(),
+  officer_name_last   = readr::col_character()
+)
+
+col_types_wide <- readr::cols(
+  .default = readr::col_integer()
+)
+
 # ---- load-data ---------------------------------------------------------------
 # Read the CSVs
-ds_command_roster      <- readr::read_csv(path_in_command_roster)
-ds_command_wide        <- readr::read_csv(path_in_command_wide)
+ds_command_roster      <- readr::read_csv(path_in_command_roster, col_types=col_types_command_roster)
+ds_command_wide        <- readr::read_csv(path_in_command_wide,   col_types=col_types_wide)
 
-ds_officer_roster      <- readr::read_csv(path_in_officer_roster)
-ds_officer_wide        <- readr::read_csv(path_in_officer_wide)
+ds_officer_roster      <- readr::read_csv(path_in_officer_roster, col_types=col_types_officer_roster)
+ds_officer_wide        <- readr::read_csv(path_in_officer_wide,   col_types=col_types_wide)
 
-rm(path_in_command_roster, path_in_command_wide)
-rm(path_in_officer_roster, path_in_officer_wide)
+rm(path_in_command_roster, col_types_command_roster)
+rm( path_in_command_wide)
+rm(path_in_officer_roster, col_types_officer_roster)
+rm(path_in_officer_wide, col_types_wide)
 
 # Print the first few rows of each table, especially if you're stitching with knitr (see first line of this file).
 #   If you print, make sure that the datasets don't contain any PHI.
