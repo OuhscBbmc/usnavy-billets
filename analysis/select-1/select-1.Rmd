@@ -60,8 +60,6 @@ read_chunk("./analysis/select-1/select-1.R") #This allows knitr to call chunks t
 ```{r tweak-data, echo=echoChunks, results='show', message=FALSE}
 ```
 
-```{r transpose-transitions, echo=echoChunks, message=FALSE, results='asis'}
-```
 
 Summary
 ===========================================
@@ -118,7 +116,24 @@ In the first table (i.e., "Input from Each *Command*"), each row represents a si
 Results
 ===========================================
 
+
+### Pre-screen
+
+Commands and officers must be excluded from the matching algorithm if none of their choices ranked them back.
+
+```{r remove-joint-unranked, echo=echoChunks, results='show', message=TRUE}
+```
+
+### Preference
+
+```{r convert-to-preferences, echo=echoChunks, results='show', message=TRUE}
+```
+
+```{r preferences, echo=echoChunks, message=TRUE}
+```
+
 ### Matches
+
 
 The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were `r sum(ds_command_roster$billet_count_max)` total billets (across `r nrow(ds_command_roster)` unique commands), but `r nrow(ds_officer_roster)` officers.  This is only the essential information.  See the following section for a comprehensive table.
 ```{r match, echo=echoChunks, message=TRUE}

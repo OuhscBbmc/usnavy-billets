@@ -54,22 +54,98 @@ ds_officer_long    <- readr::read_csv(path_in_officer       , col_types=col_type
 ds_command_roster  <- readr::read_csv(path_in_roster_command, col_types=col_types_roster_command)
 ds_officer_roster  <- readr::read_csv(path_in_roster_officer, col_types=col_types_roster_officer)
 
+rm(path_in_command  , path_in_officer  , path_in_roster_command  , path_in_roster_officer  )
+rm(col_types_command, col_types_officer, col_types_roster_command, col_types_roster_officer)
+
 # ---- tweak-data --------------------------------------------------------------
 # OuhscMunge::column_rename_headstart(ds_command_long)
 ds_command_long <- ds_command_long %>%
   dplyr::select_(
-    "college_id"             = "`command_id`"
+    "college_id"            = "`command_id`"
     , "student_id"          = "`officer_id`"
     , "rank"
   )
 
 ds_officer_long <- ds_officer_long %>%
   dplyr::select_(
-    "college_id"             = "`command_id`"
+    "college_id"            = "`command_id`"
     , "student_id"          = "`officer_id`"
     , "rank"
   )
 
+# ---- rankings-raw ------------------------------------------------------------------
+cat("\n\n### Input Provided from Each Command\n\n")
+ds_command_long %>%
+  tidyr::spread(key=student_id, value=rank) %>%
+  # dplyr::filter(!is.na(rank)) %>%
+  # dplyr::arrange(college_id, student_id) %>%
+  knitr::kable(format="markdown", align='r')
+
+cat("\n\n### Input Provided from Each Officer\n\n")
+ds_officer_long %>%
+  tidyr::spread(key=college_id, value=rank)  %>%
+  # dplyr::filter(!is.na(rank)) %>%
+  # dplyr::arrange(student_id, college_id) %>%
+  knitr::kable(format="markdown", align='r')
+
+# ---- remove-joint-unranked ---------------------------------------------------
+ds_joint_long <- ds_command_long %>%
+  dplyr::full_join(ds_officer_long, by=c("college_id", "student_id")) %>%
+  dplyr::select_(
+    "college_id"
+    , "student_id"
+    , "rank_from_college"                = "`rank.x`"
+    , "rank_from_student"                = "`rank.y`"
+  ) %>%
+  dplyr::mutate(
+    joint    = !is.na(rank_from_college) & !is.na(rank_from_student)
+  )
+
+college_id_joint_unranked <- ds_joint_long %>%
+  dplyr::group_by(college_id) %>%
+  dplyr::summarize(
+    joint_count  = sum(joint, na.rm=t)
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(joint_count==0L) %>%
+  .[["college_id"]]
+
+student_id_joint_unranked <- ds_joint_long %>%
+  dplyr::group_by(student_id) %>%
+  dplyr::summarize(
+    joint_count  = sum(joint, na.rm=t)
+  ) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(joint_count==0L) %>%
+  .[["student_id"]]
+
+cat(
+  "The following ",
+  length(college_id_joint_unranked),
+  " colleges/commands were never ranked by students/officers who ranked them: ",
+  paste(college_id_joint_unranked, collapse=", "),
+  ".  They will be removed.",
+  sep=""
+)
+
+cat(
+  "The following ",
+  length(student_id_joint_unranked),
+  " students/officers were never ranked by colleges/commands who ranked them: ",
+  paste(student_id_joint_unranked, collapse=", "),
+  ".  They will be removed.",
+  sep=""
+)
+
+ds_command_long <- ds_command_long %>%
+  dplyr::filter(!(college_id %in% college_id_joint_unranked)) %>%
+  dplyr::filter(!(student_id %in% student_id_joint_unranked))
+
+ds_officer_long <- ds_officer_long %>%
+  dplyr::filter(!(college_id %in% college_id_joint_unranked)) %>%
+  dplyr::filter(!(student_id %in% student_id_joint_unranked))
+
+# ---- convert-to-preferences --------------------------------------------------
 converted <- USNavyBillets::long_to_preference(d_rank_college=ds_command_long, d_rank_student=ds_officer_long)
 
 ds_command_roster <- ds_command_roster %>%
@@ -84,13 +160,21 @@ billet_count_ordered_by_index <- ds_command_roster %>%
   .[["billet_count_max"]]
 
 
-# ---- rankings-raw ------------------------------------------------------------------
+# ---- preferences ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
 converted$preference_college %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
+  dplyr::filter(sum > 0L ) %>%
+  dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
 
 cat("\n\n### Input Provided from Each Officer\n\n")
 converted$preference_student %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
+  dplyr::filter(sum > 0L ) %>%
+  dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
 
 # ---- match ------------------------------------------------------------------
@@ -102,28 +186,38 @@ m <- matchingMarkets::hri(
 # print(m)
 
 m$matchings %>%
-  dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
+  tibble::as_tibble() %>%
+  # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
   # dplyr::mutate(
   #   student          = ifelse(student==0, "*not matched*", student),
   #   college          = ifelse(college==0, "*not matched*", college)
   # ) %>%
   dplyr::arrange(college, student) %>%
-  dplyr::rename_(
+  dplyr::select_(
     "command<br/>index"    = "college",
-    "officer<br/>index"    = "student"
+    "officer<br/>index"    = "student",
+    "command<br/>rank"     = "cRank",
+    "officer<br/>rank"     = "sRank",
+    "command<br/>optimal"  = "cOptimal",
+    "officer<br/>optimal"  = "sOptimal",
+    "matching",
+    "slots"
+    # dplyr::everything()                    # Include any columns that were negelected
   ) %>%
   knitr::kable(
     format       = "markdown"
-    , align = c("r", "l")
+    # , align = c("r", "l")
   )
 
 # ---- display ------------------------------------------------------------------
 ds_edge <- m$matchings %>%
   tibble::as_tibble() %>%
   dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-  dplyr::rename(
-    command_index   = college,
-    officer_index   = student
+  dplyr::select_(
+    "command_index"   = "college",
+    "officer_index"   = "student",
+    "command<br/>rank"     = "cRank",
+    "officer<br/>rank"     = "sRank"
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
@@ -145,7 +239,7 @@ ds_edge %>%
 set.seed(23) #For the sake of keeping the jittering constant between runs.
 ggplot(ds_command_long, aes(x=student_id, y=rank))  +
   stat_summary(fun.y="mean", geom="point", shape=23, size=5, fill="white", alpha=.3, na.rm=T) + #See Chang (2013), Recipe 6.8.
-  geom_point(shape=21, color="royalblue", fill="skyblue", alpha=.2, position=position_jitter(width=.4, height=0)) +
+  geom_point(shape=21, color="royalblue", fill="skyblue", alpha=.2, position=position_jitter(width=.4, height=0), na.rm=T) +
   theme_light() +
   labs(title="How the Commands Ranked the Officers", x="Officer ID", y="Preference from Command\n(lower is a more desirable officer)")
 
