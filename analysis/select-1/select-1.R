@@ -76,6 +76,9 @@ ds_officer_long <- ds_officer_long %>%
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
 ds_command_long %>%
+  dplyr::mutate(
+    rank = dplyr::coalesce(as.character(rank), "-")
+  ) %>%
   tidyr::spread(key=student_id, value=rank) %>%
   # dplyr::filter(!is.na(rank)) %>%
   # dplyr::arrange(college_id, student_id) %>%
@@ -83,6 +86,9 @@ ds_command_long %>%
 
 cat("\n\n### Input Provided from Each Officer\n\n")
 ds_officer_long %>%
+  dplyr::mutate(
+    rank = dplyr::coalesce(as.character(rank), "-")
+  ) %>%
   tidyr::spread(key=college_id, value=rank)  %>%
   # dplyr::filter(!is.na(rank)) %>%
   # dplyr::arrange(student_id, college_id) %>%
@@ -165,6 +171,7 @@ cat("\n\n### Input Provided from Each Command\n\n")
 converted$preference_college %>%
   tibble::as_tibble() %>%
   dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
+  replace(is.na(.), "-") %>%
   dplyr::filter(sum > 0L ) %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
@@ -173,6 +180,7 @@ cat("\n\n### Input Provided from Each Officer\n\n")
 converted$preference_student %>%
   tibble::as_tibble() %>%
   dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
+  replace(is.na(.), "-") %>%
   dplyr::filter(sum > 0L ) %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
@@ -216,8 +224,8 @@ ds_edge <- m$matchings %>%
   dplyr::select_(
     "command_index"   = "college",
     "officer_index"   = "student",
-    "command<br/>rank"     = "cRank",
-    "officer<br/>rank"     = "sRank"
+    "command_rank"    = "cRank",
+    "officer_rank"    = "sRank"
   ) %>%
   dplyr::right_join(ds_command_roster, by="command_index") %>%
   dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
@@ -225,11 +233,13 @@ ds_edge <- m$matchings %>%
   dplyr::left_join(ds_officer_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
   dplyr::arrange(desc(billet_count_max), command_id) %>%
   dplyr::mutate(
-    command_id   = sprintf("c_%03d", command_id),
-    officer_id   = sprintf("o_%03d", officer_id)
-  )
+    command_id   = dplyr::if_else(!is.na(command_id), sprintf("c_%03d", command_id), "-"),
+    officer_id   = dplyr::if_else(!is.na(officer_id), sprintf("o_%03d", officer_id), "-")
+  ) %>%
+  dplyr::arrange(command_id, command_index, officer_id, officer_index)
 
 ds_edge %>%
+  replace(is.na(.), "-") %>%
   knitr::kable(
     col.names    = gsub("_", "<br/>", colnames(ds_edge)),
     format       = "markdown"
