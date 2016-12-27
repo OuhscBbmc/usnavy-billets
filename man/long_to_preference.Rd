@@ -4,15 +4,15 @@
 \alias{long_to_preference}
 \title{Convert a long-form ranks into a preference matrix.}
 \usage{
-long_to_preference(d_rank_school, d_rank_student)
+long_to_preference(d_rank_college, d_rank_student)
 }
 \arguments{
-\item{d_rank_school}{How the schools ranked the students.  A 1 represents a school's top choice.}
+\item{d_rank_college}{How the colleges ranked the students.  A 1 represents a college's top choice.}
 
-\item{d_rank_student}{How the students ranked the schools.  A 1 represents a student's top choice.}
+\item{d_rank_student}{How the students ranked the colleges.  A 1 represents a student's top choice.}
 }
 \description{
-A long-format dataset (where each row is a specific rank) for the school and for the students
+A long-format dataset (where each row is a specific rank) for the college and for the students
 are converted to a wide-format preference matrix.
 }
 \author{
