@@ -107,49 +107,49 @@ ds_joint_long <- ds_command_long %>%
     joint    = !is.na(rank_from_college) & !is.na(rank_from_student)
   )
 
-college_id_joint_unranked <- ds_joint_long %>%
+ds_college_joint_unranked <- ds_joint_long %>%
   dplyr::group_by(college_id) %>%
   dplyr::summarize(
     joint_count  = sum(joint, na.rm=t)
   ) %>%
   dplyr::ungroup() %>%
-  dplyr::filter(joint_count==0L) %>%
-  .[["college_id"]]
+  dplyr::filter(joint_count==0L) #%>%
+  # .[["college_id"]]
 
-student_id_joint_unranked <- ds_joint_long %>%
+ds_student_joint_unranked <- ds_joint_long %>%
   dplyr::group_by(student_id) %>%
   dplyr::summarize(
     joint_count  = sum(joint, na.rm=t)
   ) %>%
   dplyr::ungroup() %>%
-  dplyr::filter(joint_count==0L) %>%
-  .[["student_id"]]
+  dplyr::filter(joint_count==0L)# %>%
+  # .[["student_id"]]
 
 cat(
   "The following ",
-  length(college_id_joint_unranked),
+  nrow(ds_college_joint_unranked),
   " colleges/commands were never ranked by students/officers who ranked them: ",
-  paste(college_id_joint_unranked, collapse=", "),
+  paste(ds_college_joint_unranked$college_id, collapse=", "),
   ".  They will be removed.",
-  sep=""
+  sep = ""
 )
 
 cat(
   "The following ",
-  length(student_id_joint_unranked),
+  nrow(ds_student_joint_unranked),
   " students/officers were never ranked by colleges/commands who ranked them: ",
-  paste(student_id_joint_unranked, collapse=", "),
+  paste(ds_student_joint_unranked$student_id, collapse=", "),
   ".  They will be removed.",
-  sep=""
+  sep = ""
 )
 
 ds_command_long <- ds_command_long %>%
-  dplyr::filter(!(college_id %in% college_id_joint_unranked)) %>%
-  dplyr::filter(!(student_id %in% student_id_joint_unranked))
+  dplyr::filter(!(college_id %in% ds_college_joint_unranked$college_id)) %>%
+  dplyr::filter(!(student_id %in% ds_student_joint_unranked$student_id))
 
 ds_officer_long <- ds_officer_long %>%
-  dplyr::filter(!(college_id %in% college_id_joint_unranked)) %>%
-  dplyr::filter(!(student_id %in% student_id_joint_unranked))
+  dplyr::filter(!(college_id %in% ds_college_joint_unranked$college_id)) %>%
+  dplyr::filter(!(student_id %in% ds_student_joint_unranked$student_id))
 
 # ---- convert-to-preferences --------------------------------------------------
 converted <- USNavyBillets::long_to_preference(d_rank_college=ds_command_long, d_rank_student=ds_officer_long)
@@ -193,44 +193,52 @@ m <- matchingMarkets::hri(
 )
 # print(m)
 
-m$matchings %>%
+ds_match <- m$matchings %>%
   tibble::as_tibble() %>%
-  # dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-  # dplyr::mutate(
-  #   student          = ifelse(student==0, "*not matched*", student),
-  #   college          = ifelse(college==0, "*not matched*", college)
-  # ) %>%
-  dplyr::arrange(college, student) %>%
   dplyr::select_(
-    "command<br/>index"    = "college",
-    "officer<br/>index"    = "student",
-    "command<br/>rank"     = "cRank",
-    "officer<br/>rank"     = "sRank",
-    "command<br/>optimal"  = "cOptimal",
-    "officer<br/>optimal"  = "sOptimal",
+    "command_index"   = "college",
+    "officer_index"   = "student",
+    "command_rank"    = "cRank",
+    "officer_rank"    = "sRank",
+    "command_optimal" = "cOptimal",
+    "officer_optimal" = "sOptimal",
     "matching",
     "slots"
-    # dplyr::everything()                    # Include any columns that were negelected
   ) %>%
+  dplyr::arrange(command_index, officer_index)
+
+ds_command_unmatched <- ds_command_roster %>%
+  dplyr::anti_join(ds_match, by="command_index") %>%
+  dplyr::union(
+    ds_command_roster %>%
+      dplyr::right_join(ds_college_joint_unranked, by=c("command_id"="college_id")) %>%
+      dplyr::select(-joint_count)
+  ) %>%
+  dplyr::arrange(command_id)
+
+ds_officer_unmatched <- ds_officer_roster %>%
+  dplyr::anti_join(ds_match, by="officer_index") %>%
+  dplyr::union(
+    ds_officer_roster %>%
+      dplyr::right_join(ds_student_joint_unranked, by=c("officer_id"="student_id")) %>%
+      dplyr::select(-joint_count)
+  ) %>%
+  dplyr::arrange(officer_id)
+
+ds_match %>%
   knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_match)),
     format       = "markdown"
     # , align = c("r", "l")
   )
 
 # ---- display ------------------------------------------------------------------
-ds_edge <- m$matchings %>%
-  tibble::as_tibble() %>%
-  dplyr::select(-matching, -slots, -sOptimal, -cOptimal) %>%
-  dplyr::select_(
-    "command_index"   = "college",
-    "officer_index"   = "student",
-    "command_rank"    = "cRank",
-    "officer_rank"    = "sRank"
-  ) %>%
-  dplyr::right_join(ds_command_roster, by="command_index") %>%
-  dplyr::right_join(ds_officer_roster, by="officer_index" ) %>%
-  dplyr::left_join(ds_command_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
-  dplyr::left_join(ds_officer_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
+ds_edge <- ds_match %>%
+  dplyr::select(-matching, -slots, -command_optimal, -officer_optimal) %>%
+  dplyr::left_join(ds_command_roster, by="command_index") %>%
+  dplyr::left_join(ds_officer_roster, by="officer_index" ) %>%
+  # dplyr::left_join(ds_command_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
+  # dplyr::left_join(ds_officer_long, by=c("command_id"="college_id", "officer_id"="student_id")) %>%
   dplyr::arrange(desc(billet_count_max), command_id) %>%
   dplyr::mutate(
     command_id   = dplyr::if_else(!is.na(command_id), sprintf("c_%03d", command_id), "-"),
@@ -244,6 +252,22 @@ ds_edge %>%
     col.names    = gsub("_", "<br/>", colnames(ds_edge)),
     format       = "markdown"
   )
+
+
+# ---- unmatched ---------------------------------------------------------------
+
+ds_command_unmatched %>%
+  knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_command_unmatched)),
+    format       = "markdown"
+  )
+
+ds_officer_unmatched %>%
+  knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_officer_unmatched)),
+    format       = "markdown"
+  )
+
 
 # ---- graph-desirability ------------------------------------------------------------------
 set.seed(23) #For the sake of keeping the jittering constant between runs.

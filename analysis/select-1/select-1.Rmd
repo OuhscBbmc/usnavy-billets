@@ -136,6 +136,7 @@ Commands and officers must be excluded from the matching algorithm if none of th
 
 
 The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were `r sum(ds_command_roster$billet_count_max)` total billets (across `r nrow(ds_command_roster)` unique commands), but `r nrow(ds_officer_roster)` officers.  This is only the essential information.  See the following section for a comprehensive table.
+
 ```{r match, echo=echoChunks, message=TRUE}
 ```
 
@@ -152,6 +153,14 @@ The final table shows the indices of only the successful matches, along with the
 In this demonstration, notice that not all commands filled every billet.
 
 ```{r display, echo=echoChunks, message=TRUE}
+```
+
+
+### Unmatched
+
+There were `r nrow(ds_command_unmatched)` commands which didn't match to at least one officer.  Similarly, there were `r nrow(ds_officer_unmatched)` officers which didn't match to at least one command.  
+
+```{r unmatched, echo=echoChunks, message=TRUE}
 ```
 
 

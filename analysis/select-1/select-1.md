@@ -242,6 +242,7 @@ The following 4 students/officers were never ranked by colleges/commands who ran
 
 The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were 54 total billets (across 20 unique commands), but 62 officers.  This is only the essential information.  See the following section for a comprehensive table.
 
+
 | command<br/>index| officer<br/>index| command<br/>rank| officer<br/>rank| command<br/>optimal| officer<br/>optimal| matching| slots|
 |-----------------:|-----------------:|----------------:|----------------:|-------------------:|-------------------:|--------:|-----:|
 |                 1|                11|                2|                1|                   1|                   1|        1|     1|
@@ -300,115 +301,88 @@ The final table shows the indices of only the successful matches, along with the
 In this demonstration, notice that not all commands filled every billet.
 
 
-|command<br/>index |officer<br/>index |command<br/>rank |officer<br/>rank |command<br/>id |command<br/>name |billet<br/>count<br/>max |officer<br/>id |officer<br/>tag |officer<br/>name<br/>last |rank.x |rank.y |
-|:-----------------|:-----------------|:----------------|:----------------|:--------------|:----------------|:------------------------|:--------------|:---------------|:-------------------------|:------|:------|
-|-                 |25                |-                |-                |-              |-                |-                        |o_426          |d2nz            |Zimmer                    |-      |-      |
-|-                 |27                |-                |-                |-              |-                |-                        |o_428          |vzno            |Bell                      |-      |-      |
-|-                 |41                |-                |-                |-              |-                |-                        |o_443          |yocg            |Quincy                    |-      |-      |
-|-                 |45                |-                |-                |-              |-                |-                        |o_448          |nkql            |Vince                     |-      |-      |
-|-                 |47                |-                |-                |-              |-                |-                        |o_451          |fjh2            |Yu                        |-      |-      |
-|1                 |11                |2                |1                |c_201          |Guam             |1                        |o_412          |9aa1            |Lambert                   |2      |1      |
-|2                 |44                |1                |1                |c_202          |NH Oki           |2                        |o_446          |wfv3            |Tut                       |1      |1      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_406          |m8w6            |Forsyth                   |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_436          |0cot            |Jack                      |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_447          |goed            |Unger                     |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_449          |lptr            |Wilson                    |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_452          |lsg3            |Zack                      |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_453          |lgds            |Ades                      |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_454          |jp1a            |Byron                     |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_455          |zs4z            |Colgate                   |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_456          |0izt            |Dyer                      |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_457          |7-Jun           |Easton                    |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_458          |jmhn            |Fox                       |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_459          |zpzj            |Gauge                     |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_460          |q5lj            |Hastings                  |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_461          |rzj1            |Ides                      |-      |-      |
-|3                 |-                 |-                |-                |c_203          |Oki MEU          |2                        |o_462          |hw3p            |James                     |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_406          |m8w6            |Forsyth                   |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_436          |0cot            |Jack                      |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_447          |goed            |Unger                     |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_449          |lptr            |Wilson                    |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_452          |lsg3            |Zack                      |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_453          |lgds            |Ades                      |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_454          |jp1a            |Byron                     |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_455          |zs4z            |Colgate                   |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_456          |0izt            |Dyer                      |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_457          |7-Jun           |Easton                    |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_458          |jmhn            |Fox                       |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_459          |zpzj            |Gauge                     |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_460          |q5lj            |Hastings                  |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_461          |rzj1            |Ides                      |-      |-      |
-|4                 |-                 |-                |-                |c_204          |3rd MLG          |4                        |o_462          |hw3p            |James                     |-      |-      |
-|5                 |46                |1                |1                |c_205          |NH Yoko          |2                        |o_450          |2w56            |Xiang                     |1      |2      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_406          |m8w6            |Forsyth                   |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_436          |0cot            |Jack                      |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_447          |goed            |Unger                     |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_449          |lptr            |Wilson                    |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_452          |lsg3            |Zack                      |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_453          |lgds            |Ades                      |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_454          |jp1a            |Byron                     |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_455          |zs4z            |Colgate                   |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_456          |0izt            |Dyer                      |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_457          |7-Jun           |Easton                    |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_458          |jmhn            |Fox                       |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_459          |zpzj            |Gauge                     |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_460          |q5lj            |Hastings                  |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_461          |rzj1            |Ides                      |-      |-      |
-|6                 |-                 |-                |-                |c_206          |Rota             |1                        |o_462          |hw3p            |James                     |-      |-      |
-|7                 |2                 |6                |2                |c_207          |Napl             |2                        |o_402          |kobl            |Bailey                    |7      |1      |
-|7                 |16                |3                |11               |c_207          |Napl             |2                        |o_417          |s9l6            |Quinn                     |3      |5      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_406          |m8w6            |Forsyth                   |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_436          |0cot            |Jack                      |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_447          |goed            |Unger                     |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_449          |lptr            |Wilson                    |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_452          |lsg3            |Zack                      |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_453          |lgds            |Ades                      |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_454          |jp1a            |Byron                     |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_455          |zs4z            |Colgate                   |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_456          |0izt            |Dyer                      |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_457          |7-Jun           |Easton                    |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_458          |jmhn            |Fox                       |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_459          |zpzj            |Gauge                     |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_460          |q5lj            |Hastings                  |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_461          |rzj1            |Ides                      |-      |-      |
-|8                 |-                 |-                |-                |c_208          |Sig              |1                        |o_462          |hw3p            |James                     |-      |-      |
-|9                 |5                 |6                |6                |c_209          |NMCP             |6                        |o_405          |87cl            |Ellison                   |6      |1      |
-|9                 |7                 |2                |2                |c_209          |NMCP             |6                        |o_408          |as5q            |Harris                    |2      |1      |
-|9                 |19                |1                |1                |c_209          |NMCP             |6                        |o_420          |paed            |Taylor                    |1      |1      |
-|9                 |26                |5                |5                |c_209          |NMCP             |6                        |o_427          |9je3            |Aikman                    |5      |1      |
-|9                 |29                |3                |3                |c_209          |NMCP             |6                        |o_430          |zkff            |Dulles                    |3      |1      |
-|9                 |36                |4                |4                |c_209          |NMCP             |6                        |o_438          |tun2            |Laurence                  |4      |1      |
-|10                |6                 |1                |1                |c_210          |Jax              |4                        |o_407          |wnaf            |Glover                    |1      |1      |
-|10                |13                |2                |2                |c_210          |Jax              |4                        |o_414          |k1lv            |Nash                      |2      |1      |
-|10                |22                |4                |3                |c_210          |Jax              |4                        |o_423          |vqdq            |Walker                    |4      |1      |
-|10                |32                |5                |4                |c_210          |Jax              |4                        |o_433          |6zmz            |Grind                     |5      |2      |
-|11                |17                |1                |1                |c_211          |Gitmo            |1                        |o_418          |bakn            |Rampling                  |1      |2      |
-|12                |1                 |5                |8                |c_212          |NHCL             |5                        |o_401          |xvxe            |Abraham                   |6      |2      |
-|12                |3                 |9                |8                |c_212          |NHCL             |5                        |o_403          |x0qi            |Carr                      |10     |6      |
-|12                |4                 |1                |1                |c_212          |NHCL             |5                        |o_404          |pd7n            |Davidson                  |1      |3      |
-|12                |15                |6                |7                |c_212          |NHCL             |5                        |o_416          |1qhj            |Paige                     |7      |2      |
-|12                |40                |7                |4                |c_212          |NHCL             |5                        |o_442          |bqrp            |Power                     |8      |2      |
-|13                |42                |4                |7                |c_213          |2nd MLG          |2                        |o_444          |yk8a            |Rolls                     |4      |3      |
-|14                |10                |2                |2                |c_214          |2nd MEU          |2                        |o_411          |2tb7            |Knox                      |2      |1      |
-|14                |12                |1                |1                |c_214          |2nd MEU          |2                        |o_413          |5sjg            |Murray                    |1      |1      |
-|15                |24                |1                |1                |c_215          |CBIRF            |1                        |o_425          |tb5t            |Young                     |1      |1      |
-|16                |8                 |2                |1                |c_216          |NMCSD            |4                        |o_409          |pb8x            |Ince                      |2      |1      |
-|16                |18                |5                |4                |c_216          |NMCSD            |4                        |o_419          |pt9y            |Sutherland                |5      |1      |
-|16                |23                |4                |9                |c_216          |NMCSD            |4                        |o_424          |d6hs            |Xiong                     |4      |2      |
-|16                |35                |3                |2                |c_216          |NMCSD            |4                        |o_437          |ojoz            |Kippler                   |3      |1      |
-|17                |14                |3                |7                |c_217          |NH 29P           |3                        |o_415          |cn7q            |Oliver                    |3      |3      |
-|17                |30                |1                |1                |c_217          |NH 29P           |3                        |o_431          |6ust            |Estes                     |1      |1      |
-|17                |31                |2                |2                |c_217          |NH 29P           |3                        |o_432          |785o            |Flag                      |2      |2      |
-|18                |21                |4                |2                |c_218          |NH Pend          |1                        |o_422          |h8pg            |Vaughan                   |4      |3      |
-|19                |9                 |3                |2                |c_219          |1st MLG          |6                        |o_410          |5t8r            |Jones                     |3      |3      |
-|19                |20                |9                |5                |c_219          |1st MLG          |6                        |o_421          |zaif            |Underwood                 |10     |3      |
-|19                |34                |2                |1                |c_219          |1st MLG          |6                        |o_435          |cbku            |Instance                  |2      |1      |
-|19                |37                |4                |3                |c_219          |1st MLG          |6                        |o_439          |ob7u            |Michaels                  |4      |1      |
-|19                |43                |5                |4                |c_219          |1st MLG          |6                        |o_445          |fg86            |Sherman                   |5      |1      |
-|20                |28                |2                |1                |c_220          |1st MEU          |4                        |o_429          |85i6            |Coolie                    |2      |3      |
-|20                |33                |10               |3                |c_220          |1st MEU          |4                        |o_434          |525l            |Hyer                      |11     |1      |
-|20                |38                |3                |2                |c_220          |1st MEU          |4                        |o_440          |27vk            |Never                     |3      |1      |
-|20                |39                |11               |4                |c_220          |1st MEU          |4                        |o_441          |ovvy            |Object                    |12     |1      |
+| command<br/>index| officer<br/>index| command<br/>rank| officer<br/>rank|command<br/>id |command<br/>name | billet<br/>count<br/>max|officer<br/>id |officer<br/>tag |officer<br/>name<br/>last |
+|-----------------:|-----------------:|----------------:|----------------:|:--------------|:----------------|------------------------:|:--------------|:---------------|:-------------------------|
+|                 1|                11|                2|                1|c_201          |Guam             |                        1|o_412          |9aa1            |Lambert                   |
+|                 2|                44|                1|                1|c_202          |NH Oki           |                        2|o_446          |wfv3            |Tut                       |
+|                 5|                46|                1|                1|c_205          |NH Yoko          |                        2|o_450          |2w56            |Xiang                     |
+|                 7|                 2|                6|                2|c_207          |Napl             |                        2|o_402          |kobl            |Bailey                    |
+|                 7|                16|                3|               11|c_207          |Napl             |                        2|o_417          |s9l6            |Quinn                     |
+|                 9|                 5|                6|                6|c_209          |NMCP             |                        6|o_405          |87cl            |Ellison                   |
+|                 9|                 7|                2|                2|c_209          |NMCP             |                        6|o_408          |as5q            |Harris                    |
+|                 9|                19|                1|                1|c_209          |NMCP             |                        6|o_420          |paed            |Taylor                    |
+|                 9|                26|                5|                5|c_209          |NMCP             |                        6|o_427          |9je3            |Aikman                    |
+|                 9|                29|                3|                3|c_209          |NMCP             |                        6|o_430          |zkff            |Dulles                    |
+|                 9|                36|                4|                4|c_209          |NMCP             |                        6|o_438          |tun2            |Laurence                  |
+|                10|                 6|                1|                1|c_210          |Jax              |                        4|o_407          |wnaf            |Glover                    |
+|                10|                13|                2|                2|c_210          |Jax              |                        4|o_414          |k1lv            |Nash                      |
+|                10|                22|                4|                3|c_210          |Jax              |                        4|o_423          |vqdq            |Walker                    |
+|                10|                32|                5|                4|c_210          |Jax              |                        4|o_433          |6zmz            |Grind                     |
+|                11|                17|                1|                1|c_211          |Gitmo            |                        1|o_418          |bakn            |Rampling                  |
+|                12|                 1|                5|                8|c_212          |NHCL             |                        5|o_401          |xvxe            |Abraham                   |
+|                12|                 3|                9|                8|c_212          |NHCL             |                        5|o_403          |x0qi            |Carr                      |
+|                12|                 4|                1|                1|c_212          |NHCL             |                        5|o_404          |pd7n            |Davidson                  |
+|                12|                15|                6|                7|c_212          |NHCL             |                        5|o_416          |1qhj            |Paige                     |
+|                12|                40|                7|                4|c_212          |NHCL             |                        5|o_442          |bqrp            |Power                     |
+|                13|                42|                4|                7|c_213          |2nd MLG          |                        2|o_444          |yk8a            |Rolls                     |
+|                14|                10|                2|                2|c_214          |2nd MEU          |                        2|o_411          |2tb7            |Knox                      |
+|                14|                12|                1|                1|c_214          |2nd MEU          |                        2|o_413          |5sjg            |Murray                    |
+|                15|                24|                1|                1|c_215          |CBIRF            |                        1|o_425          |tb5t            |Young                     |
+|                16|                 8|                2|                1|c_216          |NMCSD            |                        4|o_409          |pb8x            |Ince                      |
+|                16|                18|                5|                4|c_216          |NMCSD            |                        4|o_419          |pt9y            |Sutherland                |
+|                16|                23|                4|                9|c_216          |NMCSD            |                        4|o_424          |d6hs            |Xiong                     |
+|                16|                35|                3|                2|c_216          |NMCSD            |                        4|o_437          |ojoz            |Kippler                   |
+|                17|                14|                3|                7|c_217          |NH 29P           |                        3|o_415          |cn7q            |Oliver                    |
+|                17|                30|                1|                1|c_217          |NH 29P           |                        3|o_431          |6ust            |Estes                     |
+|                17|                31|                2|                2|c_217          |NH 29P           |                        3|o_432          |785o            |Flag                      |
+|                18|                21|                4|                2|c_218          |NH Pend          |                        1|o_422          |h8pg            |Vaughan                   |
+|                19|                 9|                3|                2|c_219          |1st MLG          |                        6|o_410          |5t8r            |Jones                     |
+|                19|                20|                9|                5|c_219          |1st MLG          |                        6|o_421          |zaif            |Underwood                 |
+|                19|                34|                2|                1|c_219          |1st MLG          |                        6|o_435          |cbku            |Instance                  |
+|                19|                37|                4|                3|c_219          |1st MLG          |                        6|o_439          |ob7u            |Michaels                  |
+|                19|                43|                5|                4|c_219          |1st MLG          |                        6|o_445          |fg86            |Sherman                   |
+|                20|                28|                2|                1|c_220          |1st MEU          |                        4|o_429          |85i6            |Coolie                    |
+|                20|                33|               10|                3|c_220          |1st MEU          |                        4|o_434          |525l            |Hyer                      |
+|                20|                38|                3|                2|c_220          |1st MEU          |                        4|o_440          |27vk            |Never                     |
+|                20|                39|               11|                4|c_220          |1st MEU          |                        4|o_441          |ovvy            |Object                    |
+
+
+### Unmatched
+
+There were 4 commands which didn't match to at least one officer.  Similarly, there were 20 officers which didn't match to at least one command.  
+
+
+| command<br/>id|command<br/>name | billet<br/>count<br/>max| command<br/>index|
+|--------------:|:----------------|------------------------:|-----------------:|
+|            203|Oki MEU          |                        2|                 3|
+|            204|3rd MLG          |                        4|                 4|
+|            206|Rota             |                        1|                 6|
+|            208|Sig              |                        1|                 8|
+
+
+
+| officer<br/>id|officer<br/>tag |officer<br/>name<br/>last | officer<br/>index|
+|--------------:|:---------------|:-------------------------|-----------------:|
+|            406|m8w6            |Forsyth                   |                NA|
+|            426|d2nz            |Zimmer                    |                25|
+|            428|vzno            |Bell                      |                27|
+|            436|0cot            |Jack                      |                NA|
+|            443|yocg            |Quincy                    |                41|
+|            447|goed            |Unger                     |                NA|
+|            448|nkql            |Vince                     |                45|
+|            449|lptr            |Wilson                    |                NA|
+|            451|fjh2            |Yu                        |                47|
+|            452|lsg3            |Zack                      |                NA|
+|            453|lgds            |Ades                      |                NA|
+|            454|jp1a            |Byron                     |                NA|
+|            455|zs4z            |Colgate                   |                NA|
+|            456|0izt            |Dyer                      |                NA|
+|            457|7-Jun           |Easton                    |                NA|
+|            458|jmhn            |Fox                       |                NA|
+|            459|zpzj            |Gauge                     |                NA|
+|            460|q5lj            |Hastings                  |                NA|
+|            461|rzj1            |Ides                      |                NA|
+|            462|hw3p            |James                     |                NA|
 
 
 ### Desirability
@@ -426,7 +400,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-12-26, 23:14 -0600
+Report rendered by wbeasley at 2016-12-27, 00:08 -0600
 ```
 
 ```
