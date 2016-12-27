@@ -73,6 +73,9 @@ ds_officer_long <- ds_officer_long %>%
     , "rank"
   )
 
+ds_officer_roster <- ds_officer_roster %>%
+  dplyr::semi_join(ds_officer_long, by=c("officer_id"="student_id"))
+
 # ---- rankings-raw ------------------------------------------------------------------
 cat("\n\n### Input Provided from Each Command\n\n")
 ds_command_long %>%

@@ -40,7 +40,7 @@ A list of available billets will be published in the summer of 2016 for physicia
 What follows is a demonstration of the algorithm using theoretical data.
 
 ### Notes 
-1. The current demonstration covers 62 officers, 20 unique commands, and 54 total possible billets.  In the specialty of emergency medicine, the term "command" and "hospital" can almost be used interchangably.  Almost all commands are located in a single command, and each command/hospital can have multiple billets.
+1. The current demonstration covers 51 officers, 20 unique commands, and 54 total possible billets.  In the specialty of emergency medicine, the term "command" and "hospital" can almost be used interchangably.  Almost all commands are located in a single command, and each command/hospital can have multiple billets.
 1. The four simulated datasets are viewable and editable [online](https://github.com/OuhscBbmc/usnavy-billets/tree/master/data-phi-free).
     * [roster of the commands](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/command-roster.csv).
     * [roster of the officers](https://github.com/OuhscBbmc/usnavy-billets/blob/master/data-phi-free/raw/officer-roster.csv).
@@ -240,7 +240,7 @@ The following 4 students/officers were never ranked by colleges/commands who ran
 ### Matches
 
 
-The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were 54 total billets (across 20 unique commands), but 62 officers.  This is only the essential information.  See the following section for a comprehensive table.
+The skinny table below shows the pairs of command--officer matches.  Notice that not all entities were matched.  This is because there were 54 total billets (across 20 unique commands), but 51 officers.  This is only the essential information.  See the following section for a comprehensive table.
 
 
 | command<br/>index| officer<br/>index| command<br/>rank| officer<br/>rank| command<br/>optimal| officer<br/>optimal| matching| slots|
@@ -349,7 +349,7 @@ In this demonstration, notice that not all commands filled every billet.
 
 ### Unmatched
 
-There were 4 commands which didn't match to at least one officer.  Similarly, there were 20 officers which didn't match to at least one command.  
+There were 4 commands which didn't match to at least one officer.  Similarly, there were 9 officers which didn't match to at least one command.  
 
 
 | command<br/>id|command<br/>name | billet<br/>count<br/>max| command<br/>index|
@@ -372,17 +372,6 @@ There were 4 commands which didn't match to at least one officer.  Similarly, th
 |            448|nkql            |Vince                     |                45|
 |            449|lptr            |Wilson                    |                NA|
 |            451|fjh2            |Yu                        |                47|
-|            452|lsg3            |Zack                      |                NA|
-|            453|lgds            |Ades                      |                NA|
-|            454|jp1a            |Byron                     |                NA|
-|            455|zs4z            |Colgate                   |                NA|
-|            456|0izt            |Dyer                      |                NA|
-|            457|7-Jun           |Easton                    |                NA|
-|            458|jmhn            |Fox                       |                NA|
-|            459|zpzj            |Gauge                     |                NA|
-|            460|q5lj            |Hastings                  |                NA|
-|            461|rzj1            |Ides                      |                NA|
-|            462|hw3p            |James                     |                NA|
 
 
 ### Desirability
@@ -400,7 +389,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-12-27, 00:08 -0600
+Report rendered by wbeasley at 2016-12-27, 00:20 -0600
 ```
 
 ```
