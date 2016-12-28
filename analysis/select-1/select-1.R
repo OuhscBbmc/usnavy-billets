@@ -179,6 +179,29 @@ converted$preference_college %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
 
+cat("\n\n### Input Provided from Each Command --recoded\n\n")
+ds_command_preference_pretty <- converted$preference_college %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(
+    choice = seq_len(n())
+  ) %>%
+  tidyr::gather(key=command_index, value=officer_index, -choice) %>%
+  dplyr::mutate(command_index = as.integer(command_index)) %>%
+  dplyr::filter(!is.na(officer_index)) %>%
+  dplyr::left_join(ds_command_roster[, c("command_name", "command_index")], by="command_index") %>%
+  dplyr::left_join(ds_officer_roster[, c("officer_id", "officer_index")], by="officer_index") %>%
+  dplyr::select( -command_index, -officer_index) %>%
+  tidyr::spread(key=command_name, value=officer_id)
+
+ds_command_preference_pretty %>%
+  replace(is.na(.), "-") %>%
+  knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_command_preference_pretty)),
+    format       = "markdown",
+    align        = c("c")
+  )
+
+
 cat("\n\n### Input Provided from Each Officer\n\n")
 converted$preference_student %>%
   tibble::as_tibble() %>%
@@ -187,6 +210,31 @@ converted$preference_student %>%
   dplyr::filter(sum > 0L ) %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
+
+
+cat("\n\n### Input Provided from Each Officer --recoded\n\n")
+ds_officer_preference_pretty <- converted$preference_student %>%
+  tibble::as_tibble() %>%
+  dplyr::mutate(
+    choice = seq_len(n())
+  ) %>%
+  tidyr::gather(key=officer_index, value=command_index, -choice) %>%
+  dplyr::mutate(officer_index = as.integer(officer_index)) %>%
+  dplyr::filter(!is.na(command_index)) %>%
+  dplyr::left_join(ds_command_roster[, c("command_name", "command_index")], by="command_index") %>%
+  dplyr::left_join(ds_officer_roster[, c("officer_id", "officer_index")], by="officer_index") %>%
+  dplyr::select( -command_index, -officer_index) %>%
+  dplyr::mutate(command_name = gsub(" ", "<br/>", command_name)) %>%
+  tidyr::spread(key=officer_id, value=command_name)
+
+ds_officer_preference_pretty %>%
+  replace(is.na(.), "-") %>%
+  knitr::kable(
+    col.names    = gsub("_", "<br/>", colnames(ds_officer_preference_pretty)),
+    format       = "markdown",
+    align        = c("c")
+  )
+
 
 # ---- match ------------------------------------------------------------------
 m <- matchingMarkets::hri(

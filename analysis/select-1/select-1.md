@@ -217,6 +217,33 @@ The following 4 students/officers were never ranked by colleges/commands who ran
 ```
 
 
+### Input Provided from Each Command --recoded
+```
+
+
+
+| choice | 1st MEU | 1st MLG | 2nd MEU | 2nd MLG | 3rd MLG | CBIRF | Gitmo | Guam | Jax | Napl | NH 29P | NH Oki | NH Pend | NH Yoko | NHCL | NMCP | NMCSD | Oki MEU | Rota | Sig |
+|:------:|:-------:|:-------:|:-------:|:-------:|:-------:|:-----:|:-----:|:----:|:---:|:----:|:------:|:------:|:-------:|:-------:|:----:|:----:|:-----:|:-------:|:----:|:---:|
+|   1    |   431   |   415   |   413   |   412   |   411   |  425  |  418  | 402  | 407 | 438  |  431   |  446   |   431   |   450   | 404  | 420  |  425  |   429   | 418  | 402 |
+|   2    |   429   |   435   |   411   |   429   |   413   |   -   |  402  | 412  | 414 | 418  |  432   |  411   |   419   |   422   | 410  | 408  |  409  |    -    | 419  | 425 |
+|   3    |   440   |   410   |    -    |   416   |    -    |   -   |  407  | 419  | 430 | 417  |  415   |  412   |   434   |   419   | 405  | 430  |  437  |    -    | 402  | 415 |
+|   4    |   445   |   439   |    -    |   444   |    -    |   -   |  442  | 428  | 423 | 429  |  433   |  450   |   422   |    -    | 412  | 438  |  424  |    -    | 438  | 410 |
+|   5    |   432   |   445   |    -    |    -    |    -    |   -   |   -   | 422  | 433 | 430  |  417   |   -    |    -    |    -    | 450  | 427  |  419  |    -    | 429  | 441 |
+|   6    |   439   |   416   |    -    |    -    |    -    |   -   |   -   |  -   | 415 | 415  |  418   |   -    |    -    |    -    | 401  | 405  |  451  |    -    | 430  | 440 |
+|   7    |   412   |   412   |    -    |    -    |    -    |   -   |   -   |  -   | 450 | 402  |  403   |   -    |    -    |    -    | 416  | 401  |  417  |    -    |  -   | 431 |
+|   8    |   410   |   431   |    -    |    -    |    -    |   -   |   -   |  -   | 416 | 426  |  434   |   -    |    -    |    -    | 442  | 424  |  426  |    -    |  -   | 401 |
+|   9    |   435   |   411   |    -    |    -    |    -    |   -   |   -   |  -   | 448 |  -   |  422   |   -    |    -    |    -    | 421  | 409  |  423  |    -    |  -   | 411 |
+|   10   |   413   |   421   |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |  410   |   -    |    -    |    -    | 403  | 428  |   -   |    -    |  -   |  -  |
+|   11   |   434   |   434   |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |  441   |   -    |    -    |    -    | 443  | 444  |   -   |    -    |  -   |  -  |
+|   12   |   441   |    -    |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |  440   |   -    |    -    |    -    |  -   | 417  |   -   |    -    |  -   |  -  |
+|   13   |   405   |    -    |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |  416   |   -    |    -    |    -    |  -   | 421  |   -   |    -    |  -   |  -  |
+|   14   |   421   |    -    |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |  451   |   -    |    -    |    -    |  -   | 407  |   -   |    -    |  -   |  -  |
+|   15   |   411   |    -    |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |   -    |   -    |    -    |    -    |  -   |  -   |   -   |    -    |  -   |  -  |
+|   16   |   415   |    -    |    -    |    -    |    -    |   -   |   -   |  -   |  -  |  -   |   -    |   -    |    -    |    -    |  -   |  -   |   -   |    -    |  -   |  -  |
+
+```
+
+
 ### Input Provided from Each Officer
 ```
 
@@ -236,6 +263,29 @@ The following 4 students/officers were never ranked by colleges/commands who ran
 |  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  3|  -|
 |  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -| 20|  -|
 |  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -|  -| 14|  -|
+
+```
+
+
+### Input Provided from Each Officer --recoded
+```
+
+
+
+| choice |     401     |  402  |     403     |     404     |     405     |     407     | 408  |  409  |     410     |     411     |     412     |     413     | 414 |     415     |     416     |     417     |     418     |     419     | 420  |     421     |     422     |     423     |     424     |     425     |     426     | 427  |  428  |     429     |     430     |     431     |     432     |     433     |     434     |     435     |  437  |     438     |     439     |     440     |     441     |  442  |     443     |     444     |     445     |    446     |     448     |     450     |     451     |
+|:------:|:-----------:|:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:----:|:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:---:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:----:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:----:|:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----------:|:-----:|:-----------:|:-----------:|:-----------:|:-----------:|:-----:|:-----------:|:-----------:|:-----------:|:----------:|:-----------:|:-----------:|:-----------:|
+|   1    |    NMCP     | Napl  |     Jax     |    NMCP     |    NMCP     |     Jax     | NMCP | NMCSD |    NMCP     | 2nd<br/>MEU |    Guam     | 2nd<br/>MEU | Jax |     Jax     |     Jax     |    NMCSD    | NH<br/>Pend |    NMCSD    | NMCP |    NMCSD    |    Guam     |     Jax     |    NMCP     |    CBIRF    |    NMCSD    | NMCP |  Jax  | 1st<br/>MLG |    NMCP     | NH<br/>29P  | NH<br/>Pend | NH<br/>Pend | 1st<br/>MEU | 1st<br/>MLG | NMCSD |    NMCP     | 1st<br/>MLG | 1st<br/>MEU | 1st<br/>MEU | NMCP  |    NMCSD    |    NMCP     | 1st<br/>MLG | NH<br/>Oki |     Jax     |    Guam     |    NMCSD    |
+|   2    |    NHCL     | Rota  | NH<br/>Pend |    NMCSD    |    NMCSD    |    Gitmo    | NHCL | NMCP  |    NMCSD    |    NHCL     | NH<br/>Oki  |    NHCL     |  -  |    CBIRF    |    NHCL     |     Jax     |    Gitmo    | NH<br/>Pend |  -   | NH<br/>Pend |     Jax     |    NMCSD    |    NMCSD    |     Jax     |     Jax     | NHCL | NMCP  | 3rd<br/>MLG |     Jax     | 1st<br/>MLG | NH<br/>29P  |     Jax     |    NMCSD    | 1st<br/>MEU | NMCP  |     Jax     | NH<br/>Pend | 1st<br/>MLG | 1st<br/>MLG | NHCL  | NH<br/>Pend | 2nd<br/>MEU | 1st<br/>MEU |     -      | 1st<br/>MLG | NH<br/>Yoko | NH<br/>Pend |
+|   3    | 2nd<br/>MLG |  Sig  |    Guam     |    NHCL     |    NHCL     |    NMCP     |  -   |   -   | 1st<br/>MLG | 2nd<br/>MLG |     Jax     | 2nd<br/>MLG |  -  | NH<br/>29P  | NH<br/>Pend |    NMCP     | NH<br/>29P  |    NMCP     |  -   | 1st<br/>MLG | NH<br/>Pend | NH<br/>Pend |     Jax     |    NMCSD    | NH<br/>Pend |  -   | NHCL  | 1st<br/>MEU |    NMCSD    | 1st<br/>MEU |    NMCSD    | NH<br/>29P  | NH<br/>Pend | NH<br/>Pend |   -   |    Rota     | 1st<br/>MEU |    NMCSD    | NH<br/>Pend |  Jax  |    NHCL     | 2nd<br/>MLG |    NMCSD    |     -      | 1st<br/>MEU | NH<br/>Oki  |    NMCP     |
+|   4    | 2nd<br/>MEU | Guam  | NH<br/>Oki  |    Rota     | 1st<br/>MEU | NH<br/>Yoko |  -   |   -   |    NHCL     | 1st<br/>MEU | 2nd<br/>MLG | Oki<br/>MEU |  -  | 1st<br/>MLG | NH<br/>29P  | NH<br/>Pend |    Rota     |     Jax     |  -   | 1st<br/>MEU | NH<br/>Yoko |    NMCP     |    NHCL     | NH<br/>Pend |    Napl     |  -   | NMCSD | Oki<br/>MEU | NH<br/>Pend | NH<br/>Pend | 1st<br/>MLG |    NMCSD    | 1st<br/>MLG |      -      |   -   |    Napl     |    NMCSD    | NH<br/>29P  | NH<br/>29P  | Gitmo |     Jax     |    NHCL     | NH<br/>29P  |     -      | NH<br/>Pend |     Jax     |     Jax     |
+|   5    |     Jax     | Gitmo | NH<br/>29P  | NH<br/>Yoko | 1st<br/>MLG | NH<br/>Oki  |  -   |   -   |      -      | 1st<br/>MLG | 2nd<br/>MEU | 3rd<br/>MLG |  -  | 1st<br/>MEU |    NMCP     |    Napl     |     Jax     | NH<br/>Yoko |  -   |     Jax     |    NMCSD    |    NHCL     | NH<br/>Pend |    NMCP     |      -      |  -   | Rota  | 2nd<br/>MEU |      -      |      -      | 1st<br/>MEU |    NMCP     | NH<br/>29P  |      -      |   -   |     Sig     |      -      |      -      |    Guam     | CBIRF |    NMCP     |     Jax     |    NMCP     |     -      |    NMCP     | NH<br/>Pend |    NHCL     |
+|   6    |    NMCSD    |   -   |    NHCL     |    Guam     |      -      | Oki<br/>MEU |  -   |   -   |      -      | NH<br/>Oki  |    NHCL     | 1st<br/>MEU |  -  |    Napl     |    NMCSD    |    Rota     |    Napl     |      -      |  -   |    NMCP     |      -      | NH<br/>29P  | NH<br/>29P  |      -      |      -      |  -   | Napl  | 2nd<br/>MLG |      -      |      -      |      -      |      -      |      -      |      -      |   -   |    Guam     |      -      |      -      |      -      |   -   | 1st<br/>MEU |    NMCSD    |     Jax     |     -      |    NMCSD    |    NMCSD    | NH<br/>29P  |
+|   7    |      -      |   -   |    NMCSD    |      -      |      -      | 3rd<br/>MLG |  -   |   -   |      -      | 3rd<br/>MLG | 1st<br/>MEU | 1st<br/>MLG |  -  |      -      | 2nd<br/>MLG |     Sig     |      -      |      -      |  -   |    NHCL     |      -      |      -      |      -      |      -      |      -      |  -   |   -   |    Napl     |      -      |      -      |      -      |      -      |      -      |      -      |   -   | NH<br/>Yoko |      -      |      -      |      -      |   -   | NH<br/>29P  |      -      |      -      |     -      |    CBIRF    | 3rd<br/>MLG |      -      |
+|   8    |      -      |   -   |    NMCP     |      -      |      -      |    Rota     |  -   |   -   |      -      |      -      | 1st<br/>MLG |     Jax     |  -  |      -      |      -      | NH<br/>29P  |      -      |      -      |  -   |      -      |      -      |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |     -      |    Gitmo    | 1st<br/>MLG |      -      |
+|   9    |      -      |   -   |      -      |      -      |      -      |    Napl     |  -   |   -   |      -      |      -      | NH<br/>Pend |      -      |  -  |      -      |      -      |      -      |      -      |      -      |  -   |      -      |      -      |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |     -      |      -      | 2nd<br/>MLG |      -      |
+|   10   |      -      |   -   |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |  -  |      -      |      -      |      -      |      -      |      -      |  -   |      -      |      -      |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |     -      |      -      | Oki<br/>MEU |      -      |
+|   11   |      -      |   -   |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |  -  |      -      |      -      |      -      |      -      |      -      |  -   |      -      |      -      |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |     -      |      -      | 1st<br/>MEU |      -      |
+|   12   |      -      |   -   |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |  -  |      -      |      -      |      -      |      -      |      -      |  -   |      -      |      -      |      -      |      -      |      -      |      -      |  -   |   -   |      -      |      -      |      -      |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |      -      |   -   |      -      |      -      |      -      |     -      |      -      | 2nd<br/>MEU |      -      |
 
 ### Matches
 
@@ -389,7 +439,7 @@ For the sake of documentation and reproducibility, the current report was render
 
 
 ```
-Report rendered by wbeasley at 2016-12-27, 00:20 -0600
+Report rendered by wbeasley at 2016-12-27, 22:19 -0600
 ```
 
 ```
