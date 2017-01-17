@@ -1,13 +1,13 @@
 command_id,command_name,billet_count_max
 201,Guam,0
-202,NH Oki,2
+202,NH Oki,1
 203,Oki MEU,2
-204,3rd MLG,4
+204,3rd MLG,3
 205,NH Yoko,2
 206,Rota,1
 207,Napl,2
 208,Sig,1
-209,NMCP,6
+209,NMCP,5
 210,Jax,4
 211,Gitmo,1
 212,NHCL,5
@@ -17,5 +17,5 @@ command_id,command_name,billet_count_max
 216,NMCSD,4
 217,NH 29P,3
 218,NH Pend,1
-219,1st MLG,6
-220,1st MEU,4
+219,1st MLG,3
+220,1st MEU,3
