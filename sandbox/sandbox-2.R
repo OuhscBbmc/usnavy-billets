@@ -11,10 +11,10 @@ library(magrittr      , quietly=TRUE)
 library(ggplot2       , quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingMarkets"      , quietly=TRUE)  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
-requireNamespace("readr"                , quietly=TRUE)
-requireNamespace("tidyr"                , quietly=TRUE)
-requireNamespace("dplyr"                , quietly=TRUE) #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("readr")
+requireNamespace("tidyr")
+requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
