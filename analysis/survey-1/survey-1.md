@@ -39,7 +39,7 @@ This report covers the analyses used in the analysis of the survey data.
 # Graphs
 
 ## Marginals
-![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->
+![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->![](figure-png/marginals-7.png)<!-- -->
 
 ## Correlations
 ![](figure-png/correlations-1.png)<!-- -->![](figure-png/correlations-2.png)<!-- -->
@@ -123,5 +123,5 @@ Packages -----------------------------------------------------------------------
 
 
 
-Report rendered by wibeasley at 2017-07-03, 14:03 -0500 in 11 seconds.
+Report rendered by wibeasley at 2017-07-03, 14:39 -0500 in 8 seconds.
 

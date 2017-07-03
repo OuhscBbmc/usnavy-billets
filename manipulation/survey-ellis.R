@@ -83,16 +83,27 @@ ds <- ds %>%
     , "transparent"                = "`On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-`"
     , "satisfaction"               = "`On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall??detailing experience for your last set of orders-`"
     , "favoritism"                 = "`On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-`"
-    , "assignment_current_rank"    = "`Describe your current assignment:`"
-    # , "assignment_current_rank2" = "`Describe your current assignment: [Other]`"
+    , "assignment_rank"            = "`Describe your current assignment:`"
+    # , "assignment_rank2"         = "`Describe your current assignment: [Other]`"
   )  %>%
   dplyr::mutate(
     response_index        = sample.int(n(), replace=F),
-    missing_item_count    = is.na(transparent) + is.na(satisfaction) + is.na(favoritism) + is.na(assignment_current_rank)
+    missing_item_count    = is.na(transparent) + is.na(satisfaction) + is.na(favoritism) + is.na(assignment_rank)
   ) %>%
   dplyr::mutate(
-    assignment_current_rank = dplyr::recode(
-      assignment_current_rank,
+    assignment_rank_collapsed  = dplyr::recode(
+      assignment_rank,
+      "1st choice"        = 1L,
+      "2nd choice"        = 2L,
+      "3rd choice"        = 3L,
+      "4th choice"        = 4L,
+      "> 4th choice"      = 6L,
+      "Other"             = NA_integer_
+    )
+  ) %>%
+  dplyr::mutate(
+    assignment_rank = dplyr::recode(
+      assignment_rank,
       "1st choice"        = "1st",
       "2nd choice"        = "2nd",
       "3rd choice"        = "3rd",
@@ -103,6 +114,7 @@ ds <- ds %>%
     )
   ) %>%
   dplyr::arrange(response_index)
+ds$assignment_rank_collapsed
 
 table(ds$missing_item_count)
 
@@ -113,7 +125,8 @@ checkmate::assert_integer(  ds$response_index           , lower=1L, upper=nrow(d
 checkmate::assert_integer(  ds$transparent              , lower=1L, upper=5L        , any.missing=T)
 checkmate::assert_integer(  ds$satisfaction             , lower=1L, upper=5L        , any.missing=T)
 checkmate::assert_integer(  ds$favoritism               , lower=1L, upper=5L        , any.missing=T)
-checkmate::assert_character(ds$assignment_current_rank  , min.chars=3               , any.missing=F)
+checkmate::assert_character(ds$assignment_rank          , min.chars=3               , any.missing=F)
+checkmate::assert_integer(  ds$assignment_rank_collapsed, lower=1L, upper=6L        , any.missing=T)
 checkmate::assert_integer(  ds$missing_item_count       , lower=0L, upper=4L        , any.missing=F)
 
 # ---- specify-columns-to-upload -----------------------------------------------
@@ -121,7 +134,7 @@ checkmate::assert_integer(  ds$missing_item_count       , lower=0L, upper=4L    
 columns_to_write <- c(
   "response_index",
   "transparent", "satisfaction", "favoritism",
-  "assignment_current_rank", "missing_item_count"
+  "assignment_rank", "assignment_rank_collapsed", "missing_item_count"
 )
 ds_slim <- ds %>%
   dplyr::select_(.dots=columns_to_write) %>%

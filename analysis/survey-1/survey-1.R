@@ -27,12 +27,14 @@ col_types = readr::cols_only(
   transparent                 = readr::col_integer(),
   satisfaction                = readr::col_integer(),
   favoritism                  = readr::col_integer(),
-  assignment_current_rank     = readr::col_character(),
+  assignment_rank             = readr::col_character(),
+  assignment_rank_collapsed   = readr::col_integer(),
   missing_item_count          = readr::col_integer()
 )
 
 # ---- load-data ---------------------------------------------------------------
 ds <- readr::read_csv(path_input, col_types=col_types) # 'ds' stands for 'datasets'
+
 # ---- tweak-data --------------------------------------------------------------
 
 # ---- marginals ---------------------------------------------------------------
@@ -41,13 +43,13 @@ TabularManifest::histogram_continuous(ds, variable_name="transparent", bin_width
 TabularManifest::histogram_continuous(ds, variable_name="satisfaction", bin_width=1, rounded_digits=1)
 TabularManifest::histogram_continuous(ds, variable_name="favoritism", bin_width=1, rounded_digits=1)
 
-TabularManifest::histogram_discrete(ds, variable_name="assignment_current_rank")
+TabularManifest::histogram_discrete(ds, variable_name="assignment_rank")
+TabularManifest::histogram_continuous(ds, variable_name="assignment_rank_collapsed", bin_width=1, rounded_digits=1)
 TabularManifest::histogram_continuous(ds, variable_name="missing_item_count", bin_width=1, rounded_digits=1)
 
 
 # ---- correlations ------------------------------------------------------------
-outcomes <- c("transparent", "satisfaction", "favoritism", "missing_item_count")
-# outcomes_pretty <- gsub("_", "\n", outcomes)
+outcomes <- c("transparent", "satisfaction", "favoritism", "assignment_rank_collapsed", "missing_item_count")
 
 correlation_matrix <- function( d, outcomes, outcomes_pretty=gsub("_", "\n", outcomes), title="" ) {
   square <- cor(d[, outcomes], use="pairwise.complete.obs")
