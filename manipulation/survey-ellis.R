@@ -18,7 +18,6 @@ requireNamespace("checkmate"    ) # or asserting conditions meet expected patter
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
 path_raw                        <- "data-unshared/raw/Raw DM Survey 1 Results.csv"
-# path_raw                         <- "data-unshared/raw/ascii.csv"
 path_derived                    <- "data-unshared/derived/survey-dm-1.csv"
 
 col_types <- readr::cols_only(
@@ -135,4 +134,4 @@ rm(columns_to_write)
 
 # ---- save-to-disk ------------------------------------------------------------
 # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.
-readr::write_csv(ds, path_derived)
+readr::write_csv(ds_slim, path_derived)
