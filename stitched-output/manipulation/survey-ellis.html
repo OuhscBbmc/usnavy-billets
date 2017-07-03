@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title></title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+<!-- Styles for R syntax highlighter -->
+<style type="text/css">
+   pre .operator,
+   pre .paren {
+     color: rgb(104, 118, 135)
+   }
+
+   pre .literal {
+     color: #990073
+   }
+
+   pre .number {
+     color: #099;
+   }
+
+   pre .comment {
+     color: #998;
+     font-style: italic
+   }
+
+   pre .keyword {
+     color: #900;
+     font-weight: bold
+   }
+
+   pre .identifier {
+     color: rgb(0, 0, 0);
+   }
+
+   pre .string {
+     color: #d14;
+   }
+</style>
+
+<!-- R syntax highlighter -->
+<script type="text/javascript">
+var hljs=new function(){function m(p){return p.replace(/&/gm,"&amp;").replace(/</gm,"&lt;")}function f(r,q,p){return RegExp(q,"m"+(r.cI?"i":"")+(p?"g":""))}function b(r){for(var p=0;p<r.childNodes.length;p++){var q=r.childNodes[p];if(q.nodeName=="CODE"){return q}if(!(q.nodeType==3&&q.nodeValue.match(/\s+/))){break}}}function h(t,s){var p="";for(var r=0;r<t.childNodes.length;r++){if(t.childNodes[r].nodeType==3){var q=t.childNodes[r].nodeValue;if(s){q=q.replace(/\n/g,"")}p+=q}else{if(t.childNodes[r].nodeName=="BR"){p+="\n"}else{p+=h(t.childNodes[r])}}}if(/MSIE [678]/.test(navigator.userAgent)){p=p.replace(/\r/g,"\n")}return p}function a(s){var r=s.className.split(/\s+/);r=r.concat(s.parentNode.className.split(/\s+/));for(var q=0;q<r.length;q++){var p=r[q].replace(/^language-/,"");if(e[p]){return p}}}function c(q){var p=[];(function(s,t){for(var r=0;r<s.childNodes.length;r++){if(s.childNodes[r].nodeType==3){t+=s.childNodes[r].nodeValue.length}else{if(s.childNodes[r].nodeName=="BR"){t+=1}else{if(s.childNodes[r].nodeType==1){p.push({event:"start",offset:t,node:s.childNodes[r]});t=arguments.callee(s.childNodes[r],t);p.push({event:"stop",offset:t,node:s.childNodes[r]})}}}}return t})(q,0);return p}function k(y,w,x){var q=0;var z="";var s=[];function u(){if(y.length&&w.length){if(y[0].offset!=w[0].offset){return(y[0].offset<w[0].offset)?y:w}else{return w[0].event=="start"?y:w}}else{return y.length?y:w}}function t(D){var A="<"+D.nodeName.toLowerCase();for(var B=0;B<D.attributes.length;B++){var C=D.attributes[B];A+=" "+C.nodeName.toLowerCase();if(C.value!==undefined&&C.value!==false&&C.value!==null){A+='="'+m(C.value)+'"'}}return A+">"}while(y.length||w.length){var v=u().splice(0,1)[0];z+=m(x.substr(q,v.offset-q));q=v.offset;if(v.event=="start"){z+=t(v.node);s.push(v.node)}else{if(v.event=="stop"){var p,r=s.length;do{r--;p=s[r];z+=("</"+p.nodeName.toLowerCase()+">")}while(p!=v.node);s.splice(r,1);while(r<s.length){z+=t(s[r]);r++}}}}return z+m(x.substr(q))}function j(){function q(x,y,v){if(x.compiled){return}var u;var s=[];if(x.k){x.lR=f(y,x.l||hljs.IR,true);for(var w in x.k){if(!x.k.hasOwnProperty(w)){continue}if(x.k[w] instanceof Object){u=x.k[w]}else{u=x.k;w="keyword"}for(var r in u){if(!u.hasOwnProperty(r)){continue}x.k[r]=[w,u[r]];s.push(r)}}}if(!v){if(x.bWK){x.b="\\b("+s.join("|")+")\\s"}x.bR=f(y,x.b?x.b:"\\B|\\b");if(!x.e&&!x.eW){x.e="\\B|\\b"}if(x.e){x.eR=f(y,x.e)}}if(x.i){x.iR=f(y,x.i)}if(x.r===undefined){x.r=1}if(!x.c){x.c=[]}x.compiled=true;for(var t=0;t<x.c.length;t++){if(x.c[t]=="self"){x.c[t]=x}q(x.c[t],y,false)}if(x.starts){q(x.starts,y,false)}}for(var p in e){if(!e.hasOwnProperty(p)){continue}q(e[p].dM,e[p],true)}}function d(B,C){if(!j.called){j();j.called=true}function q(r,M){for(var L=0;L<M.c.length;L++){if((M.c[L].bR.exec(r)||[null])[0]==r){return M.c[L]}}}function v(L,r){if(D[L].e&&D[L].eR.test(r)){return 1}if(D[L].eW){var M=v(L-1,r);return M?M+1:0}return 0}function w(r,L){return L.i&&L.iR.test(r)}function K(N,O){var M=[];for(var L=0;L<N.c.length;L++){M.push(N.c[L].b)}var r=D.length-1;do{if(D[r].e){M.push(D[r].e)}r--}while(D[r+1].eW);if(N.i){M.push(N.i)}return f(O,M.join("|"),true)}function p(M,L){var N=D[D.length-1];if(!N.t){N.t=K(N,E)}N.t.lastIndex=L;var r=N.t.exec(M);return r?[M.substr(L,r.index-L),r[0],false]:[M.substr(L),"",true]}function z(N,r){var L=E.cI?r[0].toLowerCase():r[0];var M=N.k[L];if(M&&M instanceof Array){return M}return false}function F(L,P){L=m(L);if(!P.k){return L}var r="";var O=0;P.lR.lastIndex=0;var M=P.lR.exec(L);while(M){r+=L.substr(O,M.index-O);var N=z(P,M);if(N){x+=N[1];r+='<span class="'+N[0]+'">'+M[0]+"</span>"}else{r+=M[0]}O=P.lR.lastIndex;M=P.lR.exec(L)}return r+L.substr(O,L.length-O)}function J(L,M){if(M.sL&&e[M.sL]){var r=d(M.sL,L);x+=r.keyword_count;return r.value}else{return F(L,M)}}function I(M,r){var L=M.cN?'<span class="'+M.cN+'">':"";if(M.rB){y+=L;M.buffer=""}else{if(M.eB){y+=m(r)+L;M.buffer=""}else{y+=L;M.buffer=r}}D.push(M);A+=M.r}function G(N,M,Q){var R=D[D.length-1];if(Q){y+=J(R.buffer+N,R);return false}var P=q(M,R);if(P){y+=J(R.buffer+N,R);I(P,M);return P.rB}var L=v(D.length-1,M);if(L){var O=R.cN?"</span>":"";if(R.rE){y+=J(R.buffer+N,R)+O}else{if(R.eE){y+=J(R.buffer+N,R)+O+m(M)}else{y+=J(R.buffer+N+M,R)+O}}while(L>1){O=D[D.length-2].cN?"</span>":"";y+=O;L--;D.length--}var r=D[D.length-1];D.length--;D[D.length-1].buffer="";if(r.starts){I(r.starts,"")}return R.rE}if(w(M,R)){throw"Illegal"}}var E=e[B];var D=[E.dM];var A=0;var x=0;var y="";try{var s,u=0;E.dM.buffer="";do{s=p(C,u);var t=G(s[0],s[1],s[2]);u+=s[0].length;if(!t){u+=s[1].length}}while(!s[2]);if(D.length>1){throw"Illegal"}return{r:A,keyword_count:x,value:y}}catch(H){if(H=="Illegal"){return{r:0,keyword_count:0,value:m(C)}}else{throw H}}}function g(t){var p={keyword_count:0,r:0,value:m(t)};var r=p;for(var q in e){if(!e.hasOwnProperty(q)){continue}var s=d(q,t);s.language=q;if(s.keyword_count+s.r>r.keyword_count+r.r){r=s}if(s.keyword_count+s.r>p.keyword_count+p.r){r=p;p=s}}if(r.language){p.second_best=r}return p}function i(r,q,p){if(q){r=r.replace(/^((<[^>]+>|\t)+)/gm,function(t,w,v,u){return w.replace(/\t/g,q)})}if(p){r=r.replace(/\n/g,"<br>")}return r}function n(t,w,r){var x=h(t,r);var v=a(t);var y,s;if(v){y=d(v,x)}else{return}var q=c(t);if(q.length){s=document.createElement("pre");s.innerHTML=y.value;y.value=k(q,c(s),x)}y.value=i(y.value,w,r);var u=t.className;if(!u.match("(\\s|^)(language-)?"+v+"(\\s|$)")){u=u?(u+" "+v):v}if(/MSIE [678]/.test(navigator.userAgent)&&t.tagName=="CODE"&&t.parentNode.tagName=="PRE"){s=t.parentNode;var p=document.createElement("div");p.innerHTML="<pre><code>"+y.value+"</code></pre>";t=p.firstChild.firstChild;p.firstChild.cN=s.cN;s.parentNode.replaceChild(p.firstChild,s)}else{t.innerHTML=y.value}t.className=u;t.result={language:v,kw:y.keyword_count,re:y.r};if(y.second_best){t.second_best={language:y.second_best.language,kw:y.second_best.keyword_count,re:y.second_best.r}}}function o(){if(o.called){return}o.called=true;var r=document.getElementsByTagName("pre");for(var p=0;p<r.length;p++){var q=b(r[p]);if(q){n(q,hljs.tabReplace)}}}function l(){if(window.addEventListener){window.addEventListener("DOMContentLoaded",o,false);window.addEventListener("load",o,false)}else{if(window.attachEvent){window.attachEvent("onload",o)}else{window.onload=o}}}var e={};this.LANGUAGES=e;this.highlight=d;this.highlightAuto=g;this.fixMarkup=i;this.highlightBlock=n;this.initHighlighting=o;this.initHighlightingOnLoad=l;this.IR="[a-zA-Z][a-zA-Z0-9_]*";this.UIR="[a-zA-Z_][a-zA-Z0-9_]*";this.NR="\\b\\d+(\\.\\d+)?";this.CNR="\\b(0[xX][a-fA-F0-9]+|(\\d+(\\.\\d*)?|\\.\\d+)([eE][-+]?\\d+)?)";this.BNR="\\b(0b[01]+)";this.RSR="!|!=|!==|%|%=|&|&&|&=|\\*|\\*=|\\+|\\+=|,|\\.|-|-=|/|/=|:|;|<|<<|<<=|<=|=|==|===|>|>=|>>|>>=|>>>|>>>=|\\?|\\[|\\{|\\(|\\^|\\^=|\\||\\|=|\\|\\||~";this.ER="(?![\\s\\S])";this.BE={b:"\\\\.",r:0};this.ASM={cN:"string",b:"'",e:"'",i:"\\n",c:[this.BE],r:0};this.QSM={cN:"string",b:'"',e:'"',i:"\\n",c:[this.BE],r:0};this.CLCM={cN:"comment",b:"//",e:"$"};this.CBLCLM={cN:"comment",b:"/\\*",e:"\\*/"};this.HCM={cN:"comment",b:"#",e:"$"};this.NM={cN:"number",b:this.NR,r:0};this.CNM={cN:"number",b:this.CNR,r:0};this.BNM={cN:"number",b:this.BNR,r:0};this.inherit=function(r,s){var p={};for(var q in r){p[q]=r[q]}if(s){for(var q in s){p[q]=s[q]}}return p}}();hljs.LANGUAGES.cpp=function(){var a={keyword:{"false":1,"int":1,"float":1,"while":1,"private":1,"char":1,"catch":1,"export":1,virtual:1,operator:2,sizeof:2,dynamic_cast:2,typedef:2,const_cast:2,"const":1,struct:1,"for":1,static_cast:2,union:1,namespace:1,unsigned:1,"long":1,"throw":1,"volatile":2,"static":1,"protected":1,bool:1,template:1,mutable:1,"if":1,"public":1,friend:2,"do":1,"return":1,"goto":1,auto:1,"void":2,"enum":1,"else":1,"break":1,"new":1,extern:1,using:1,"true":1,"class":1,asm:1,"case":1,typeid:1,"short":1,reinterpret_cast:2,"default":1,"double":1,register:1,explicit:1,signed:1,typename:1,"try":1,"this":1,"switch":1,"continue":1,wchar_t:1,inline:1,"delete":1,alignof:1,char16_t:1,char32_t:1,constexpr:1,decltype:1,noexcept:1,nullptr:1,static_assert:1,thread_local:1,restrict:1,_Bool:1,complex:1},built_in:{std:1,string:1,cin:1,cout:1,cerr:1,clog:1,stringstream:1,istringstream:1,ostringstream:1,auto_ptr:1,deque:1,list:1,queue:1,stack:1,vector:1,map:1,set:1,bitset:1,multiset:1,multimap:1,unordered_set:1,unordered_map:1,unordered_multiset:1,unordered_multimap:1,array:1,shared_ptr:1}};return{dM:{k:a,i:"</",c:[hljs.CLCM,hljs.CBLCLM,hljs.QSM,{cN:"string",b:"'\\\\?.",e:"'",i:"."},{cN:"number",b:"\\b(\\d+(\\.\\d*)?|\\.\\d+)(u|U|l|L|ul|UL|f|F)"},hljs.CNM,{cN:"preprocessor",b:"#",e:"$"},{cN:"stl_container",b:"\\b(deque|list|queue|stack|vector|map|set|bitset|multiset|multimap|unordered_map|unordered_set|unordered_multiset|unordered_multimap|array)\\s*<",e:">",k:a,r:10,c:["self"]}]}}}();hljs.LANGUAGES.r={dM:{c:[hljs.HCM,{cN:"number",b:"\\b0[xX][0-9a-fA-F]+[Li]?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+(?:[eE][+\\-]?\\d*)?L\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\b\\d+\\.(?!\\d)(?:i\\b)?",e:hljs.IMMEDIATE_RE,r:1},{cN:"number",b:"\\b\\d+(?:\\.\\d*)?(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"number",b:"\\.\\d+(?:[eE][+\\-]?\\d*)?i?\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"keyword",b:"(?:tryCatch|library|setGeneric|setGroupGeneric)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\.",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\.\\.\\d+(?![\\w.])",e:hljs.IMMEDIATE_RE,r:10},{cN:"keyword",b:"\\b(?:function)",e:hljs.IMMEDIATE_RE,r:2},{cN:"keyword",b:"(?:if|in|break|next|repeat|else|for|return|switch|while|try|stop|warning|require|attach|detach|source|setMethod|setClass)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"literal",b:"(?:NA|NA_integer_|NA_real_|NA_character_|NA_complex_)\\b",e:hljs.IMMEDIATE_RE,r:10},{cN:"literal",b:"(?:NULL|TRUE|FALSE|T|F|Inf|NaN)\\b",e:hljs.IMMEDIATE_RE,r:1},{cN:"identifier",b:"[a-zA-Z.][a-zA-Z0-9._]*\\b",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"<\\-(?!\\s*\\d)",e:hljs.IMMEDIATE_RE,r:2},{cN:"operator",b:"\\->|<\\-",e:hljs.IMMEDIATE_RE,r:1},{cN:"operator",b:"%%|~",e:hljs.IMMEDIATE_RE},{cN:"operator",b:">=|<=|==|!=|\\|\\||&&|=|\\+|\\-|\\*|/|\\^|>|<|!|&|\\||\\$|:",e:hljs.IMMEDIATE_RE,r:0},{cN:"operator",b:"%",e:"%",i:"\\n",r:1},{cN:"identifier",b:"`",e:"`",r:0},{cN:"string",b:'"',e:'"',c:[hljs.BE],r:0},{cN:"string",b:"'",e:"'",c:[hljs.BE],r:0},{cN:"paren",b:"[[({\\])}]",e:hljs.IMMEDIATE_RE,r:0}]}};
+hljs.initHighlightingOnLoad();
+</script>
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<p>This report was automatically generated with the R package <strong>knitr</strong>
+(version 1.16).</p>
+
+<pre><code class="r"># knitr::stitch_rmd(script=&quot;./manipulation/survey-ellis.R&quot;, output=&quot;./stitched-output/manipulation/survey-ellis.md&quot;) # dir.create(output=&quot;./stitched-output/manipulation/&quot;, recursive=T)
+rm(list=ls(all=TRUE))  #Clear the variables from previous runs.
+</code></pre>
+
+<pre><code class="r"># Call `base::source()` on any repo file that defines functions needed below.  Ideally, no real operations are performed.
+</code></pre>
+
+<pre><code class="r"># Attach these package(s) so their functions don&#39;t need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+library(magrittr            , quietly=TRUE)
+
+# Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
+requireNamespace(&quot;readr&quot;        )
+requireNamespace(&quot;tidyr&quot;        )
+requireNamespace(&quot;dplyr&quot;        ) # void attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
+requireNamespace(&quot;testit&quot;       ) # or asserting conditions meet expected patterns.
+requireNamespace(&quot;checkmate&quot;    ) # or asserting conditions meet expected patterns. # devtools::install_github(&quot;mllg/checkmate&quot;)
+</code></pre>
+
+<pre><code class="r"># Constant values that won&#39;t change.
+path_raw                        &lt;- &quot;data-unshared/raw/Raw DM Survey 1 Results.csv&quot;
+# path_raw                         &lt;- &quot;data-unshared/raw/ascii.csv&quot;
+path_derived                    &lt;- &quot;data-unshared/derived/survey-dm-1.csv&quot;
+
+col_types &lt;- readr::cols_only(
+    `Response ID` = readr::col_integer(),
+  # `Date submitted` = readr::col_datetime(format = &quot;&quot;),
+  # `Last page` = readr::col_integer(),
+  # `Start language` = readr::col_character(),
+  # `Date started` = readr::col_datetime(format = &quot;&quot;),
+  # `Date last action` = readr::col_datetime(format = &quot;&quot;),
+  # `What is your primary??specialty-` = readr::col_character(),
+  # `What is your primary??specialty- [Other]` = readr::col_character(),
+  # `What is your rank-` = readr::col_character(),
+  # `What year did you??execute orders for your current billet-?? (Consider retour orders the same as a PCS set of orders.)` = readr::col_character(),
+  # `What year did you??execute orders for your current billet-?? (Consider retour orders the same as a PCS set of orders.) [Other]` = readr::col_character(),
+  # `How would you describe your current billet-` = readr::col_character(),
+  # `How would you describe your current billet- [Other]` = readr::col_character(),
+  # `For your last set of orders, how many months prior to your move were your orders released-?? That is, how many months did you have to prepare for your PCS-` = readr::col_character(),
+  # `For your last set of orders, how many months prior to your move were your orders released-?? That is, how many months did you have to prepare for your PCS- [Other]` = readr::col_character(),
+  `On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-` = readr::col_integer(),
+  `On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall??detailing experience for your last set of orders-` = readr::col_integer(),
+  `On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-` = readr::col_integer(),
+  `Describe your current assignment:` = readr::col_character()
+  # `Describe your current assignment: [Other]` = readr::col_character()
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 1]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 2]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 3]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 4]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 5]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 6]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 7]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 8]` = readr::col_character(),
+  # `Please rank your desired billet locations with the top level being the most desireable, and the bottom being the least desireable. [Ranking 9]` = readr::col_character(),
+  # `Which career path do you want to pursue in the next 5-10?? years-` = readr::col_character(),
+  # `Which career path do you want to pursue in the next 5-10?? years- [Other]` = readr::col_character(),
+  # `Neither the Army nor the Air Force have physicians in the detailer role.?? Instead, they have nurses or medical administrators work with specialty leaders to determine assigments.?? This is different from the current Navy Medical Corps billet assignment process where the detailer??is a physician*.?? Would you??approve if the detailer position was filled by a non-physician-` = readr::col_character(),
+  # `Neither the Army nor the Air Force have physicians in the detailer role.?? Instead, they have nurses or medical administrators work with specialty leaders to determine assigments.?? This is different from the current Navy Medical Corps billet assignment process where the detailer??is a physician*.?? Would you??approve if the detailer position was filled by a non-physician- [Other]` = readr::col_character(),
+  # `How long should an individual be allowed to remain at one command-` = readr::col_character(),
+  # `How long should an individual be allowed to remain at one command- [Other]` = readr::col_character(),
+  # `Do you think that there is a problem in the Medical Corps with members not moving-?? That is, are there too many physicians who get to stay in one place too long-` = readr::col_character(),
+  # `Do you think that there is a problem in the Medical Corps with members not moving-?? That is, are there too many physicians who get to stay in one place too long- [Other]` = readr::col_character(),
+  # `Civilian medical residency positions are assigned using the National Residency Match Program where members submit a preference list, residency directors submit a preference list, and a computer algorithm optimizes a match.?? This is different from the current Navy Medical Corps billet assignment process where the detailer and specialty leader take input from medical officers and then make a decision.?? Of these two options, which would you prefer for your military billet assignment-` = readr::col_character(),
+  # `Civilian medical residency positions are assigned using the National Residency Match Program where members submit a preference list, residency directors submit a preference list, and a computer algorithm optimizes a match.?? This is different from the current Navy Medical Corps billet assignment process where the detailer and specialty leader take input from medical officers and then make a decision.?? Of these two options, which would you prefer for your military billet assignment- [Other]` = readr::col_character(),
+  # `The later the match day, the more information one has before creating their rank list.?? The earlier the match day, the sooner one can have certainty and prepare.?? Assuming your were scheduled to??execute new orders in July of 2017, what month would you want the match to occur in-` = readr::col_character(),
+  # `The later the match day, the more information one has before creating their rank list.?? The earlier the match day, the sooner one can have certainty and prepare.?? Assuming your were scheduled to??execute new orders in July of 2017, what month would you want the match to occur in- [Other]` = readr::col_character(),
+  # `Do you think members who are coming from operational or OCONUS assignments should be given preference in billet assignment-` = readr::col_character(),
+  # `Do you think members with more seniority (as defined by time in service or rank)??should be given preference in billet assignment-` = readr::col_character(),
+  # `Any last thoughts or input regarding the billet assignment process-` = readr::col_character()
+)
+</code></pre>
+
+<pre><code class="r"># Read the CSVs
+ds &lt;- readr::read_csv(path_raw, col_types=col_types)
+
+rm(path_raw, col_types)
+
+dim(ds)
+</code></pre>
+
+<pre><code>## [1] 1298    5
+</code></pre>
+
+<pre><code class="r"># OuhscMunge::column_rename_headstart(ds) #Spit out columns to help write call ato `dplyr::rename()`.
+ds &lt;- ds %&gt;%
+  dplyr::select_( #`select()` implicitly drops the other columns not mentioned.
+    &quot;response_id&quot;                  = &quot;`Response ID`&quot;
+    , &quot;transparent&quot;                = &quot;`On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-`&quot;
+    , &quot;satisfaction&quot;               = &quot;`On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall??detailing experience for your last set of orders-`&quot;
+    , &quot;favoritism&quot;                 = &quot;`On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-`&quot;
+    , &quot;assignment_current_rank&quot;    = &quot;`Describe your current assignment:`&quot;
+    # , &quot;assignment_current_rank2&quot; = &quot;`Describe your current assignment: [Other]`&quot;
+  )  %&gt;%
+  dplyr::mutate(
+    response_index        = sample.int(n(), replace=F),
+    missing_item_count    = is.na(transparent) + is.na(satisfaction) + is.na(favoritism) + is.na(assignment_current_rank)
+  ) %&gt;%
+  dplyr::mutate(
+    assignment_current_rank = dplyr::recode(
+      assignment_current_rank,
+      &quot;1st choice&quot;        = &quot;1st&quot;,
+      &quot;2nd choice&quot;        = &quot;2nd&quot;,
+      &quot;3rd choice&quot;        = &quot;3rd&quot;,
+      &quot;4th choice&quot;        = &quot;4th&quot;,
+      &quot;&gt; 4th choice&quot;      = &quot;5th+&quot;,
+      &quot;Other&quot;             = &quot;Other&quot;,
+      .missing            = &quot;Unknown&quot;
+    )
+  ) %&gt;%
+  dplyr::arrange(response_index)
+
+table(ds$missing_item_count)
+</code></pre>
+
+<pre><code>## 
+##   0   1   2   3   4 
+## 770 138  12  20 358
+</code></pre>
+
+<pre><code class="r"># Sniff out problems
+checkmate::assert_integer(  ds$response_id              , lower=1L                  , any.missing=F, unique=T)
+checkmate::assert_integer(  ds$response_index           , lower=1L, upper=nrow(ds)  , any.missing=F, unique=T)
+checkmate::assert_integer(  ds$transparent              , lower=1L, upper=5L        , any.missing=T)
+checkmate::assert_integer(  ds$satisfaction             , lower=1L, upper=5L        , any.missing=T)
+checkmate::assert_integer(  ds$favoritism               , lower=1L, upper=5L        , any.missing=T)
+checkmate::assert_character(ds$assignment_current_rank  , min.chars=3               , any.missing=F)
+checkmate::assert_integer(  ds$missing_item_count       , lower=0L, upper=4L        , any.missing=F)
+</code></pre>
+
+<pre><code class="r"># dput(colnames(ds)) # Print colnames for line below.
+columns_to_write &lt;- c(
+  &quot;response_index&quot;,
+  &quot;transparent&quot;, &quot;satisfaction&quot;, &quot;favoritism&quot;,
+  &quot;assignment_current_rank&quot;, &quot;missing_item_count&quot;
+)
+ds_slim &lt;- ds %&gt;%
+  dplyr::select_(.dots=columns_to_write) %&gt;%
+  dplyr::mutate(
+    # fte_approximated &lt;- as.integer(fte_approximated)
+  )
+ds_slim
+</code></pre>
+
+<pre><code>## # A tibble: 1,298 x 6
+##    response_index transparent satisfaction favoritism
+##             &lt;int&gt;       &lt;int&gt;        &lt;int&gt;      &lt;int&gt;
+##  1              1           2            4          5
+##  2              2           3            5         NA
+##  3              3          NA           NA         NA
+##  4              4           1            1          1
+##  5              5          NA           NA         NA
+##  6              6          NA           NA         NA
+##  7              7           5            5          5
+##  8              8           1            3          2
+##  9              9          NA           NA         NA
+## 10             10           5            5          5
+## # ... with 1,288 more rows, and 2 more variables:
+## #   assignment_current_rank &lt;chr&gt;, missing_item_count &lt;int&gt;
+</code></pre>
+
+<pre><code class="r">rm(columns_to_write)
+</code></pre>
+
+<pre><code class="r"># If there&#39;s no PHI, a rectangular CSV is usually adequate, and it&#39;s portable to other machines and software.
+readr::write_csv(ds, path_derived)
+</code></pre>
+
+<p>The R session information (including the OS info, R version and all
+packages used):</p>
+
+<pre><code class="r">sessionInfo()
+</code></pre>
+
+<pre><code>## R version 3.4.1 (2017-06-30)
+## Platform: x86_64-pc-linux-gnu (64-bit)
+## Running under: Ubuntu 16.04.2 LTS
+## 
+## Matrix products: default
+## BLAS: /usr/lib/atlas-base/atlas/libblas.so.3.0
+## LAPACK: /usr/lib/atlas-base/atlas/liblapack.so.3.0
+## 
+## locale:
+##  [1] LC_CTYPE=en_US.UTF-8       LC_NUMERIC=C              
+##  [3] LC_TIME=en_US.UTF-8        LC_COLLATE=en_US.UTF-8    
+##  [5] LC_MONETARY=en_US.UTF-8    LC_MESSAGES=en_US.UTF-8   
+##  [7] LC_PAPER=en_US.UTF-8       LC_NAME=C                 
+##  [9] LC_ADDRESS=C               LC_TELEPHONE=C            
+## [11] LC_MEASUREMENT=en_US.UTF-8 LC_IDENTIFICATION=C       
+## 
+## attached base packages:
+## [1] stats     graphics  grDevices utils     datasets  methods   base     
+## 
+## other attached packages:
+## [1] bindrcpp_0.2 magrittr_1.5
+## 
+## loaded via a namespace (and not attached):
+##  [1] Rcpp_0.12.11          knitr_1.16            bindr_0.1            
+##  [4] hms_0.3               bit_1.1-12            testit_0.7           
+##  [7] lattice_0.20-35       R6_2.2.2              rlang_0.1.1.9000     
+## [10] stringr_1.2.0         blob_1.1.0            dplyr_0.7.1          
+## [13] tools_3.4.1           grid_3.4.1            checkmate_1.8.3      
+## [16] DBI_0.7               digest_0.6.12         bit64_0.9-7          
+## [19] assertthat_0.2.0      tibble_1.3.3          purrr_0.2.2.2        
+## [22] readr_1.1.1           tidyr_0.6.3           evaluate_0.10.1      
+## [25] memoise_1.1.0         glue_1.1.1            OuhscMunge_0.1.8.9002
+## [28] RSQLite_2.0           stringi_1.1.5         compiler_3.4.1       
+## [31] backports_1.1.0       markdown_0.8          pkgconfig_2.0.1      
+## [34] zoo_1.8-0
+</code></pre>
+
+<pre><code class="r">Sys.time()
+</code></pre>
+
+<pre><code>## [1] &quot;2017-07-03 12:34:48 CDT&quot;
+</code></pre>
+
+</body>
+
+</html>
