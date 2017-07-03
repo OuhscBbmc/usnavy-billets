@@ -81,8 +81,8 @@ read_chunk("./analysis/survey-1/survey-1.R") #This allows knitr to call chunks t
 ```{r marginals, echo=echo_chunks, message=message_chunks}
 ```
 
-## Scatterplots
-```{r scatterplots, echo=echo_chunks, message=message_chunks, fig.width=7}
+## Correlations
+```{r correlations, echo=echo_chunks, message=message_chunks, fig.width=7, fig.height=7}
 ```
 
 

@@ -41,8 +41,8 @@ This report covers the analyses used in the analysis of the survey data.
 ## Marginals
 ![](figure-png/marginals-1.png)<!-- -->![](figure-png/marginals-2.png)<!-- -->![](figure-png/marginals-3.png)<!-- -->![](figure-png/marginals-4.png)<!-- -->![](figure-png/marginals-5.png)<!-- -->![](figure-png/marginals-6.png)<!-- -->
 
-## Scatterplots
-
+## Correlations
+![](figure-png/correlations-1.png)<!-- -->![](figure-png/correlations-2.png)<!-- -->
 
 
 # Session Information
@@ -79,6 +79,7 @@ Packages -----------------------------------------------------------------------
  bindrcpp        * 0.2         2017-06-17 CRAN (R 3.4.0)                          
  colorspace        1.3-2       2016-12-14 CRAN (R 3.4.1)                          
  compiler          3.4.1       2017-07-01 local                                   
+ corrplot          0.77        2016-04-21 CRAN (R 3.4.1)                          
  datasets        * 3.4.1       2017-07-01 local                                   
  devtools          1.13.2      2017-06-02 CRAN (R 3.4.0)                          
  digest            0.6.12      2017-01-27 CRAN (R 3.4.1)                          
@@ -122,5 +123,5 @@ Packages -----------------------------------------------------------------------
 
 
 
-Report rendered by wibeasley at 2017-07-03, 13:47 -0500 in 6 seconds.
+Report rendered by wibeasley at 2017-07-03, 14:03 -0500 in 11 seconds.
 

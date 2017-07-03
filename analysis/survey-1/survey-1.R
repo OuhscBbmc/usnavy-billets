@@ -13,6 +13,8 @@ requireNamespace("dplyr")
 # requireNamespace("RColorBrewer")
 # requireNamespace("scales") #For formating values in graphs
 # requireNamespace("mgcv) #For the Generalized Additive Model that smooths the longitudinal graphs.
+
+requireNamespace("corrplot")
 requireNamespace("TabularManifest") # devtools::install_github("Melinae/TabularManifest")
 
 # ---- declare-globals ---------------------------------------------------------
@@ -41,6 +43,50 @@ TabularManifest::histogram_continuous(ds, variable_name="favoritism", bin_width=
 
 TabularManifest::histogram_discrete(ds, variable_name="assignment_current_rank")
 TabularManifest::histogram_continuous(ds, variable_name="missing_item_count", bin_width=1, rounded_digits=1)
+
+
+# ---- correlations ------------------------------------------------------------
+outcomes <- c("transparent", "satisfaction", "favoritism", "missing_item_count")
+# outcomes_pretty <- gsub("_", "\n", outcomes)
+
+correlation_matrix <- function( d, outcomes, outcomes_pretty=gsub("_", "\n", outcomes), title="" ) {
+  square <- cor(d[, outcomes], use="pairwise.complete.obs")
+  dimnames(square) <- list(outcomes_pretty, outcomes_pretty)
+  corrplot::corrplot(square, method="ellipse", addCoef.col="gray30", tl.col="gray10", diag=F, cl.pos="n")
+  mtext(text = title, line = +3, col="DarkBlue", font=2)
+}
+correlation_matrix(
+  ds,
+  outcomes,
+  title = "Correlations Among Responses"
+)
+
+
+scatter_matrix <- function( d, outcomes, outcomes_pretty=gsub("_", "\n", outcomes), title="" ) {
+  pointsCex <- .8
+  panel.hist <- function(x, ...) {
+    usr <- par("usr")
+    on.exit(par(usr))
+    par(usr=c(usr[1:2], 0, 1.5))
+
+    h <- hist(x, plot=F)
+    breaks <- h$breaks
+    nB <- length(breaks)
+    y <- h$counts
+    y <- y/max(y)
+    rect(breaks[-nB], 0, breaks[-1], y, col="white", ...)
+  }
+  pairs(labels = outcomes_pretty,
+        #pch=".",
+        cex=pointsCex,
+        x=d[, outcomes],
+        lower.panel=panel.smooth,
+        upper.panel=panel.smooth, #panel.cor,
+        diag.panel=panel.hist
+  )
+  mtext(text = title, line = -1, col="tomato",font=2)
+}
+scatter_matrix(ds, outcomes)
 
 #
 # # ---- scatterplots ------------------------------------------------------------
