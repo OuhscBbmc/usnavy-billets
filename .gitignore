@@ -11,37 +11,9 @@
 # I'm afraid this might contain PHI if someone knew how to decode it.
 us.stackdump
 
-# Data formats that potentially contain PHI
-*.rdata
-*.Rdata
-*.RData
-*.RDATA
-*.RDS
-*.rds
-*.csv
-*.mdb
-*.accdb
-*.sav
-*.sas7bdat
-*.xls
-*.xlsx
 
 # Dataset Exceptions
-!recruitment-productivity/recruitment-zones/zipcodes-to-zone.csv
-!osdh-reports/administrative-record-counts/administrative-record-counts-2013-07-24.xlsx
-!osdh-reports/osdh-maps/county-characteristics.csv
-!data-unshared/zipcode-zone.csv
-!data-unshared/cache/redcap-audit/mock-user-list-from-irb.csv
-
-!spatial/zipcode-aggregate.csv
-!spatial/census/ACS_11_5YR_B01003_metadata.csv
-!spatial/census/ACS_11_5YR_B01003_with_ann.csv
-
-!Recruitment/RecruitmentMetadata.xlsx
-
-# RData exceptions
-!osdh-reports/c1-models-apc/results-bugs.RData
-!osdh-reports/c1-models-apc/results-jags.RData
+!data-phi-free/
 
 # ---- R and RStudio files -----------------------------------------------
 .Rhistory
