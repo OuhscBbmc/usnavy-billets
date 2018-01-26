@@ -18,4 +18,3 @@ are converted to a wide-format preference matrix.
 \author{
 Will Beasley
 }
-
