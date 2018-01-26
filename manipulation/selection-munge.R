@@ -17,12 +17,12 @@ requireNamespace("testit") #For asserting conditions meet expected patterns.
 # ---- declare-globals ---------------------------------------------------------
 # Constant values that won't change.
 set.seed(43) #So the random sampling won't change.
-path_in_command_roster              <- "data-phi-free/raw/command-roster.csv"
-path_in_command_wide                <- "data-phi-free/raw/command-wide.csv"
+path_in_command_roster              <- "data-phi-free/raw/2018/command-roster.csv"
+path_in_command_wide                <- "data-phi-free/raw/2018/command-wide.csv"
 path_out_command_wide               <- "data-phi-free/derived/command.csv"
 
-path_in_officer_roster              <- "data-phi-free/raw/officer-roster.csv"
-path_in_officer_wide                <- "data-phi-free/raw/officer-wide.csv"
+path_in_officer_roster              <- "data-phi-free/raw/2018/officer-roster.csv"
+path_in_officer_wide                <- "data-phi-free/raw/2018/officer-wide.csv"
 path_out_officer_wide               <- "data-phi-free/derived/officer.csv"
 
 col_types_command_roster <- readr::cols_only(
@@ -93,6 +93,7 @@ ds_command_missing_ranks <- ds_command_long %>%
     nonmissing_rank_count  = sum(!is.na(rank))
   ) %>%
   dplyr::ungroup() %>%
+
   dplyr::filter(nonmissing_rank_count == 0L)
 
 ds_officer_missing_ranks <- ds_officer_long %>%

@@ -17,8 +17,8 @@ requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
 
 # ---- declare-globals ---------------------------------------------------------
-path_in_roster_command    <- "./data-phi-free/raw/command-roster.csv"
-path_in_roster_officer    <- "./data-phi-free/raw/officer-roster.csv"
+path_in_roster_command    <- "./data-phi-free/raw/2018/command-roster.csv"
+path_in_roster_officer    <- "./data-phi-free/raw/2018/officer-roster.csv"
 path_in_command           <- "./data-phi-free/derived/command.csv"
 path_in_officer           <- "./data-phi-free/derived/officer.csv"
 
