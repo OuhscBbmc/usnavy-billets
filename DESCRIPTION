@@ -1,7 +1,7 @@
 Package: USNavyBillets
 Title: Matching Billets and Officers 
 Description: This software assists the Non-Surgical Medical Corps Detailer of the US Navy.
-Version: 0.1.1.9000
+Version: 0.1.2.9000
 Date: 2016-12-22
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("Richard", "Childers", role = "ctb"))
@@ -16,7 +16,6 @@ Depends:
 Imports:
     dplyr,
     magrittr,
-    matchingMarkets,
     readr,
     tidyr
 Suggests:
@@ -24,6 +23,8 @@ Suggests:
     rmarkdown,
     testit,
     testthat (>= 0.9)
+Remotes:
+  github::thiloklein/matchingMarkets,    
 License: GPL-3 + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr
