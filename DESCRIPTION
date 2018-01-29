@@ -2,7 +2,7 @@ Package: USNavyBillets
 Title: Matching Billets and Officers 
 Description: This software assists the Non-Surgical Medical Corps Detailer of the US Navy.
 Version: 0.1.2.9000
-Date: 2016-12-22
+Date: 2018-01-28
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com"), person("Richard", "Childers", role = "ctb"))
 Author: Will Beasley [aut, cre],

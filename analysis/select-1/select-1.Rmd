@@ -66,9 +66,9 @@ Summary
 
 ### Background
 
-To increase billet assignment transparency, and to give members and commands more control of the process, 2017 Navy Emergency Medicine Billets will be assigned using a detailing marketplace.  This is a pilot project within the Navy's larger effort to modernize the personnel system.  
+To increase billet assignment transparency, and to give members and commands more control of the process, 2017 & 2018 Navy Emergency Medicine Billets have been assigned using a detailing marketplace.  This is a pilot project within the Navy's larger effort to modernize the personnel system.  
   
-A list of available billets will be published in the summer of 2016 for physicians to compete for.  At the same time, a list of officers/physicians up for orders will be made available for commands to recruit.  In January, rank lists from officers and commands will be submitted and run through the deferred acceptance algorithm.  The algorithm, used in the National Resident Matching Program, will optimize a match between officer and command.
+A list of available billets will be published in the summer of 2016/2017 for physicians to compete for.  At the same time, a list of officers/physicians up for orders will be made available for commands to recruit.  In January, rank lists from officers and commands will be submitted and run through the deferred acceptance algorithm.  The algorithm, used in the National Resident Matching Program, will optimize a match between officer and command.
 
 What follows is a demonstration of the algorithm using theoretical data.
 

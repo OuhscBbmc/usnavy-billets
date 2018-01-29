@@ -237,6 +237,10 @@ ds_officer_preference_pretty %>%
 
 
 # ---- match ------------------------------------------------------------------
+
+dim(converted$preference_college)
+dim(converted$preference_student)
+
 m <- matchingMarkets::hri(
   c.prefs = converted$preference_college, #College/command preferences (each officer is a row)
   s.prefs = converted$preference_student, #Student/officer preferences (each command is a row)
