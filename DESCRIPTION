@@ -6,9 +6,6 @@ Date: 2018-01-28
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
     "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")), 
     person("Richard", "Childers", role = "ctb"))
-Author: Will Beasley [aut, cre],
-    Richard Childers [ctb]
-Maintainer: Will Beasley <wibeasley@hotmail.com>
 URL: https://github.com/OuhscBbmc/usnavy-billets, http://ouhsc.edu/bbmc/
 BugReports: https://github.com/OuhscBbmc/usnavy-billets/issues
 Depends:
