@@ -4,7 +4,8 @@ Description: This software assists the Non-Surgical Medical Corps Detailer of th
 Version: 0.1.2.9000
 Date: 2018-01-28
 Authors@R: c(person("Will", "Beasley", role = c("aut", "cre"), email =
-    "wibeasley@hotmail.com"), person("Richard", "Childers", role = "ctb"))
+    "wibeasley@hotmail.com", comment = c(ORCID = "0000-0002-5613-5006")), 
+    person("Richard", "Childers", role = "ctb"))
 Author: Will Beasley [aut, cre],
     Richard Childers [ctb]
 Maintainer: Will Beasley <wibeasley@hotmail.com>
