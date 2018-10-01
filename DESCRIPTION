@@ -26,4 +26,5 @@ Remotes:
 License: GPL-3 + file LICENSE
 LazyData: TRUE
 VignetteBuilder: knitr
+Encoding: UTF-8
 RoxygenNote: 6.0.1
