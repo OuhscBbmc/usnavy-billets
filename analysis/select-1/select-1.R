@@ -11,7 +11,7 @@ library(magrittr, quietly=TRUE)
 library(ggplot2, quietly=TRUE)
 
 # Verify these packages are available on the machine, but their functions need to be qualified: http://r-pkgs.had.co.nz/namespace.html#search-path
-requireNamespace("matchingMarkets")  # devtools::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
+requireNamespace("matchingMarkets")  # remotes::install_version("matchingMarkets", version = "0.2-1", repos = "http://cran.us.r-project.org")
 requireNamespace("readr")
 requireNamespace("tidyr")
 requireNamespace("dplyr") #Avoid attaching dplyr, b/c its function names conflict with a lot of packages (esp base, stats, and plyr).
@@ -159,10 +159,10 @@ converted <- USNavyBillets::long_to_preference(d_rank_college=ds_command_long, d
 
 ds_command_roster <- ds_command_roster %>%
   dplyr::left_join(converted$d_roster_college, by=c("command_id"="college_id")) %>%
-  dplyr::rename_("command_index" = "college_index")
+  dplyr::rename(command_index = college_index)
 ds_officer_roster <- ds_officer_roster %>%
   dplyr::left_join(converted$d_roster_student, by=c("officer_id"="student_id")) %>%
-  dplyr::rename_("officer_index" = "student_index")
+  dplyr::rename(officer_index = student_index)
 
 billet_count_ordered_by_index <- ds_command_roster %>%
   dplyr::arrange(command_index) %>%
@@ -174,7 +174,12 @@ cat("\n\n### Input Provided from Each Command\n\n")
 converted$preference_college %>%
   tibble::as_tibble() %>%
   dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
-  replace(is.na(.), "-") %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = tidyselect::everything(),
+      .fns  = \(x) dplyr::coalesce(as.character(x), "-")
+    )
+  ) |>
   dplyr::filter(sum > 0L ) %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
@@ -183,7 +188,7 @@ cat("\n\n### Input Provided from Each Command --recoded\n\n")
 ds_command_preference_pretty <- converted$preference_college %>%
   tibble::as_tibble() %>%
   dplyr::mutate(
-    choice = seq_len(n())
+    choice = seq_len(dplyr::n())
   ) %>%
   tidyr::gather(key=command_index, value=officer_index, -choice) %>%
   dplyr::mutate(command_index = as.integer(command_index)) %>%
@@ -194,7 +199,12 @@ ds_command_preference_pretty <- converted$preference_college %>%
   tidyr::spread(key=command_name, value=officer_id)
 
 ds_command_preference_pretty %>%
-  replace(is.na(.), "-") %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = tidyselect::everything(),
+      .fns  = \(x) dplyr::coalesce(as.character(x), "-")
+    )
+  ) |>
   knitr::kable(
     col.names    = gsub("_", "<br/>", colnames(ds_command_preference_pretty)),
     format       = "markdown",
@@ -206,7 +216,12 @@ cat("\n\n### Input Provided from Each Officer\n\n")
 converted$preference_student %>%
   tibble::as_tibble() %>%
   dplyr::mutate(sum = rowSums(., na.rm=T)) %>%
-  replace(is.na(.), "-") %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = tidyselect::everything(),
+      .fns  = \(x) dplyr::coalesce(as.character(x), "-")
+    )
+  ) |>
   dplyr::filter(sum > 0L ) %>%
   dplyr::select(-sum) %>%
   knitr::kable(format="markdown", align='r')
@@ -216,7 +231,7 @@ cat("\n\n### Input Provided from Each Officer --recoded\n\n")
 ds_officer_preference_pretty <- converted$preference_student %>%
   tibble::as_tibble() %>%
   dplyr::mutate(
-    choice = seq_len(n())
+    choice = seq_len(dplyr::n())
   ) %>%
   tidyr::gather(key=officer_index, value=command_index, -choice) %>%
   dplyr::mutate(officer_index = as.integer(officer_index)) %>%
@@ -228,7 +243,12 @@ ds_officer_preference_pretty <- converted$preference_student %>%
   tidyr::spread(key=officer_id, value=command_name)
 
 ds_officer_preference_pretty %>%
-  replace(is.na(.), "-") %>%
+  dplyr::mutate(
+    dplyr::across(
+      .cols = tidyselect::everything(),
+      .fns  = \(x) dplyr::coalesce(as.character(x), "-")
+    )
+  ) |>
   knitr::kable(
     col.names    = gsub("_", "<br/>", colnames(ds_officer_preference_pretty)),
     format       = "markdown",

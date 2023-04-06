@@ -20,6 +20,7 @@ requireNamespace("checkmate"    ) # or asserting conditions meet expected patter
 path_raw                        <- "data-unshared/raw/Raw DM Survey 1 Results.csv"
 path_derived                    <- "data-unshared/derived/survey-dm-1.csv"
 
+OuhscMunge::readr_spec_aligned(path_raw)
 col_types <- readr::cols_only(
     `Response ID` = readr::col_integer(),
   # `Date submitted` = readr::col_datetime(format = ""),
@@ -37,7 +38,7 @@ col_types <- readr::cols_only(
   # `For your last set of orders, how many months prior to your move were your orders released-?? That is, how many months did you have to prepare for your PCS-` = readr::col_character(),
   # `For your last set of orders, how many months prior to your move were your orders released-?? That is, how many months did you have to prepare for your PCS- [Other]` = readr::col_character(),
   `On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-` = readr::col_integer(),
-  `On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall??detailing experience for your last set of orders-` = readr::col_integer(),
+  `On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall detailing experience for your last set of orders-` = readr::col_integer(),
   `On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-` = readr::col_integer(),
   `Describe your current assignment:` = readr::col_character()
   # `Describe your current assignment: [Other]` = readr::col_character()
@@ -78,16 +79,16 @@ dim(ds)
 # ---- tweak-data --------------------------------------------------------------
 # OuhscMunge::column_rename_headstart(ds) #Spit out columns to help write call ato `dplyr::rename()`.
 ds <- ds %>%
-  dplyr::select_( #`select()` implicitly drops the other columns not mentioned.
-    "response_id"                  = "`Response ID`"
-    , "transparent"                = "`On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-`"
-    , "satisfaction"               = "`On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall??detailing experience for your last set of orders-`"
-    , "favoritism"                 = "`On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-`"
-    , "assignment_rank"            = "`Describe your current assignment:`"
-    # , "assignment_rank2"         = "`Describe your current assignment: [Other]`"
+  dplyr::select( #`select()` implicitly drops the other columns not mentioned.
+    response_id                  = `Response ID`,
+    transparent                = `On a scale of 1 to 5, with 1 being not transparent and 5 being very transparent, how would you rate the transparency of your detailing experience for your last set of orders-`,
+    satisfaction               = `On a scale of 1 to 5, with 1 being unsatisfied and 5 being very satisfied, how would you rate your overall detailing experience for your last set of orders-`,
+    favoritism                 = `On a scale of 1 to 5, with 1 representing a significant problem and 5 being not a problem at all, how would you rank the problem of favoritism in the billet assignment process-`,
+    assignment_rank            = `Describe your current assignment:`,
+    # assignment_rank2         = `Describe your current assignment: [Other]`
   )  %>%
   dplyr::mutate(
-    response_index        = sample.int(n(), replace=F),
+    response_index        = sample.int(dplyr::n(), replace=F),
     missing_item_count    = is.na(transparent) + is.na(satisfaction) + is.na(favoritism) + is.na(assignment_rank)
   ) %>%
   dplyr::mutate(
@@ -130,20 +131,23 @@ checkmate::assert_integer(  ds$assignment_rank_collapsed, lower=1L, upper=6L    
 checkmate::assert_integer(  ds$missing_item_count       , lower=0L, upper=4L        , any.missing=F)
 
 # ---- specify-columns-to-upload -----------------------------------------------
-# dput(colnames(ds)) # Print colnames for line below.
-columns_to_write <- c(
-  "response_index",
-  "transparent", "satisfaction", "favoritism",
-  "assignment_rank", "assignment_rank_collapsed", "missing_item_count"
-)
+#   cat(paste0("    ", colnames(ds), collapse=",\n"))
+
 ds_slim <- ds %>%
-  dplyr::select_(.dots=columns_to_write) %>%
+  dplyr::select(
+    response_id,
+    transparent,
+    satisfaction,
+    favoritism,
+    assignment_rank,
+    response_index,
+    missing_item_count,
+    assignment_rank_collapsed
+  ) %>%
   dplyr::mutate(
     # fte_approximated <- as.integer(fte_approximated)
   )
 ds_slim
-
-rm(columns_to_write)
 
 # ---- save-to-disk ------------------------------------------------------------
 # If there's no PHI, a rectangular CSV is usually adequate, and it's portable to other machines and software.

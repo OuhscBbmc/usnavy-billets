@@ -65,16 +65,16 @@ ds_officer_wide
 # colnames(ds_command_wide)  <- make.names(colnames(ds_command_wide))
 
 ds_command_long <- ds_command_wide %>%
-  dplyr::rename_(
-    "officer_id"     = "Code"
+  dplyr::rename(
+    officer_id     = Code
   ) %>%
   tidyr::gather(key=command_name, value=rank, -officer_id) %>%
   dplyr::left_join(ds_command_roster, by="command_name") %>%
   dplyr::arrange(command_id, officer_id)
 
 ds_officer_long <- ds_officer_wide %>%
-  dplyr::rename_(
-    "officer_id"     = "Code"
+  dplyr::rename(
+    officer_id     = Code
   ) %>%
   tidyr::gather(key=command_name, value=rank, -officer_id) %>%
   dplyr::left_join(
