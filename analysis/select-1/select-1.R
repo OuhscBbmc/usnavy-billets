@@ -270,15 +270,15 @@ m <- matchingMarkets::hri(
 
 ds_match <- m$matchings %>%
   tibble::as_tibble() %>%
-  dplyr::select_(
-    "command_index"   = "college",
-    "officer_index"   = "student",
-    "command_rank"    = "cRank",
-    "officer_rank"    = "sRank",
-    "command_optimal" = "cOptimal",
-    "officer_optimal" = "sOptimal",
-    "matching",
-    "slots"
+  dplyr::select(
+    command_index   = college,
+    officer_index   = student,
+    command_rank    = cRank,
+    officer_rank    = sRank,
+    command_optimal = cOptimal,
+    officer_optimal = sOptimal,
+    matching,
+    slots
   ) %>%
   dplyr::arrange(command_index, officer_index)
 
